@@ -1,36 +1,85 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 export default function WorkWithUsForm() {
+  const [fileName, setFileName] = useState('');
+
+  const handleFileChange = (e) => {
+    if (e.target.files && e.target.files[0]) {
+      setFileName(e.target.files[0].name);
+    } else {
+      setFileName('');
+    }
+  };
+
   return (
-    <form>
-      <h2>Work with us</h2>
-      <div>
-        <label htmlFor="name">Name</label>
-        <input type="text" id="name" name="name" />
+    <form className="contact-form">
+      <div className="form-group">
+        <label htmlFor="name">
+          Name <span className="required-asterisk">*</span>
+        </label>
+        <input type="text" id="name" name="name" required />
       </div>
-      <div>
-        <label htmlFor="email">Email</label>
-        <input type="email" id="email" name="email" />
+      
+      <div className="form-group">
+        <label htmlFor="email">
+          Email <span className="required-asterisk">*</span>
+        </label>
+        <input type="email" id="email" name="email" required />
       </div>
-      <div>
-        <label htmlFor="profession">Profession</label>
+      
+      <div className="form-group">
+        <label htmlFor="profession">What do you do for a living?</label>
         <select id="profession" name="profession">
-          <option value="">Select a profession</option>
+          <option value="">Select an option</option>
+          <option value="2d-animator">2D Animator</option>
+          <option value="3d-animator">3D Animator</option>
+          <option value="illustrator">Illustrator</option>
+          <option value="modeler">Modeler</option>
+          <option value="composer">Composer / Sound Designer</option>
+          <option value="voice-actor">Voice Actor</option>
+          <option value="other">Other</option>
         </select>
       </div>
-      <div>
-        <label htmlFor="message">Message</label>
-        <textarea id="message" name="message" />
+      
+      <div className="form-group">
+        <label htmlFor="message">
+          Message <span className="required-asterisk">*</span>
+        </label>
+        <textarea id="message" name="message" required />
       </div>
-      <div>
-        <label htmlFor="reelLink">Reel link</label>
-        <input type="url" id="reelLink" name="reelLink" />
+      
+      <div className="form-row">
+        <div className="form-group">
+          <label htmlFor="reelLink">
+            Link de Reel <span className="required-asterisk">*</span>
+          </label>
+          <input type="url" id="reelLink" name="reelLink" required />
+        </div>
+        
+        <div className="form-group file-upload-container">
+          <label htmlFor="cvUpload">
+            Attach your CV in PDF format <span className="required-asterisk">*</span>
+          </label>
+          <div className="file-upload-wrapper">
+            <label htmlFor="cvUpload" className="custom-file-upload">
+              Select file
+            </label>
+            <input 
+              type="file" 
+              id="cvUpload" 
+              name="cvUpload" 
+              accept=".pdf"
+              style={{ display: 'none' }} 
+              onChange={handleFileChange}
+              required
+            />
+            {fileName && <span className="file-name-display">{fileName}</span>}
+          </div>
+        </div>
       </div>
-      <div>
-        <label htmlFor="cvUpload">CV file upload</label>
-        <input type="file" id="cvUpload" name="cvUpload" />
-      </div>
-      <button type="submit">Submit</button>
+      
+      <button type="submit" className="submit-btn">Send</button>
     </form>
   );
 }
+
