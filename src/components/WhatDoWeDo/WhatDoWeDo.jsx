@@ -1,48 +1,22 @@
+import "./WhatDoWeDo.css";
+
 const WhatDoWeDo = () => {
   return (
-    <section style={{ padding: "40px", background: "#111", color: "#fff" }}>
+    <section className="whatwedo">
       <h2>What Do We Do?</h2>
 
-      <div style={{ display: "flex", gap: "20px", marginTop: "20px" }}>
+      <div className="container">
         
-        {/* BLOQUE 1 */}
-        <div style={{ flex: 1 }}>
-          
-          {/* Espacio para imagen */}
-          <div
-            style={{
-              width: "100%",
-              height: "150px",
-              background: "#ccc",
-              borderRadius: "10px",
-              marginBottom: "10px"
-            }}
-          ></div>
-
+        <div className="card">
+          <div className="image"></div>
           <h3>2D Animation</h3>
-          <p>
-            We create amazing 2D animations with creative storytelling.
-          </p>
+          <p>We create amazing 2D animations with creative storytelling.</p>
         </div>
 
-        {/* BLOQUE 2 */}
-        <div style={{ flex: 1 }}>
-          
-          {/* Espacio para imagen */}
-          <div
-            style={{
-              width: "100%",
-              height: "150px",
-              background: "#ccc",
-              borderRadius: "10px",
-              marginBottom: "10px"
-            }}
-          ></div>
-
+        <div className="card">
+          <div className="image"></div>
           <h3>3D Animation</h3>
-          <p>
-            We develop high-quality 3D animated content.
-          </p>
+          <p>We develop high-quality 3D animated content.</p>
         </div>
 
       </div>
