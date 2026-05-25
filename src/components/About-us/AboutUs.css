@@ -28,7 +28,7 @@
 }
 
 .about-main-header .highlight-orange {
-  color: #ff6a00; /* Color corporativo de Daga */
+  color: #ff6a00; /* Naranja corporativo */
 }
 
 .about-lead-text {
@@ -48,25 +48,24 @@
   gap: 40px;
 }
 
-/* Cuando la pantalla es grande (escritorio), activa el mapa de la imagen */
+/* Distribución de escritorio */
 @media (min-width: 900px) {
   .about-layout-grid {
     grid-template-columns: 1fr 1fr;
     grid-template-areas: 
       "text-left   characters"
       "sketches    text-right";
-    gap: 40px 80px; /* Separación horizontal amplia */
+    gap: 40px 80px;
     align-items: center;
   }
 
-  /* Asignación de áreas */
   .grid-area-text-left  { grid-area: text-left; }
   .grid-area-sketches   { grid-area: sketches; }
   .grid-area-characters { grid-area: characters; }
   .grid-area-text-right { grid-area: text-right; }
 }
 
-/* Estilos de bloques de textos */
+/* Bloques de texto informativos */
 .text-block h2 {
   font-size: 1.8rem;
   font-weight: 700;
@@ -86,21 +85,22 @@
   text-align: center;
 }
 
-/* Cuadrícula de bocetos del soldado (2x2) */
-.sketches-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 15px;
-}
-
-.sketches-grid img {
+/* Contenedor optimizado para Dibujo.png (4 en 1) */
+.sketches-single-container {
   width: 100%;
-  aspect-ratio: 1 / 1;
-  object-fit: cover;
-  border-radius: 12px;
+  display: flex;
+  justify-content: center;
 }
 
-/* Tarjetas de Personajes */
+.sketches-img {
+  width: 100%;
+  max-width: 480px; /* Evita que se estire demasiado y mantiene proporciones */
+  height: auto;
+  border-radius: 12px;
+  display: block;
+}
+
+/* Contenedor de las fichas de Zoe y Poblador */
 .character-cards-wrapper {
   display: flex;
   gap: 20px;
@@ -108,7 +108,7 @@
 }
 
 .character-card {
-  background-color: #e2e8f0; /* Color de fondo gris claro idéntico a las fichas */
+  background-color: #e2e8f0; /* Fondo gris claro idéntico al papel de la ficha */
   border-radius: 16px;
   padding: 10px;
   width: 100%;

@@ -1,11 +1,16 @@
 import React from 'react';
 import './AboutUs.css';
 
+// 1. Importación de las imágenes reales desde assets
+import zoeImg from '../../assets/Zoe.png';
+import poblaImg from '../../assets/PObla.png';
+import dibujoImg from '../../assets/Dibujo.png';
+
 function AboutUs() {
   return (
     <section className="about-section">
       
-      {/* 2. Encabezado principal centrado */}
+      {/* Encabezado principal centrado */}
       <div className="about-main-header">
         <h1>The <span className="highlight-orange">Daga</span>media Team</h1>
         <p className="about-lead-text">
@@ -13,10 +18,10 @@ function AboutUs() {
         </p>
       </div>
 
-      {/* 3. El contenedor maestro con CSS Grid Asimétrico */}
+      {/* Contenedor principal asimétrico en Grid */}
       <div className="about-layout-grid">
         
-        {/* Bloque: Directing Projects (Texto Izquierda) */}
+        {/* Bloque Izquierdo Superior: Texto Directing Projects */}
         <div className="grid-area-text-left">
           <div className="text-block">
             <h2>Directing projects</h2>
@@ -26,29 +31,26 @@ function AboutUs() {
           </div>
         </div>
 
-        {/* Bloque: Las 4 imágenes del Soldado (Abajo a la izquierda) */}
+        {/* Bloque Izquierdo Inferior: Imagen única Dibujo.png */}
         <div className="grid-area-sketches">
-          <div className="sketches-grid">
-            <img src="https://via.placeholder.com/300" alt="Sketch 1" />
-            <img src="https://via.placeholder.com/300" alt="Sketch 2" />
-            <img src="https://via.placeholder.com/300" alt="Sketch 3" />
-            <img src="https://via.placeholder.com/300" alt="Sketch 4" />
+          <div className="sketches-single-container">
+            <img src={dibujoImg} alt="Project Sketches" className="sketches-img" />
           </div>
         </div>
 
-        {/* Bloque: Tarjetas de Personajes (Arriba a la derecha) */}
+        {/* Bloque Derecho Superior: Fichas de Personajes */}
         <div className="grid-area-characters">
           <div className="character-cards-wrapper">
             <div className="character-card">
-              <img src="https://via.placeholder.com/220x300" alt="Zoe Character" />
+              <img src={zoeImg} alt="Zoe Character" />
             </div>
             <div className="character-card">
-              <img src="https://via.placeholder.com/220x300" alt="Poblador Character" />
+              <img src={poblaImg} alt="Poblador Character" />
             </div>
           </div>
         </div>
 
-        {/* Bloque: We are a 3D-2D... (Abajo a la derecha) */}
+        {/* Bloque Derecho Inferior: Texto Animation Company */}
         <div className="grid-area-text-right">
           <div className="text-block text-center">
             <h2>We are a 3D-2D animation company</h2>
