@@ -1,13 +1,28 @@
 import { useState } from 'react';
 import './Contact.css';
 
+// Usamos un estado para manejar el formulario, como en el repo del profe
 function Contact() {
-  // Usamos un estado para manejar el formulario, como en el repo del profe
-  const [nombre, setNombre] = useState('');
+  const [formData, setFormData] = useState({
+    nombre: '',
+    email: '',
+    mensaje: ''
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value
+    }));
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    alert(`¡Gracias ${nombre}! Tu mensaje ha sido enviado (simulación).`);
+    const { nombre, email, mensaje } = formData;
+    alert(`¡Gracias ${nombre}! Tu mensaje ha sido enviado.\n\nCorreo: ${email}\nMensaje: ${mensaje}`);
+    // Aquí iría la lógica para enviar a un servidor o email service
+    setFormData({ nombre: '', email: '', mensaje: '' });
   };
 
   return (
@@ -33,21 +48,36 @@ function Contact() {
             <label>Nombre:</label>
             <input 
               type="text" 
+              name="nombre"
               placeholder="Escribe tu nombre" 
-              value={nombre}
-              onChange={(e) => setNombre(e.target.value)} 
+              value={formData.nombre}
+              onChange={handleChange} 
               required
             />
           </div>
 
           <div className="form-group">
             <label>Correo electrónico:</label>
-            <input type="email" placeholder="tucorreo@ejemplo.com" required />
+            <input 
+              type="email" 
+              name="email"
+              placeholder="tucorreo@ejemplo.com" 
+              value={formData.email}
+              onChange={handleChange}
+              required 
+            />
           </div>
 
           <div className="form-group">
             <label>Mensaje:</label>
-            <textarea placeholder="¿En qué podemos ayudarte?" rows="4"></textarea>
+            <textarea 
+              name="mensaje"
+              placeholder="¿En qué podemos ayudarte?" 
+              rows="4"
+              value={formData.mensaje}
+              onChange={handleChange}
+              required
+            ></textarea>
           </div>
 
           <button type="submit" className="submit-btn">ENVIAR MENSAJE</button>
