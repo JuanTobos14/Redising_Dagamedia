@@ -21,7 +21,7 @@ function Home() {
             className="video-poster"
           />
         </div>
-      </div>ñ
+      </div>
     </div>
   );
 }

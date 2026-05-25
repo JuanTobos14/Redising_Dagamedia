@@ -16,10 +16,18 @@
   --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 html, body {
   margin: 0;
   padding: 0;
   background-color: var(--contact-bg);
   color: var(--contact-text);
   font-family: var(--contact-font);
+}
+
+section[id] {
+  scroll-margin-top: 80px;
 }

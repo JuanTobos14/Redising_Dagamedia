@@ -1,4 +1,3 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
 import Home from './pages/Home/Home';
@@ -9,19 +8,27 @@ import ContactLayout from './components/Contact/ContactLayout';
 
 function App() {
   return (
-    <Router>
+    <div className="app-container">
       <Header />
-      <main className="content">
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/about-us" element={<AboutUs />} />
-          <Route path="/what-we-do" element={<WhatDoWeDo />} />
-          <Route path="/our-films" element={<OurFilms />} />
-          <Route path="/contact" element={<ContactLayout />} />
-        </Routes>
+      <main>
+        <section id="home">
+          <Home />
+        </section>
+        <section id="our-films">
+          <OurFilms />
+        </section>
+        <section id="what-we-do">
+          <WhatDoWeDo />
+        </section>
+        <section id="about-us">
+          <AboutUs />
+        </section>
+        <section id="contact">
+          <ContactLayout />
+        </section>
       </main>
       <Footer />
-    </Router>
+    </div>
   );
 }
 
