@@ -1,11 +1,27 @@
-import React from 'react';
-import { ContactLayout } from './components/Contact';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Header from './components/Header/Header';
+import Footer from './components/Footer/Footer';
+import Home from './pages/Home/Home';
+import AboutUs from './components/AboutUs/AboutUs';
+import WhatDoWeDo from './components/WhatDoWeDo/WhatDoWeDo';
+import OurFilms from './components/Ourfilms/OurFilms';
+import ContactLayout from './components/Contact/ContactLayout';
 
 function App() {
   return (
-    <div style={{ backgroundColor: '#0b0b0b', minHeight: '100vh', margin: 0, padding: 0 }}>
-      <ContactLayout />
-    </div>
+    <Router>
+      <Header />
+      <main className="content">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/about-us" element={<AboutUs />} />
+          <Route path="/what-we-do" element={<WhatDoWeDo />} />
+          <Route path="/our-films" element={<OurFilms />} />
+          <Route path="/contact" element={<ContactLayout />} />
+        </Routes>
+      </main>
+      <Footer />
+    </Router>
   );
 }
 

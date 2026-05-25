@@ -1,0 +1,57 @@
+.what-we-do {
+  padding: 80px 10%;
+  background-color: #0a0a0a; /* Un negro ligeramente distinto para separar secciones */
+  color: white;
+}
+
+.section-title {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 60px;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.service-row {
+  display: flex;
+  align-items: center;
+  gap: 50px;
+  margin-bottom: 80px;
+}
+
+/* Esta clase hace que se invierta el orden (Imagen a la derecha) */
+.service-row.reverse {
+  flex-direction: row-reverse;
+}
+
+.service-image {
+  flex: 1;
+}
+
+.service-image img {
+  width: 100%;
+  border-radius: 15px;
+  border: 1px solid #333;
+  transition: filter 0.4s ease;
+}
+
+.service-image img:hover {
+  filter: brightness(1.2);
+}
+
+.service-info {
+  flex: 1;
+}
+
+.service-info h3 {
+  font-size: 2rem;
+  color: #e67e22; /* Naranja Daga */
+  margin-bottom: 15px;
+}
+
+.service-info p {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: #ccc;
+}

@@ -1,0 +1,17 @@
+.main-header {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 10%;
+  background: #000;
+  border-bottom: 1px solid #e67e22;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.main-header nav a {
+  color: white;
+  margin-left: 20px;
+  text-decoration: none;
+  font-weight: bold;
+}
+.main-header nav a:hover { color: #e67e22; }
