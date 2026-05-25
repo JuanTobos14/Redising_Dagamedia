@@ -19,11 +19,14 @@
   .footer-content {
     flex-direction: row;
     justify-content: space-between;
-    align-items: flex-end; /* Alineación inferior igual a la imagen */
+    align-items: flex-end; /* Alineación inferior perfecta como en la imagen */
   }
 }
 
-/* Estilos de Redes e Íconos */
+/* ==========================================================================
+   ESTILOS DE REDES E ÍCONOS (ACTUALIZADOS PARA SVG INLINE)
+   ========================================================================== */
+
 .footer-left {
   display: flex;
   flex-direction: column;
@@ -36,28 +39,38 @@
 }
 
 .social-btn {
-  width: 36px;
-  height: 36px;
+  width: 44px; /* Ajustado el tamaño para un look más fiel a la captura */
+  height: 44px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #000000;
-  font-weight: bold;
   text-decoration: none;
-  font-size: 0.95rem;
-  transition: transform 0.2s ease;
+  transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+/* Estilos internos para los vectores SVG */
+.icon-svg {
+  width: 22px;
+  height: 22px;
+  fill: #000000; /* Asegura el color negro absoluto del icono por dentro */
+  display: block;
 }
 
 .social-btn:hover {
   transform: scale(1.1);
+  filter: brightness(1.1); /* Destello sutil al pasar el mouse */
 }
 
-/* Colores corporativos alternados según la imagen */
-.facebook { background-color: #e65c00; }
-.instagram { background-color: #ffcc00; color: #000; }
-.youtube { background-color: #e65c00; }
-.x-twitter { background-color: #ffcc00; color: #000; font-family: sans-serif; }
+/* Colores corporativos exactos (Naranja y Amarillo Dagamedia) */
+.facebook { background-color: #ff6b00; }
+.instagram { background-color: #ffd000; }
+.youtube { background-color: #ff6b00; }
+.x-twitter { background-color: #ffd000; }
+
+/* ==========================================================================
+   INFORMACIÓN DE CONTACTO Y TEXTOS
+   ========================================================================== */
 
 .phone-info {
   display: flex;
@@ -90,12 +103,12 @@
 
 @media (min-width: 768px) {
   .footer-right {
-    align-items: flex-end;
+    align-items: flex-end; /* Alinea los textos a la derecha en pantallas grandes */
   }
 }
 
 .daga-logo-img {
-  height: 35px; /* Controla el tamaño del logo */
+  height: 35px; /* Controla el tamaño del logo corporativo en assets */
   width: auto;
   display: block;
 }
