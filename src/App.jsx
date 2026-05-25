@@ -3,7 +3,8 @@ import Home from "./components/Home/Home";
 import WhatDoWeDo from "./components/WhatDoWeDo/WhatDoWeDo";
 import AboutUs from "./components/About-us/AboutUs";
 import { ContactLayout } from "./components/Contact";
-import Footer from "./components/Footer/Footer";
+import Footer from "./components/Footer/Footer"
+import OurFilms from "./components/OurFilms/OurFilms";
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
       <Navbar />
       <Home />
       <WhatDoWeDo />
+      <OurFilms />
       <AboutUs />
       <ContactLayout />
       <Footer />
