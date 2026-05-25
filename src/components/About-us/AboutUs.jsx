@@ -1,44 +1,63 @@
 import React from 'react';
+import './AboutUs.css';
 
 function AboutUs() {
   return (
-    <section>
-      {/* Introducción Principal */}
-      <div>
-        <h1>Daga Media</h1>
-        <h2>Creamos experiencias digitales que impulsan tu negocio</h2>
-        <p>
-          Somos una agencia digital especializada en conectar marcas con audiencias reales. 
-          Nos apasiona el diseño, el desarrollo web y las estrategias digitales que generan resultados.
+    <section className="about-section">
+      
+      {/* 2. Encabezado principal centrado */}
+      <div className="about-main-header">
+        <h1>The <span className="highlight-orange">Daga</span>media Team</h1>
+        <p className="about-lead-text">
+          Our team is composed of an interdisciplinary group, including illustrators, modelers, animators, composers, and we have a fascinating stock of voices.
         </p>
       </div>
 
-      {/* Nuestros Servicios */}
-      <div>
-        <h3>Nuestros Servicios</h3>
-        <ul>
-          <li>
-            <h4>Desarrollo Web</h4>
-            <p>Sitios web modernos, rápidos y optimizados para cualquier dispositivo.</p>
-          </li>
-          <li>
-            <h4>Diseño de Marca</h4>
-            <p>Identidades visuales únicas que transmiten la esencia de tu negocio.</p>
-          </li>
-          <li>
-            <h4>Marketing Digital</h4>
-            <p>Estrategias a medida para posicionar tu marca en el mercado actual.</p>
-          </li>
-        </ul>
-      </div>
+      {/* 3. El contenedor maestro con CSS Grid Asimétrico */}
+      <div className="about-layout-grid">
+        
+        {/* Bloque: Directing Projects (Texto Izquierda) */}
+        <div className="grid-area-text-left">
+          <div className="text-block">
+            <h2>Directing projects</h2>
+            <p>
+              Graphic designers passionate about animation and creative productions, Edison and Diego Yaya founded Dagamedia in 2009. Since then, they have been dedicated to telling their own stories through animation and creating productions for companies and institutions in need. They continue to shape their future in the world of animation as an animation film company.
+            </p>
+          </div>
+        </div>
 
-      {/* Filosofía */}
-      <div>
-        <h3>¿Por qué elegirnos?</h3>
-        <p>
-          No solo creamos páginas web; construimos herramientas de trabajo. Nos enfocamos 
-          en la funcionalidad, la velocidad y en que tu inversión se traduzca en clientes.
-        </p>
+        {/* Bloque: Las 4 imágenes del Soldado (Abajo a la izquierda) */}
+        <div className="grid-area-sketches">
+          <div className="sketches-grid">
+            <img src="https://via.placeholder.com/300" alt="Sketch 1" />
+            <img src="https://via.placeholder.com/300" alt="Sketch 2" />
+            <img src="https://via.placeholder.com/300" alt="Sketch 3" />
+            <img src="https://via.placeholder.com/300" alt="Sketch 4" />
+          </div>
+        </div>
+
+        {/* Bloque: Tarjetas de Personajes (Arriba a la derecha) */}
+        <div className="grid-area-characters">
+          <div className="character-cards-wrapper">
+            <div className="character-card">
+              <img src="https://via.placeholder.com/220x300" alt="Zoe Character" />
+            </div>
+            <div className="character-card">
+              <img src="https://via.placeholder.com/220x300" alt="Poblador Character" />
+            </div>
+          </div>
+        </div>
+
+        {/* Bloque: We are a 3D-2D... (Abajo a la derecha) */}
+        <div className="grid-area-text-right">
+          <div className="text-block text-center">
+            <h2>We are a 3D-2D animation company</h2>
+            <p>
+              We have dedicated several years of our creative activity to improve our processes and envision our future as an animation film production company. This includes the production of short films and feature films where we can bring our stories to life and share with audiences everything we have in mind.
+            </p>
+          </div>
+        </div>
+
       </div>
     </section>
   );
