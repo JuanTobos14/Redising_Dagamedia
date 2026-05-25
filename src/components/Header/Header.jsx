@@ -3,22 +3,27 @@ import { useTranslation } from 'react-i18next';
 import './Header.css';
 
 function Header() {
+  // Hook para acceder a las traducciones y cambiar idioma
   const { t, i18n } = useTranslation();
 
+  // Función para cambiar entre idiomas
   const handleLanguageChange = (lang) => {
     i18n.changeLanguage(lang);
   };
 
   return (
     <header className="main-header">
+      {/* Logo traducido */}
       <div className="logo">{t('header.logo')}</div>
       <nav>
+        {/* Navegación con traducciones */}
         <Link to="/">{t('header.nav.home')}</Link>
         <Link to="/our-films">{t('header.nav.ourFilms')}</Link>
         <Link to="/what-we-do">{t('header.nav.whatWeDo')}</Link>
         <Link to="/about-us">{t('header.nav.aboutUs')}</Link>
         <Link to="/contact">{t('header.nav.contact')}</Link>
       </nav>
+      {/* Selector de idioma con botones ES/EN */}
       <div className="language-switcher">
         <button 
           onClick={() => handleLanguageChange('es')}

@@ -3,8 +3,10 @@ import { useTranslation } from 'react-i18next';
 import './OurFilms.css';
 
 function OurFilms() {
+  // Hook para acceder a las traducciones
   const { t } = useTranslation();
 
+  // Array de películas con etiquetas traducidas
   const films = [
     {
       id: 1,
@@ -28,10 +30,12 @@ function OurFilms() {
 
   const [currentIndex, setCurrentIndex] = useState(1);
 
+  // Función para ir a película anterior
   const handlePrev = () => {
     setCurrentIndex((prev) => (prev === 0 ? films.length - 1 : prev - 1));
   };
 
+  // Función para ir a película siguiente
   const handleNext = () => {
     setCurrentIndex((prev) => (prev === films.length - 1 ? 0 : prev + 1));
   };
@@ -41,8 +45,10 @@ function OurFilms() {
 
   return (
     <section className="films-container">
+      {/* Título traducido */}
       <h2 className="films-title">{t('films.title')}</h2>
 
+      {/* Slider de Películas */}
       <div className="slider-wrapper">
         <button className="slider-arrow" onClick={handlePrev}>{"<"}</button>
         <div className="slider-content">
@@ -60,22 +66,27 @@ function OurFilms() {
         <button className="slider-arrow" onClick={handleNext}>{">"}</button>
       </div>
 
+      {/* Sección Tundama (3 columnas según tu dibujo) */}
       <div className="tundama-header">
         <h3>{films[currentIndex].title}</h3>
       </div>
       
       <div className="tundama-grid">
+        {/* Columna 1: Póster */}
         <div className="grid-col poster">
           <img src={films[currentIndex].poster} alt={`${films[currentIndex].title} Poster`} />
         </div>
 
+        {/* Columna 2: Info y Trailer */}
         <div className="grid-col info">
+          {/* Descripción y trailer traducidos */}
           <p>{t('films.tundama.description')}</p>
           <div className="video-placeholder">
             <span>{t('films.trailer')}</span>
           </div>
         </div>
 
+        {/* Columna 3: Personaje */}
         <div className="grid-col character">
           <img src="https://dagamedia.com/wp-content/uploads/2021/02/servicios-post.jpg" alt="Character Design" />
         </div>
