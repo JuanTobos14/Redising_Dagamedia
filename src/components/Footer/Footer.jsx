@@ -1,11 +1,14 @@
+import { useTranslation } from 'react-i18next';
 import './Footer.css';
 
 function Footer() {
+  const { t } = useTranslation();
+
   return (
     <footer className="main-footer">
-      <p>© 2026 Daga Media | Tunja - Boyacá - Colombia</p>
+      <p>{t('footer.copyright')}</p>
       <div className="social-links">
-        <span>FB</span> | <span>TW</span> | <span>IG</span> | <span>YT</span>
+        <span>{t('footer.social.facebook')}</span> | <span>{t('footer.social.twitter')}</span> | <span>{t('footer.social.instagram')}</span> | <span>{t('footer.social.youtube')}</span>
       </div>
     </footer>
   );

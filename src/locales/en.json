@@ -1,0 +1,69 @@
+{
+  "header": {
+    "logo": "DAGA MEDIA",
+    "nav": {
+      "home": "Home",
+      "ourFilms": "Our Films",
+      "whatWeDo": "What we do?",
+      "aboutUs": "About us",
+      "contact": "Contact"
+    }
+  },
+  "home": {
+    "phrase": "\"Creativity\""
+  },
+  "about": {
+    "title": "ABOUT US",
+    "description1": "At Daga Media, we are passionate about visual narrative. From Boyacá to the world, we create content that inspires and connects.",
+    "description2": "Specialized in 2D and 3D animation and high-impact cinematographic production.",
+    "altAnimation": "Animation",
+    "altProduction": "Production",
+    "altPostProduction": "Post-production"
+  },
+  "whatWeDo": {
+    "mainTitle": "2D and 3D Animation",
+    "animation2d": {
+      "title": "2D Animation",
+      "description": "We create unique characters and worlds with traditional and digital techniques. Our stories come to life through fluid movement and captivating aesthetics."
+    },
+    "animation3d": {
+      "title": "3D Animation",
+      "description": "High-quality modeling, texturing and rendering. We take audiovisual production to the next level with visual effects and immersive three-dimensional environments."
+    }
+  },
+  "films": {
+    "title": "OUR FILMS",
+    "labels": {
+      "premiere": "PREMIERE",
+      "popular": "POPULAR",
+      "classic": "CLASSIC"
+    },
+    "tundama": {
+      "title": "Tundama",
+      "description": "The story of a hero who defended his people with courage. An epic 3D animation production."
+    },
+    "trailer": "TRAILER (VIDEO)"
+  },
+  "contact": {
+    "title": "CONTACT",
+    "form": {
+      "name": "Name:",
+      "namePlaceholder": "Write your name",
+      "email": "Email:",
+      "emailPlaceholder": "youremail@example.com",
+      "message": "Message:",
+      "messagePlaceholder": "How can we help you?",
+      "submitButton": "SEND MESSAGE",
+      "successMessage": "Thank you {name}! Your message has been sent.\n\nEmail: {email}\nMessage: {message}"
+    }
+  },
+  "footer": {
+    "copyright": "© 2026 Daga Media | Tunja - Boyacá - Colombia",
+    "social": {
+      "facebook": "FB",
+      "twitter": "TW",
+      "instagram": "IG",
+      "youtube": "YT"
+    }
+  }
+}

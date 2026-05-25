@@ -1,25 +1,28 @@
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import './OurFilms.css';
 
 function OurFilms() {
+  const { t } = useTranslation();
+
   const films = [
     {
       id: 1,
       title: 'Tundama',
       poster: 'https://dagamedia.com/wp-content/uploads/2021/02/tundama-poster.jpg',
-      label: 'ESTRENO'
+      label: t('films.labels.premiere')
     },
     {
       id: 2,
       title: 'Film 2',
       poster: 'https://dagamedia.com/wp-content/uploads/2021/02/tundama-poster.jpg',
-      label: 'POPULAR'
+      label: t('films.labels.popular')
     },
     {
       id: 3,
       title: 'Film 3',
       poster: 'https://dagamedia.com/wp-content/uploads/2021/02/tundama-poster.jpg',
-      label: 'CLÁSICO'
+      label: t('films.labels.classic')
     }
   ];
 
@@ -38,9 +41,8 @@ function OurFilms() {
 
   return (
     <section className="films-container">
-      <h2 className="films-title">OUR FILMS</h2>
+      <h2 className="films-title">{t('films.title')}</h2>
 
-      {/* Slider de Películas */}
       <div className="slider-wrapper">
         <button className="slider-arrow" onClick={handlePrev}>{"<"}</button>
         <div className="slider-content">
@@ -58,26 +60,22 @@ function OurFilms() {
         <button className="slider-arrow" onClick={handleNext}>{">"}</button>
       </div>
 
-      {/* Sección Tundama (3 columnas según tu dibujo) */}
       <div className="tundama-header">
         <h3>{films[currentIndex].title}</h3>
       </div>
       
       <div className="tundama-grid">
-        {/* Columna 1: Póster */}
         <div className="grid-col poster">
           <img src={films[currentIndex].poster} alt={`${films[currentIndex].title} Poster`} />
         </div>
 
-        {/* Columna 2: Info y Trailer */}
         <div className="grid-col info">
-          <p>La historia de un héroe que defendió su pueblo con valor. Una producción épica de animación 3D.</p>
+          <p>{t('films.tundama.description')}</p>
           <div className="video-placeholder">
-            <span>TRAILER (VIDEO)</span>
+            <span>{t('films.trailer')}</span>
           </div>
         </div>
 
-        {/* Columna 3: Personaje */}
         <div className="grid-col character">
           <img src="https://dagamedia.com/wp-content/uploads/2021/02/servicios-post.jpg" alt="Character Design" />
         </div>
