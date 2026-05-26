@@ -1,7 +1,7 @@
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
-import enJSON from '../locales/en.json';
-import esJSON from '../locales/es.json';
+import enJSON from './locales/en.json';
+import esJSON from './locales/es.json';
 
 // Inicializar i18next con react-i18next
 // Este archivo configura el sistema de traducción multiidioma
