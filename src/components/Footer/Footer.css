@@ -1,0 +1,120 @@
+.footer-container {
+  background-color: #000000;
+  color: #8a8a8a;
+  padding: 40px 20px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  border-top: 1px solid #111111;
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  align-items: center;
+}
+
+@media (min-width: 768px) {
+  .footer-content {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end; /* Alineación inferior perfecta como en la imagen */
+  }
+}
+
+/* ==========================================================================
+   ESTILOS DE REDES E ÍCONOS (ACTUALIZADOS PARA SVG INLINE)
+   ========================================================================== */
+
+.footer-left {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.social-media-icons {
+  display: flex;
+  gap: 12px;
+}
+
+.social-btn {
+  width: 44px; /* Ajustado el tamaño para un look más fiel a la captura */
+  height: 44px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+/* Estilos internos para los vectores SVG */
+.icon-svg {
+  width: 22px;
+  height: 22px;
+  fill: #000000; /* Asegura el color negro absoluto del icono por dentro */
+  display: block;
+}
+
+.social-btn:hover {
+  transform: scale(1.1);
+  filter: brightness(1.1); /* Destello sutil al pasar el mouse */
+}
+
+/* Colores corporativos exactos (Naranja y Amarillo Dagamedia) */
+.facebook { background-color: #ff6b00; }
+.instagram { background-color: #ffd000; }
+.youtube { background-color: #ff6b00; }
+.x-twitter { background-color: #ffd000; }
+
+/* ==========================================================================
+   INFORMACIÓN DE CONTACTO Y TEXTOS
+   ========================================================================== */
+
+.phone-info {
+  display: flex;
+  flex-direction: column;
+  font-size: 0.8rem;
+  line-height: 1.4;
+}
+
+.phone-label {
+  color: #555555;
+}
+
+.phone-numbers {
+  color: #8a8a8a;
+}
+
+/* Centro (Copyright) */
+.footer-center {
+  font-size: 0.8rem;
+  color: #555555;
+}
+
+/* Derecha (Logo y dirección) */
+.footer-right {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+@media (min-width: 768px) {
+  .footer-right {
+    align-items: flex-end; /* Alinea los textos a la derecha en pantallas grandes */
+  }
+}
+
+.daga-logo-img {
+  height: 35px; /* Controla el tamaño del logo corporativo en assets */
+  width: auto;
+  display: block;
+}
+
+.address-text {
+  font-size: 0.8rem;
+  color: #8a8a8a;
+  letter-spacing: 0.5px;
+}

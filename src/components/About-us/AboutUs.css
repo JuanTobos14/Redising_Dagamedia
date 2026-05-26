@@ -1,0 +1,124 @@
+/* Contenedor general en fondo negro absoluto */
+.about-section {
+  background-color: #000000;
+  color: #ffffff;
+  padding: 40px 50px 80px 50px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* Etiqueta pequeña superior izquierda */
+.about-top-tag {
+  color: #333333;
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+/* Header central */
+.about-main-header {
+  text-align: center;
+  margin-bottom: 70px;
+}
+
+.about-main-header h1 {
+  font-size: 3.5rem;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  margin-bottom: 25px;
+}
+
+.about-main-header .highlight-orange {
+  color: #ff6a00; /* Naranja corporativo */
+}
+
+.about-lead-text {
+  color: #888888;
+  font-size: 0.95rem;
+  max-width: 900px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* --- GRID DE MAQUETACIÓN ASIMÉTRICA --- */
+.about-layout-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 40px;
+}
+
+/* Distribución de escritorio */
+@media (min-width: 900px) {
+  .about-layout-grid {
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas: 
+      "text-left   characters"
+      "sketches    text-right";
+    gap: 40px 80px;
+    align-items: center;
+  }
+
+  .grid-area-text-left  { grid-area: text-left; }
+  .grid-area-sketches   { grid-area: sketches; }
+  .grid-area-characters { grid-area: characters; }
+  .grid-area-text-right { grid-area: text-right; }
+}
+
+/* Bloques de texto informativos */
+.text-block h2 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 20px;
+  letter-spacing: 0.5px;
+}
+
+.text-block p {
+  color: #888888;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  text-align: justify;
+}
+
+/* Centrado explícito para el bloque inferior derecho */
+.text-center h2, .text-center p {
+  text-align: center;
+}
+
+/* Contenedor optimizado para Dibujo.png (4 en 1) */
+.sketches-single-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.sketches-img {
+  width: 100%;
+  max-width: 480px; /* Evita que se estire demasiado y mantiene proporciones */
+  height: auto;
+  border-radius: 12px;
+  display: block;
+}
+
+/* Contenedor de las fichas de Zoe y Poblador */
+.character-cards-wrapper {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+}
+
+.character-card {
+  background-color: #e2e8f0; /* Fondo gris claro idéntico al papel de la ficha */
+  border-radius: 16px;
+  padding: 10px;
+  width: 100%;
+  max-width: 230px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+}
+
+.character-card img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 10px;
+}
