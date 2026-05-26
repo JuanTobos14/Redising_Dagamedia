@@ -104,7 +104,7 @@ io.on('connection', (socket) => {
 });
 
 // Fallback route to serve the React SPA index.html
-app.get('*', (req, res) => {
+app.get('/{*splat}', (req, res) => {
   res.sendFile(path.join(__dirname, 'dist', 'index.html'), (err) => {
     if (err) {
       res.status(200).send('WebSocket server is active. Please compile the frontend using build scripts to view the client.');
