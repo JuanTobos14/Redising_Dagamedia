@@ -1,0 +1,155 @@
+{
+  "header": {
+    "logo": "DAGA MEDIA",
+    "nav": {
+      "home": "Home",
+      "ourFilms": "Our Films",
+      "whatWeDo": "What we do?",
+      "aboutUs": "About us",
+      "contact": "Contact"
+    }
+  },
+  "home": {
+    "phrase": "\"Creativity\""
+  },
+  "about": {
+    "title": "ABOUT US",
+    "description1": "At Daga Media, we are passionate about visual narrative. From Boyacá to the world, we create content that inspires and connects.",
+    "description2": "Specialized in 2D and 3D animation and high-impact cinematographic production.",
+    "altAnimation": "Animation",
+    "altProduction": "Production",
+    "altPostProduction": "Post-production",
+    "mainTitle1": "The",
+    "mainTitleHighlight": "Daga",
+    "mainTitle2": "media Team",
+    "leadText": "Our team is composed of an interdisciplinary group, including illustrators, modelers, animators, composers, and we have a fascinating stock of voices.",
+    "directingProjectsTitle": "Directing projects",
+    "directingProjectsDescription": "Graphic designers passionate about animation and creative productions, Edison and Diego Yaya founded Dagamedia in 2009. Since then, they have been dedicated to telling their own stories through animation and creating productions for companies and institutions in need. They continue to shape their future in the world of animation as an animation film company.",
+    "animationCompanyTitle": "We are a 3D-2D animation company",
+    "animationCompanyDescription": "We have dedicated several years of our creative activity to improve our processes and envision our future as an animation film production company. This includes the production of short films and feature films where we can bring our stories to life and share with audiences everything we have in mind.",
+    "altSketches": "Project sketches",
+    "altZoe": "Zoe character",
+    "altPobla": "Villager character"
+  },
+  "whatWeDo": {
+    "mainTitle": "2D and 3D Animation",
+    "animation2d": {
+      "title": "2D Animation",
+      "description": "We create unique characters and worlds with traditional and digital techniques. Our stories come to life through fluid movement and captivating aesthetics."
+    },
+    "animation3d": {
+      "title": "3D Animation",
+      "description": "High-quality modeling, texturing and rendering. We take audiovisual production to the next level with visual effects and immersive three-dimensional environments."
+    }
+  },
+  "films": {
+    "title": "Our Films",
+    "labels": {
+      "premiere": "PREMIERE",
+      "popular": "POPULAR",
+      "classic": "CLASSIC"
+    },
+    "tundama": {
+      "title": "Tundama",
+      "description": "The story of a hero who defended his people with courage. An epic 3D animation production."
+    },
+    "trailer": "TRAILER (VIDEO)",
+    "headerTitleLine1": "We invite you to",
+    "headerTitleLine2": "watch our selection.",
+    "headerDescription1": "Some of our",
+    "shortFilms": "short films",
+    "headerDescription2": "are about to premiere, while others are still in progress. We present them to you.",
+    "tundamaTopText": "We premiered in commercial movie theaters in Colombia in 2021 and in Spain in February 2022, soon to be available on digital platforms.",
+    "tundamaBottomText": "Tundama is the first film that rescues the Muisca language from central Colombia, declared extinct since the 18th century.",
+    "trailerTitle": "We present to you the official trailer.",
+    "trailerDescription": "At the beginning of the 16th century, a brave chieftain confronts the devastating arrival of the Spanish to his territories. Two children searching for their kidnapped sister find themselves in the midst of this clash of cultures, triggering battles where feelings and acts of bravery, betrayal, love, and greed are uncovered.",
+    "playTrailer": "Play trailer",
+    "alt": {
+      "oldWoman": "Old woman by the fire",
+      "bear": "Bear at the waterfall",
+      "warrior": "Front-facing warrior",
+      "sketch": "Tundama pencil sketch",
+      "tundamaLogo": "Official Tundama logo",
+      "awards": "Tundama honor awards",
+      "poster": "Official Tundama poster",
+      "trailerScene": "Official trailer scene"
+    }
+  },
+  "contact": {
+    "title": "CONTACT",
+    "form": {
+      "name": "Name:",
+      "namePlaceholder": "Write your name",
+      "email": "Email:",
+      "emailPlaceholder": "youremail@example.com",
+      "message": "Message:",
+      "messagePlaceholder": "How can we help you?",
+      "submitButton": "SEND MESSAGE",
+      "successMessage": "Thank you {name}! Your message has been sent.\n\nEmail: {email}\nMessage: {message}"
+    },
+    "tabs": {
+      "contact": "Contact",
+      "workWithUs": "Work with us"
+    },
+    "subtitle": {
+      "work": "Join us!",
+      "standard": "If you have a question or wish to contact us"
+    },
+    "pagination": {
+      "contact": "Contact Form",
+      "work": "Work with us Form"
+    },
+    "standardForm": {
+      "name": "Name",
+      "namePlaceholder": "Enter your name",
+      "email": "Email",
+      "emailPlaceholder": "Enter your email",
+      "contactNumber": "Contact number",
+      "contactNumberPlaceholder": "Enter your phone number",
+      "message": "Message",
+      "messagePlaceholder": "Write your message",
+      "submit": "Send",
+      "successMessage": "Thank you {{name}}! Your message has been sent."
+    },
+    "workForm": {
+      "name": "Name",
+      "namePlaceholder": "Enter your name",
+      "email": "Email",
+      "emailPlaceholder": "Enter your email",
+      "profession": "What do you do for a living?",
+      "selectOption": "Select an option",
+      "message": "Message",
+      "messagePlaceholder": "Write your message",
+      "reelLink": "Reel link",
+      "reelPlaceholder": "Paste your portfolio or reel link",
+      "cvUpload": "Attach your CV in PDF format",
+      "selectFile": "Select file",
+      "submit": "Send",
+      "successMessage": "Thank you {{name}}! Your application has been sent.",
+      "options": {
+        "animator2d": "2D Animator",
+        "animator3d": "3D Animator",
+        "illustrator": "Illustrator",
+        "modeler": "Modeler",
+        "composer": "Composer / Sound Designer",
+        "voiceActor": "Voice Actor",
+        "other": "Other"
+      }
+    }
+  },
+  "footer": {
+  "copyright": "© 2026 Daga Media | Tunja - Boyacá - Colombia",
+
+  "mobile": "Mobile",
+
+  "logoAlt": "Dagamedia logo",
+
+  "address": "68 Street 6-66 Tunja – Boyacá – Colombia",
+
+  "social": {
+    "facebook": "FB",
+    "twitter": "TW",
+    "instagram": "IG",
+    "youtube": "YT"
+  }
+}}

@@ -1,5 +1,7 @@
 .navbar {
   width: 100%;
+  box-sizing: border-box;
+
   height: 80px;
   padding: 0 60px;
 
@@ -14,8 +16,8 @@
 
   background: rgba(10, 10, 10, 0.42);
 
-  backdrop-filter: blur(24px) saturate(180%);
   -webkit-backdrop-filter: blur(24px) saturate(180%);
+  backdrop-filter: blur(24px) saturate(180%);
 
   border-bottom: 1px solid rgba(255, 255, 255, 0.12);
 
@@ -24,11 +26,18 @@
     inset 0 1px 0 rgba(255, 255, 255, 0.08);
 }
 
+/* Logo */
+.navbarLogo {
+  flex-shrink: 0;
+}
+
 .navbarLogo img {
   height: 42px;
   object-fit: contain;
+  display: block;
 }
 
+/* Links */
 .navbarLinks {
   display: flex;
   align-items: center;
@@ -38,14 +47,26 @@
 .navbarLinks a {
   color: #ffffff;
   text-decoration: none;
+
   font-size: 15px;
   font-weight: 500;
   letter-spacing: 0.3px;
+
+  transition:
+    color 0.25s ease,
+    opacity 0.25s ease,
+    transform 0.25s ease;
 }
 
-/* Botón estilo Liquid Glass tipo iPhone / WhatsApp */
+.navbarLinks a:hover {
+  color: #25d366;
+  transform: translateY(-1px);
+}
+
+/* Botón Liquid Glass */
 .liquidNavButton {
   position: relative;
+
   padding: 11px 22px;
 
   border-radius: 999px;
@@ -54,13 +75,15 @@
   background: rgba(255, 255, 255, 0.055);
 
   color: rgba(255, 255, 255, 0.9);
+
   font-size: 15px;
   font-weight: 500;
+
   cursor: pointer;
   overflow: hidden;
 
-  backdrop-filter: blur(22px) saturate(180%);
   -webkit-backdrop-filter: blur(22px) saturate(180%);
+  backdrop-filter: blur(22px) saturate(180%);
 
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.16),
@@ -75,9 +98,10 @@
     box-shadow 0.25s ease;
 }
 
-/* Luz interior suave, sin reflejo fuerte */
+/* Brillo interno suave */
 .liquidNavButton::before {
   content: "";
+
   position: absolute;
   inset: 1px;
 
@@ -92,7 +116,7 @@
   pointer-events: none;
 }
 
-/* Quitamos el reflejo diagonal */
+/* Sin reflejo diagonal */
 .liquidNavButton::after {
   display: none;
 }
@@ -119,37 +143,132 @@
 
 .liquidNavButton:active {
   transform: translateY(0) scale(0.97);
+
   background: rgba(37, 211, 102, 0.16);
 }
 
+/* Selector idioma */
 .language {
   display: flex;
   align-items: center;
   gap: 10px;
 
   padding: 9px 15px;
+
   border-radius: 999px;
 
-  color: #25d366;
+  color: #ff8c42;
+
   font-size: 15px;
   font-weight: 700;
 
-  background: rgba(255, 255, 255, 0.055);
-  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: rgba(255, 140, 66, 0.08);
 
-  backdrop-filter: blur(22px) saturate(180%);
+  border: 1px solid rgba(255, 140, 66, 0.22);
+
   -webkit-backdrop-filter: blur(22px) saturate(180%);
+  backdrop-filter: blur(22px) saturate(180%);
+
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.14),
+    0 6px 18px rgba(0, 0, 0, 0.26),
+    0 0 18px rgba(255, 140, 66, 0.08);
+
+  transition:
+    background 0.25s ease,
+    border-color 0.25s ease,
+    box-shadow 0.25s ease,
+    transform 0.25s ease;
+}
+
+/* Hover del contenedor idioma */
+.language:hover {
+  background: rgba(255, 140, 66, 0.12);
+
+  border-color: rgba(255, 140, 66, 0.35);
 
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.16),
-    0 6px 18px rgba(0, 0, 0, 0.26);
+    0 8px 22px rgba(0, 0, 0, 0.3),
+    0 0 22px rgba(255, 140, 66, 0.14);
 }
 
-/* Responsive */
+/* Botones idioma */
+.language button {
+  position: relative;
+
+  background: transparent;
+  border: none;
+
+  color: rgba(255, 255, 255, 0.72);
+
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+
+  cursor: pointer;
+
+  padding: 4px 6px;
+
+  border-radius: 8px;
+
+  transition:
+    color 0.25s ease,
+    transform 0.25s ease,
+    text-shadow 0.25s ease,
+    background 0.25s ease,
+    opacity 0.25s ease;
+}
+
+/* Hover botones idioma */
+.language button:hover {
+  color: #ff8c42;
+
+  transform: translateY(-1px);
+
+  background: rgba(255, 140, 66, 0.08);
+
+  text-shadow: 0 0 10px rgba(255, 140, 66, 0.55);
+}
+
+/* Idioma activo */
+.language button.active {
+  color: #ffffff;
+
+  background: linear-gradient(
+    135deg,
+    rgba(255, 140, 66, 0.9),
+    rgba(255, 115, 0, 0.85)
+  );
+
+  box-shadow:
+    0 0 14px rgba(255, 140, 66, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.18);
+
+  transform: scale(1.05);
+
+  text-shadow: none;
+}
+
+/* Efecto click */
+.language button:active {
+  transform: scale(0.96);
+}
+
+/* Separador visual */
+.language .separator {
+  color: rgba(255, 255, 255, 0.28);
+
+  font-size: 13px;
+}
+
+/* Responsive Tablet */
 @media (max-width: 950px) {
   .navbar {
     height: auto;
+
     padding: 18px 24px;
+
     flex-direction: column;
     gap: 18px;
   }
@@ -157,31 +276,49 @@
   .navbarLinks {
     flex-wrap: wrap;
     justify-content: center;
+
     gap: 12px;
   }
 
   .liquidNavButton {
     padding: 10px 18px;
+
     font-size: 13px;
   }
 }
 
+/* Responsive Mobile */
 @media (max-width: 480px) {
   .navbar {
     padding: 16px;
+    gap: 14px;
   }
 
   .navbarLogo img {
     height: 36px;
   }
 
+  .navbarLinks {
+    gap: 10px;
+  }
+
+  .navbarLinks a {
+    font-size: 13px;
+  }
+
   .liquidNavButton {
     padding: 9px 14px;
+
     font-size: 12px;
   }
 
   .language {
     padding: 8px 13px;
+
+    font-size: 12px;
+  }
+
+  .language button {
     font-size: 12px;
   }
 }

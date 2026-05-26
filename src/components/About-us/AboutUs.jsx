@@ -1,63 +1,99 @@
-import React from 'react';
+import 'react';
+import { useTranslation } from 'react-i18next';
 import './AboutUs.css';
 
-// 1. Importación de las imágenes reales desde assets
+// Imágenes
 import zoeImg from '../../assets/Zoe.png';
 import poblaImg from '../../assets/PObla.png';
 import dibujoImg from '../../assets/Dibujo.png';
 
 function AboutUs() {
+  const { t } = useTranslation();
+
   return (
     <section className="about-section">
-      <h2 className="about-top-tag">About-us</h2>
-      
-      {/* Encabezado principal centrado */}
+      <h2 className="about-top-tag">
+        {t('about.title')}
+      </h2>
+
+      {/* Encabezado principal */}
       <div className="about-main-header">
-        <h1>The <span className="highlight-orange">Daga</span>media Team</h1>
+        <h1>
+          {t('about.mainTitle1')}{' '}
+          <span className="highlight-orange">
+            {t('about.mainTitleHighlight')}
+          </span>
+          {t('about.mainTitle2')}
+        </h1>
+
         <p className="about-lead-text">
-          Our team is composed of an interdisciplinary group, including illustrators, modelers, animators, composers, and we have a fascinating stock of voices.
+          {t('about.leadText')}
         </p>
       </div>
 
-      {/* Contenedor principal asimétrico en Grid */}
+      {/* Layout principal */}
       <div className="about-layout-grid">
-        
-        {/* Bloque Izquierdo Superior: Texto Directing Projects */}
+
+        {/* Texto izquierdo */}
         <div className="grid-area-text-left">
           <div className="text-block">
-            <h2>Directing projects</h2>
+            <h2>
+              {t('about.directingProjectsTitle')}
+            </h2>
+
             <p>
-              Graphic designers passionate about animation and creative productions, Edison and Diego Yaya founded Dagamedia in 2009. Since then, they have been dedicated to telling their own stories through animation and creating productions for companies and institutions in need. They continue to shape their future in the world of animation as an animation film company.
+              {t('about.directingProjectsDescription')}
             </p>
           </div>
         </div>
 
-        {/* Bloque Izquierdo Inferior: Imagen única Dibujo.png */}
+        {/* Imagen dibujo */}
         <div className="grid-area-sketches">
           <div className="sketches-single-container">
-            <img src={dibujoImg} alt="Project Sketches" className="sketches-img" />
+            <img
+              src={dibujoImg}
+              alt={t('about.altSketches')}
+              className="sketches-img"
+              loading="lazy"
+            />
           </div>
         </div>
 
-        {/* Bloque Derecho Superior: Fichas de Personajes */}
+        {/* Personajes */}
         <div className="grid-area-characters">
           <div className="character-cards-wrapper">
+
             <div className="character-card">
-              <img src={zoeImg} alt="Zoe Character" />
+              <img
+                src={zoeImg}
+                alt={t('about.altZoe')}
+                loading="lazy"
+              />
             </div>
+
             <div className="character-card">
-              <img src={poblaImg} alt="Poblador Character" />
+              <img
+                src={poblaImg}
+                alt={t('about.altPobla')}
+                loading="lazy"
+              />
             </div>
+
           </div>
         </div>
 
-        {/* Bloque Derecho Inferior: Texto Animation Company */}
+        {/* Texto derecho */}
         <div className="grid-area-text-right">
           <div className="text-block text-center">
-            <h2>We are a 3D-2D animation company</h2>
+
+            <h2>
+              {t('about.animationCompanyTitle')}
+            </h2>
+
             <p>
-              We have dedicated several years of our creative activity to improve our processes and envision our future as an animation film production company. This includes the production of short films and feature films where we can bring our stories to life and share with audiences everything we have in mind.
+              {t('about.animationCompanyDescription')}
             </p>
+
           </div>
         </div>
 

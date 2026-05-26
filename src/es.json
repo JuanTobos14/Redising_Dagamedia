@@ -1,0 +1,165 @@
+{
+  "header": {
+    "logo": "DAGA MEDIA",
+    "nav": {
+      "home": "Inicio",
+      "ourFilms": "Nuestras Películas",
+      "whatWeDo": "¿Qué hacemos?",
+      "aboutUs": "Quiénes somos",
+      "contact": "Contacto"
+    }
+  },
+  "home": {
+    "phrase": "\"Creatividad\""
+  },
+  "about": {
+    "title": "QUIÉNES SOMOS",
+    "description1": "En Daga Media, somos apasionados por la narrativa visual. Desde Boyacá para el mundo, creamos contenidos que inspiran y conectan.",
+    "description2": "Especializados en animación 2D, 3D y producción cinematográfica de alto impacto.",
+    "altAnimation": "Animación",
+    "altProduction": "Producción",
+    "altPostProduction": "Post-producción",
+    "mainTitle1": "El equipo de",
+    "mainTitleHighlight": "Daga",
+    "mainTitle2": "media",
+    "leadText": "Nuestro equipo está compuesto por un grupo interdisciplinario, incluyendo ilustradores, modeladores, animadores, compositores y contamos con un fascinante banco de voces.",
+    "directingProjectsTitle": "Dirigiendo proyectos",
+    "directingProjectsDescription": "Los diseñadores gráficos apasionados por la animación y las producciones creativas, Edison y Diego Yaya, fundaron Dagamedia en 2009. Desde entonces, se han dedicado a contar sus propias historias a través de la animación y crear producciones para empresas e instituciones que lo necesitan. Continúan construyendo su futuro en el mundo de la animación como productora cinematográfica de animación.",
+    "animationCompanyTitle": "Somos una empresa de animación 3D-2D",
+    "animationCompanyDescription": "Hemos dedicado varios años de nuestra actividad creativa a mejorar nuestros procesos y visualizar nuestro futuro como productora cinematográfica de animación. Esto incluye la producción de cortometrajes y largometrajes donde podemos dar vida a nuestras historias y compartir con el público todo lo que imaginamos.",
+    "altSketches": "Bocetos del proyecto",
+    "altZoe": "Personaje Zoe",
+    "altPobla": "Personaje poblador"
+  },
+  "whatWeDo": {
+    "mainTitle": "Animación 2D y 3D",
+    "animation2d": {
+      "title": "Animación 2D",
+      "description": "Creamos personajes y mundos únicos con técnicas tradicionales y digitales. Nuestras historias cobran vida a través de un movimiento fluido y una estética cautivadora."
+    },
+    "animation3d": {
+      "title": "Animación 3D",
+      "description": "Modelado, texturizado y renderizado de alta calidad. Llevamos la producción audiovisual al siguiente nivel con efectos visuales y entornos tridimensionales inmersivos."
+    }
+  },
+  "films": {
+    "title": "Nuestras Películas",
+    "labels": {
+      "premiere": "ESTRENO",
+      "popular": "POPULAR",
+      "classic": "CLÁSICO"
+    },
+    "tundama": {
+      "title": "Tundama",
+      "description": "La historia de un héroe que defendió su pueblo con valor. Una producción épica de animación 3D."
+    },
+    "trailer": "TRAILER (VIDEO)",
+    "headerTitleLine1": "Te invitamos a",
+    "headerTitleLine2": "ver nuestra selección.",
+    "headerDescription1": "Algunos de nuestros",
+    "shortFilms": "cortometrajes",
+    "headerDescription2": "están próximos a estrenarse, mientras otros siguen en producción. Te los presentamos.",
+    "tundamaTopText": "Nos estrenamos en salas de cine comerciales en Colombia en 2021 y en España en febrero de 2022, próximamente disponibles en plataformas digitales.",
+    "tundamaBottomText": "Tundama es la primera película que rescata la lengua muisca del centro de Colombia, declarada extinta desde el siglo XVIII.",
+    "trailerTitle": "Te presentamos el tráiler oficial.",
+    "trailerDescription": "A comienzos del siglo XVI, un valiente cacique enfrenta la devastadora llegada de los españoles a sus territorios. Dos niños que buscan a su hermana secuestrada se encuentran en medio de este choque de culturas, desencadenando batallas donde salen a la luz sentimientos y actos de valentía, traición, amor y ambición.",
+    "playTrailer": "Reproducir tráiler",
+    "alt": {
+      "oldWoman": "Anciana junto al fuego",
+      "bear": "Oso en la cascada",
+      "warrior": "Guerrero de frente",
+      "sketch": "Boceto a lápiz de Tundama",
+      "tundamaLogo": "Logo oficial de Tundama",
+      "awards": "Premios de honor de Tundama",
+      "poster": "Póster oficial de Tundama",
+      "trailerScene": "Escena oficial del tráiler"
+    }
+  },
+  "contact": {
+    "title": "CONTACTO",
+    "form": {
+      "name": "Nombre:",
+      "namePlaceholder": "Escribe tu nombre",
+      "email": "Correo electrónico:",
+      "emailPlaceholder": "tucorreo@ejemplo.com",
+      "message": "Mensaje:",
+      "messagePlaceholder": "¿En qué podemos ayudarte?",
+      "submitButton": "ENVIAR MENSAJE",
+      "successMessage": "¡Gracias {name}! Tu mensaje ha sido enviado.\n\nCorreo: {email}\nMensaje: {message}"
+    },
+    "tabs": {
+      "contact": "Contacto",
+      "workWithUs": "Trabaja con nosotros"
+    },
+    "subtitle": {
+      "work": "¡Únete a nosotros!",
+      "standard": "Si tienes una pregunta o deseas contactarnos"
+    },
+    "pagination": {
+      "contact": "Formulario de contacto",
+      "work": "Formulario trabaja con nosotros"
+    },
+    "standardForm": {
+      "name": "Nombre",
+      "namePlaceholder": "Ingresa tu nombre",
+      "email": "Correo electrónico",
+      "emailPlaceholder": "Ingresa tu correo",
+      "contactNumber": "Número de contacto",
+      "contactNumberPlaceholder": "Ingresa tu número",
+      "message": "Mensaje",
+      "messagePlaceholder": "Escribe tu mensaje",
+      "submit": "Enviar",
+      "successMessage": "¡Gracias {{name}}! Tu mensaje ha sido enviado."
+    },
+    "workForm": {
+  "name": "Nombre",
+  "namePlaceholder": "Ingresa tu nombre",
+
+  "email": "Correo electrónico",
+  "emailPlaceholder": "Ingresa tu correo",
+
+  "profession": "¿A qué te dedicas?",
+  "selectOption": "Selecciona una opción",
+
+  "message": "Mensaje",
+  "messagePlaceholder": "Escribe tu mensaje",
+
+  "reelLink": "Link de reel",
+  "reelPlaceholder": "Pega el enlace de tu portafolio o reel",
+
+  "cvUpload": "Adjunta tu hoja de vida en PDF",
+
+  "selectFile": "Seleccionar archivo",
+
+  "submit": "Enviar",
+
+  "successMessage": "¡Gracias {{name}}! Tu solicitud ha sido enviada.",
+
+  "options": {
+    "animator2d": "Animador 2D",
+    "animator3d": "Animador 3D",
+    "illustrator": "Ilustrador",
+    "modeler": "Modelador",
+    "composer": "Compositor / Diseñador de sonido",
+    "voiceActor": "Actor de voz",
+    "other": "Otro"
+  }
+}
+  },
+  "footer": {
+  "copyright": "© 2026 Daga Media | Tunja - Boyacá - Colombia",
+
+  "mobile": "Celular",
+
+  "logoAlt": "Dagamedia logo",
+
+  "address": "68 Street 6-66 Tunja – Boyacá – Colombia",
+
+  "social": {
+    "facebook": "FB",
+    "twitter": "TW",
+    "instagram": "IG",
+    "youtube": "YT"
+  }
+}
+}

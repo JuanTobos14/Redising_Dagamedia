@@ -1,22 +1,26 @@
+import { useTranslation } from 'react-i18next';
 import "./WhatDoWeDo.css";
 
 const WhatDoWeDo = () => {
+  // Hook para acceder a las traducciones
+  const { t } = useTranslation();
+
   return (
     <section className="whatwedo">
-      <h2>What Do We Do?</h2>
+      <h2>{t('whatWeDo.mainTitle')}</h2>
 
       <div className="container">
         
         <div className="card">
           <div className="image"></div>
-          <h3>2D Animation</h3>
-          <p>We create amazing 2D animations with creative storytelling.</p>
+          <h3>{t('whatWeDo.animation2d.title')}</h3>
+          <p>{t('whatWeDo.animation2d.description')}</p>
         </div>
 
         <div className="card">
           <div className="image"></div>
-          <h3>3D Animation</h3>
-          <p>We develop high-quality 3D animated content.</p>
+          <h3>{t('whatWeDo.animation3d.title')}</h3>
+          <p>{t('whatWeDo.animation3d.description')}</p>
         </div>
 
       </div>
