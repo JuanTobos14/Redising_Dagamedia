@@ -1,20 +1,38 @@
-import React from 'react';
+import { useState } from 'react';
 import { useLanguage } from '../../context/LanguageContext';
 import './WhatDoWeDo.css';
 
+const SERVICES = [
+  {
+    id: '2d',
+    titleKey: 'services_2d_title',
+    descKey: 'services_2d_desc',
+    image: 'https://dagamedia.com/wp-content/uploads/2021/02/animacion-2d.jpg',
+    subtitleKey: 'services_2d_fun',
+    detailKey: 'services_2d_detail'
+  },
+  {
+    id: '3d',
+    titleKey: 'services_3d_title',
+    descKey: 'services_3d_desc',
+    image: 'https://dagamedia.com/wp-content/uploads/2021/02/animacion-3d.jpg',
+    subtitleKey: 'services_3d_fun',
+    detailKey: 'services_3d_detail'
+  }
+];
+
 function WhatDoWeDo() {
   const { t } = useLanguage();
+  const [activeTab, setActiveTab] = useState('2d');
+  const active = SERVICES.find(s => s.id === activeTab);
 
   const handleMouseMove = (e) => {
     const card = e.currentTarget;
     const rect = card.getBoundingClientRect();
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
-    
     const centerX = rect.width / 2;
     const centerY = rect.height / 2;
-    
-    // Max tilt angle in degrees
     const maxTilt = 18;
     const rotateY = ((x - centerX) / centerX) * maxTilt;
     const rotateX = -((y - centerY) / centerY) * maxTilt;
@@ -39,46 +57,49 @@ function WhatDoWeDo() {
   };
 
   return (
-    <section className="what-we-do reveal-on-scroll" id="servicios">
-      <div className="what-we-do-title-wrap">
-        <h2 className="what-we-do-title">{t('services_title')}</h2>
+    <section className="wdwd-section reveal-on-scroll" id="servicios">
+      {/* Section label */}
+      <h2 className="section-label">{t('services_title')}</h2>
+
+      {/* Tabs row */}
+      <div className="wdwd-tabs">
+        <div className="wdwd-tab-dot" />
+        {SERVICES.map((svc) => (
+          <button
+            key={svc.id}
+            className={`wdwd-tab ${activeTab === svc.id ? 'active' : ''}`}
+            onClick={() => setActiveTab(svc.id)}
+          >
+            {t(svc.titleKey)}
+          </button>
+        ))}
+        {/* Arrow indicator */}
+        <button 
+          className="wdwd-tab-arrow"
+          onClick={() => setActiveTab(activeTab === '2d' ? '3d' : '2d')}
+        >
+          <svg viewBox="0 0 24 24" width="28" height="28">
+            <polygon points="8,4 20,12 8,20" fill="currentColor"/>
+          </svg>
+        </button>
       </div>
 
-      {/* Fila 1: Imagen Izquierda, Texto Derecha */}
-      <div className="service-row">
+      {/* Subtitle */}
+      <p className="wdwd-subtitle">{t(active.descKey).split('.')[0]}.</p>
+
+      {/* Content: image left, text right */}
+      <div className="wdwd-content">
         <div 
-          className="service-image tilt-card"
+          className="wdwd-image tilt-card"
           onMouseMove={handleMouseMove}
           onMouseLeave={handleMouseLeave}
         >
           <div className="card-shine" />
-          <img 
-            src="https://dagamedia.com/wp-content/uploads/2021/02/animacion-2d.jpg" 
-            alt="Animación 2D Dagamedia" 
-          />
+          <img src={active.image} alt={t(active.titleKey)} />
         </div>
-        <div className="service-info">
-          <h3>{t('services_2d_title')}</h3>
-          <p>{t('services_2d_desc')}</p>
-        </div>
-      </div>
-
-      {/* Fila 2: Texto Izquierda, Imagen Derecha (usamos la clase 'reverse') */}
-      <div className="service-row reverse">
-        <div 
-          className="service-image tilt-card"
-          onMouseMove={handleMouseMove}
-          onMouseLeave={handleMouseLeave}
-        >
-          <div className="card-shine" />
-          <img 
-            src="https://dagamedia.com/wp-content/uploads/2021/02/animacion-3d.jpg" 
-            alt="Animación 3D Dagamedia" 
-          />
-        </div>
-        <div className="service-info">
-          <h3>{t('services_3d_title')}</h3>
-          <p>{t('services_3d_desc')}</p>
+        <div className="wdwd-text">
+          <h3>{t(active.subtitleKey) || 'Drawing sequences is fun'}</h3>
+          <p>{t(active.detailKey) || t(active.descKey)}</p>
         </div>
       </div>
     </section>

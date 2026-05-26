@@ -1,4 +1,3 @@
-import React from 'react';
 import { useLanguage } from '../../context/LanguageContext';
 import StandardForm from './StandardForm';
 import WorkWithUsForm from './WorkWithUsForm';
@@ -16,26 +15,31 @@ export default function ContactLayout({ activeForm = 'standard', onChangeActiveF
 
   return (
     <div className="contact-container">
-      {/* Header Tabs Toggle */}
+      {/* Header Tabs */}
       <header className="contact-tabs">
+        <div className="contact-tab-dot" />
         <button 
           type="button" 
           className={`contact-tab ${currentForm === 'standard' ? 'active' : ''}`}
           onClick={() => setCurrentForm('standard')}
         >
-          {currentForm === 'standard' && <span className="tab-bullet">● </span>}
-          {currentForm === 'work' && <span className="tab-arrow">◀ </span>}
           {t('contact_tab_contact')}
         </button>
-        
         <button 
           type="button" 
           className={`contact-tab ${currentForm === 'work' ? 'active' : ''}`}
           onClick={() => setCurrentForm('work')}
         >
           {t('contact_tab_work')}
-          {currentForm === 'work' && <span className="tab-bullet"> ●</span>}
-          {currentForm === 'standard' && <span className="tab-arrow"> ▶</span>}
+        </button>
+        {/* Arrow */}
+        <button 
+          className="contact-tab-arrow"
+          onClick={() => setCurrentForm(currentForm === 'standard' ? 'work' : 'standard')}
+        >
+          <svg viewBox="0 0 24 24" width="28" height="28">
+            <polygon points="8,4 20,12 8,20" fill="currentColor"/>
+          </svg>
         </button>
       </header>
 
@@ -56,7 +60,7 @@ export default function ContactLayout({ activeForm = 'standard', onChangeActiveF
         )}
       </main>
 
-      {/* Dot Pagination Selector */}
+      {/* Dot Pagination */}
       <div className="contact-pagination">
         <span 
           className={`pagination-dot ${currentForm === 'standard' ? 'active' : ''}`}
@@ -70,7 +74,7 @@ export default function ContactLayout({ activeForm = 'standard', onChangeActiveF
         />
       </div>
 
-      {/* Google Map Section */}
+      {/* Google Map */}
       <div className="contact-map-container">
         <iframe
           src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3971.2847522502677!2d-73.3419956!3d5.5732819!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e6a7c762797ec35%3A0x4dd06b9858acbe6c!2sDagamedia!5e0!3m2!1ses-419!2sco!4v1716300000000!5m2!1ses-419!2sco"
@@ -86,4 +90,3 @@ export default function ContactLayout({ activeForm = 'standard', onChangeActiveF
     </div>
   );
 }
-

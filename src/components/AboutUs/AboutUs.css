@@ -1,139 +1,188 @@
 /* src/components/AboutUs/AboutUs.css */
-.about-container {
-  padding: 100px 8%;
+.about-section {
+  padding: 80px 100px;
   background-color: var(--bg-primary);
-  color: var(--text-main);
-  position: relative;
 }
 
-.about-header {
-  margin-bottom: 50px;
-}
-
-.about-header h2 {
-  font-size: clamp(2.5rem, 6vw, 60px);
-  font-weight: 800;
-  letter-spacing: 0.05em;
+/* Team Title — large centered */
+.about-team-title {
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 7vw, 100px);
+  font-weight: 700;
+  letter-spacing: 5px;
   color: var(--text-main);
   text-align: center;
-  text-transform: uppercase;
-  margin: 0;
+  margin: 40px 0 30px;
+  line-height: 1.15;
 }
 
-.about-main-content {
+.text-orange {
+  color: var(--accent-orange);
+}
+
+.about-team-desc {
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 36px;
+  letter-spacing: 2.5px;
+  color: var(--text-muted);
+  text-align: center;
+  max-width: 1720px;
+  margin: 0 auto 70px;
+}
+
+/* Directors row: text left, photos right */
+.about-directors-row {
   display: flex;
-  gap: 50px;
-  align-items: center;
-  margin-bottom: 60px;
+  gap: 60px;
+  align-items: flex-start;
+  margin-bottom: 70px;
 }
 
-.about-image-large {
-  flex: 1.2;
-  position: relative;
+.about-directors-text {
+  flex: 1;
+}
+
+.about-subsection-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 3vw, 50px);
+  font-weight: 700;
+  color: var(--text-main);
+  margin: 0 0 20px;
+  text-align: center;
+  letter-spacing: 2px;
+}
+
+.about-subsection-text {
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 36px;
+  letter-spacing: 2px;
+  color: var(--text-muted);
+  margin: 0;
+  text-align: center;
+}
+
+.about-directors-photos {
+  display: flex;
+  gap: 40px;
+  flex-shrink: 0;
+}
+
+.director-photo {
+  width: 396px;
+  height: 560px;
   border-radius: 20px;
   overflow: hidden;
-  border: 1px solid var(--border-color);
-  box-shadow: 0 15px 45px rgba(0, 0, 0, 0.4);
-  transition: var(--transition-smooth);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
 }
 
-.about-image-large:hover {
-  border-color: var(--accent-orange);
-  box-shadow: 0 20px 50px rgba(255, 107, 0, 0.08);
-  transform: translateY(-3px);
+.director-photo:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 25px 60px rgba(255, 102, 0, 0.1);
 }
 
-.about-image-large img {
+.director-photo img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
+  transition: transform 0.4s ease;
 }
 
-.about-text {
-  flex: 1;
-  font-size: 1.15rem;
-  line-height: 1.8;
-  color: var(--text-muted);
-}
-
-.about-text strong {
-  color: var(--text-main);
-}
-
-.about-text p {
-  margin-bottom: 20px;
-}
-
-/* 3 columns grid under info */
-.about-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 25px;
-}
-
-.grid-item {
-  border-radius: 14px;
-  overflow: hidden;
-  border: 1px solid var(--border-color);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-  transition: var(--transition-smooth);
-}
-
-.grid-item:hover {
-  border-color: var(--accent-orange);
-  transform: translateY(-5px);
-  box-shadow: 0 15px 35px rgba(255, 107, 0, 0.1);
-}
-
-.grid-item img {
-  width: 100%;
-  height: 220px;
-  object-fit: cover;
-  display: block;
-  transition: var(--transition-smooth);
-}
-
-.grid-item:hover img {
+.director-photo:hover img {
   transform: scale(1.03);
 }
 
-@media (max-width: 992px) {
-  .about-main-content {
+/* Bottom row: photos grid left, company info right */
+.about-bottom-row {
+  display: flex;
+  gap: 60px;
+  align-items: flex-start;
+}
+
+.about-photos-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 35px;
+  flex-shrink: 0;
+}
+
+.team-photo {
+  width: 380px;
+  height: 351px;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.team-photo:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 50px rgba(255, 102, 0, 0.08);
+}
+
+.team-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s ease;
+}
+
+.team-photo:hover img {
+  transform: scale(1.04);
+}
+
+.about-company-info {
+  flex: 1;
+  padding-top: 80px;
+}
+
+@media (max-width: 1200px) {
+  .about-directors-row {
     flex-direction: column;
-    gap: 30px;
   }
-  .about-grid {
+  .about-directors-photos {
+    justify-content: center;
+  }
+  .about-bottom-row {
+    flex-direction: column;
+  }
+  .about-photos-grid {
+    justify-self: center;
+  }
+  .director-photo {
+    width: 300px;
+    height: 420px;
+  }
+  .team-photo {
+    width: 100%;
+    height: 280px;
+  }
+}
+
+@media (max-width: 768px) {
+  .about-section {
+    padding: 60px 20px;
+  }
+  .about-directors-photos {
+    flex-direction: column;
+    align-items: center;
+  }
+  .director-photo {
+    width: 100%;
+    max-width: 380px;
+    height: 400px;
+  }
+  .about-photos-grid {
     grid-template-columns: 1fr;
-    gap: 20px;
   }
-  .grid-item img {
+  .team-photo {
+    width: 100%;
     height: 250px;
   }
-}
-
-.grid-info-box {
-  padding: 20px;
-  background: rgba(26, 26, 26, 0.9);
-  border-top: 1px solid var(--border-color);
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  min-height: 190px;
-}
-
-.grid-item h4 {
-  font-size: 1.15rem;
-  font-weight: 700;
-  color: var(--accent-orange);
-  margin: 0;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
-
-.grid-item p {
-  font-size: 0.92rem;
-  line-height: 1.6;
-  color: var(--text-muted);
-  margin: 0;
 }

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import { useLanguage } from '../../context/LanguageContext';
 import './Home.css';
@@ -24,32 +24,33 @@ function Home() {
 
   return (
     <div className="home-container reveal-on-scroll" id="inicio">
-      {/* Phrase/Title Section */}
-      <div className="phrase-section">
-        <h1 className="home-title">{t('home_title')}</h1>
-        <h2 className="home-subtitle">{t('home_subtitle')}</h2>
-        <p className="home-creativity-text">
-          <strong>{t('home_creativity')}</strong> — {t('home_look_productions')}
+      {/* Hero text — "Creativity" big centered */}
+      <div className="hero-text-block">
+        <h1 className="hero-main-title">{t('home_creativity')}</h1>
+        <p className="hero-subtitle">
+          {t('home_look_productions').split('productions')[0]}
+          <span className="text-yellow">productions</span>
         </p>
       </div>
 
-      {/* Main Video Wrapper */}
-      <div className="video-main-wrapper">
-        <div className="video-player-box">
-          <div className="video-poster-wrapper" onClick={() => setPlay(true)}>
-            <div className="play-icon-center">
-              <div className="triangle"></div>
-            </div>
-            <img 
-              src="https://img.youtube.com/vi/SUbnWx93k8c/maxresdefault.jpg" 
-              alt="Daga Media Video Preview" 
-              className="video-poster"
-            />
+      {/* Large video poster with play button */}
+      <div className="hero-video-wrapper">
+        <div className="hero-video-box" onClick={() => setPlay(true)}>
+          <img 
+            src="https://img.youtube.com/vi/SUbnWx93k8c/maxresdefault.jpg" 
+            alt="Daga Media Video Preview" 
+            className="hero-video-poster"
+          />
+          {/* Circular play button overlay */}
+          <div className="hero-play-btn">
+            <svg viewBox="0 0 24 24" fill="white" width="50" height="50">
+              <polygon points="8,5 20,12 8,19" />
+            </svg>
           </div>
         </div>
       </div>
 
-      {/* Fullscreen Premium Lightbox Modal for trailer playback */}
+      {/* Fullscreen Premium Lightbox Modal */}
       {play && createPortal(
         <div className="cube-lightbox-modal" onClick={() => setPlay(false)}>
           <button 

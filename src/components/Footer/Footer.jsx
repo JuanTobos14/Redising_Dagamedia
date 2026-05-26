@@ -1,5 +1,6 @@
 import { useLanguage } from '../../context/LanguageContext';
 import './Footer.css';
+import headerLogo from '../../assets/Logo-DAGAMEDIA-Encabezado.png';
 
 function Footer() {
   const { t } = useLanguage();
@@ -41,14 +42,7 @@ function Footer() {
 
       <div className="footer-right">
         <div className="footer-logo">
-          <svg className="logo-icon-svg" viewBox="0 0 32 32">
-            <path fill="#FF6B00" d="M16 2C8.268 2 2 8.268 2 16s6.268 14 14 14 14-6.268 14-14S23.732 2 16 2zm0 24c-5.523 0-10-4.477-10-10S10.477 6 16 6s10 4.477 10 10-4.477 10-10 10z"/>
-            <path fill="#FFC502" d="M13 11l8 5-8 5V11z"/>
-          </svg>
-          <div className="logo-text-wrapper">
-            <span className="logo-main-text">dagamedia</span>
-            <span className="logo-sub-text">AUDIOVISUALES S.A.S.</span>
-          </div>
+          <img src={headerLogo} alt="DAGAMEDIA" className="footer-logo-img" />
         </div>
         <div className="footer-address">
           {t('footer_address')}
