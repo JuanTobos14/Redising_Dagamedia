@@ -3,29 +3,38 @@ import logo from "../../assets/Logo-DAGAMEDIA-Encabezado.png";
 
 function Navbar() {
   return (
-    <header className={styles.header}>
-
-      <div className={styles.logoContainer}>
+    <nav className={styles.navbar}>
+      <div className={styles.navbarLogo}>
         <img src={logo} alt="Dagamedia" />
       </div>
 
-      <nav className={styles.navbar}>
-        <ul className={styles.menu}>
-          <li className={styles.active}>Home</li>
-          <li>What do we do?</li>
-          <li>Our films</li>
-          <li>About us</li>
-          <li>Contact</li>
-        </ul>
+      <div className={styles.navbarLinks}>
+        <a className={styles.liquidNavButton} href="#home">
+          <span>Home</span>
+        </a>
 
-        <div className={styles.right}>
-          <span>▼</span>
-          <span>EN</span>
-          <span>🌐</span>
-        </div>
-      </nav>
+        <a className={styles.liquidNavButton} href="#what-do-we-do">
+          <span>What do we do?</span>
+        </a>
 
-    </header>
+        <a className={styles.liquidNavButton} href="#our-films">
+          <span>Our films</span>
+        </a>
+
+        <a className={styles.liquidNavButton} href="#about-us">
+          <span>About us</span>
+        </a>
+
+        <a className={styles.liquidNavButton} href="#contact">
+          <span>Contact</span>
+        </a>
+      </div>
+
+      <div className={styles.language}>
+        <span>EN</span>
+        <span>◎</span>
+      </div>
+    </nav>
   );
 }
 
