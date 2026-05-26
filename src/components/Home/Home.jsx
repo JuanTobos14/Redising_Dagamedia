@@ -2,7 +2,7 @@ import "./Home.css";
 
 function Home() {
   return (
-    <section className="hero">
+    <section className="hero section-padding">
       <h1>Creativity</h1>
 
       <p>

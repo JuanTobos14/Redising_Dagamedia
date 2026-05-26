@@ -7,15 +7,26 @@ body {
   margin: 0;
   padding: 0;
   width: 100%;
-  max-width: 100%;
   overflow-x: hidden;
-  background-color: #000;
+  background: #000;
+  font-family: Arial, sans-serif;
 }
 
 #root {
   width: 100%;
-  max-width: 100%;
   min-height: 100vh;
-  overflow-x: hidden;
-  background-color: #000;
+  background: #000;
+}
+
+/* Padding estándar para todas las secciones */
+.section-padding {
+  padding-left: 52px;
+  padding-right: 52px;
+}
+
+@media (max-width: 768px) {
+  .section-padding {
+    padding-left: 22px;
+    padding-right: 22px;
+  }
 }
