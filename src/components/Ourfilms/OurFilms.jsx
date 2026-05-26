@@ -38,16 +38,62 @@ function OurFilms({ setContactFormType }) {
         </p>
       </div>
 
-      {/* 3 Film Cards */}
-      <div className="films-cards-row">
-        <div className="film-card">
-          <img src="https://dagamedia.com/wp-content/uploads/2021/02/tundama-poster.jpg" alt="Tundama" />
-        </div>
-        <div className="film-card">
-          <img src="https://dagamedia.com/wp-content/uploads/2021/02/animacion-2d.jpg" alt="Short Film" />
-        </div>
-        <div className="film-card">
-          <img src="https://dagamedia.com/wp-content/uploads/2021/02/animacion-3d.jpg" alt="Short Film" />
+      {/* 3 Film Cards Carousel (ShortFilms) */}
+      <div className="shortfilms-carousel-wrapper">
+        <div className="shortfilms-carousel-track">
+          {/* Card 1: Campfire Scene */}
+          <div className="shortfilm-card-block">
+            {/* NOTA PARA COMPAÑEROS: Para cambiar la imagen del cortometraje (ej. Campfire Scene), descomenta la línea de abajo y añade la ruta: */}
+            {/* <img src="RUTA_DE_LA_IMAGEN_CAMPFIRE" alt="Campfire Scene" className="shortfilm-img" /> */}
+            <div className="shortfilm-placeholder">
+              <span className="placeholder-icon">🔥</span>
+              <span className="placeholder-title">Cortometraje 1</span>
+              <span className="placeholder-subtitle">(Escena de la fogata)</span>
+            </div>
+          </div>
+
+          {/* Card 2: Bear Scene */}
+          <div className="shortfilm-card-block">
+            {/* <img src="RUTA_DE_LA_IMAGEN_OSO" alt="Waterfall Bear Scene" className="shortfilm-img" /> */}
+            <div className="shortfilm-placeholder">
+              <span className="placeholder-icon">🐻</span>
+              <span className="placeholder-title">Cortometraje 2</span>
+              <span className="placeholder-subtitle">(Oso en la cascada)</span>
+            </div>
+          </div>
+
+          {/* Card 3: Tundama Scene */}
+          <div className="shortfilm-card-block">
+            {/* <img src="RUTA_DE_LA_IMAGEN_TUNDAMA" alt="Tundama Character" className="shortfilm-img" /> */}
+            <div className="shortfilm-placeholder">
+              <span className="placeholder-icon">🏹</span>
+              <span className="placeholder-title">Cortometraje 3</span>
+              <span className="placeholder-subtitle">(Personaje Tundama)</span>
+            </div>
+          </div>
+
+          {/* Duplicate cards for seamless infinite scroll */}
+          <div className="shortfilm-card-block">
+            <div className="shortfilm-placeholder">
+              <span className="placeholder-icon">🔥</span>
+              <span className="placeholder-title">Cortometraje 1</span>
+              <span className="placeholder-subtitle">(Escena de la fogata)</span>
+            </div>
+          </div>
+          <div className="shortfilm-card-block">
+            <div className="shortfilm-placeholder">
+              <span className="placeholder-icon">🐻</span>
+              <span className="placeholder-title">Cortometraje 2</span>
+              <span className="placeholder-subtitle">(Oso en la cascada)</span>
+            </div>
+          </div>
+          <div className="shortfilm-card-block">
+            <div className="shortfilm-placeholder">
+              <span className="placeholder-icon">🏹</span>
+              <span className="placeholder-title">Cortometraje 3</span>
+              <span className="placeholder-subtitle">(Personaje Tundama)</span>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -64,85 +110,20 @@ function OurFilms({ setContactFormType }) {
           />
           <p className="tundama-premiere">{t('films_tundama_header')}</p>
           
-          {/* Awards/Laurels Infinite Carousel */}
-          <div className="laurels-carousel-wrapper">
-            <div className="laurels-carousel-track">
-              {/* Laurel Block 1 */}
-              <div className="laurel-block">
-                {/* NOTA PARA COMPAÑEROS: Para reemplazar con imagen real, descomenta la línea de abajo y añade la ruta: */}
-                {/* <img src="RUTA_DE_LA_IMAGEN" alt="Laurel Award" className="laurel-img" /> */}
-                <div className="laurel-img-placeholder">
-                  <span className="placeholder-icon">🏆</span>
-                  <span className="placeholder-text">Laurel 1</span>
-                </div>
+          {/* Static Laurels / Awards block as designed in Figma */}
+          <div className="tundama-laurels-block">
+            <div className="laurels-static-row">
+              <div className="laurel-static-item">
+                <span className="laurel-static-icon">🏆</span>
+                <span className="laurel-static-name">Oniros Film Awards</span>
               </div>
-              
-              {/* Laurel Block 2 */}
-              <div className="laurel-block">
-                {/* <img src="RUTA_DE_LA_IMAGEN" alt="Laurel Award" className="laurel-img" /> */}
-                <div className="laurel-img-placeholder">
-                  <span className="placeholder-icon">🎬</span>
-                  <span className="placeholder-text">Laurel 2</span>
-                </div>
+              <div className="laurel-static-item">
+                <span className="laurel-static-icon">🎬</span>
+                <span className="laurel-static-name">River Atreyee Festival</span>
               </div>
-
-              {/* Laurel Block 3 */}
-              <div className="laurel-block">
-                {/* <img src="RUTA_DE_LA_IMAGEN" alt="Laurel Award" className="laurel-img" /> */}
-                <div className="laurel-img-placeholder">
-                  <span className="placeholder-icon">🌟</span>
-                  <span className="placeholder-text">Laurel 3</span>
-                </div>
-              </div>
-
-              {/* Laurel Block 4 */}
-              <div className="laurel-block">
-                {/* <img src="RUTA_DE_LA_IMAGEN" alt="Laurel Award" className="laurel-img" /> */}
-                <div className="laurel-img-placeholder">
-                  <span className="placeholder-icon">🎖️</span>
-                  <span className="placeholder-text">Laurel 4</span>
-                </div>
-              </div>
-
-              {/* Laurel Block 5 */}
-              <div className="laurel-block">
-                {/* <img src="RUTA_DE_LA_IMAGEN" alt="Laurel Award" className="laurel-img" /> */}
-                <div className="laurel-img-placeholder">
-                  <span className="placeholder-icon">🎥</span>
-                  <span className="placeholder-text">Laurel 5</span>
-                </div>
-              </div>
-
-              {/* Duplicate blocks for seamless loop */}
-              <div className="laurel-block">
-                <div className="laurel-img-placeholder">
-                  <span className="placeholder-icon">🏆</span>
-                  <span className="placeholder-text">Laurel 1</span>
-                </div>
-              </div>
-              <div className="laurel-block">
-                <div className="laurel-img-placeholder">
-                  <span className="placeholder-icon">🎬</span>
-                  <span className="placeholder-text">Laurel 2</span>
-                </div>
-              </div>
-              <div className="laurel-block">
-                <div className="laurel-img-placeholder">
-                  <span className="placeholder-icon">🌟</span>
-                  <span className="placeholder-text">Laurel 3</span>
-                </div>
-              </div>
-              <div className="laurel-block">
-                <div className="laurel-img-placeholder">
-                  <span className="placeholder-icon">🎖️</span>
-                  <span className="placeholder-text">Laurel 4</span>
-                </div>
-              </div>
-              <div className="laurel-block">
-                <div className="laurel-img-placeholder">
-                  <span className="placeholder-icon">🎥</span>
-                  <span className="placeholder-text">Laurel 5</span>
-                </div>
+              <div className="laurel-static-item">
+                <span className="laurel-static-icon">🌟</span>
+                <span className="laurel-static-name">Cine en las Montañas</span>
               </div>
             </div>
           </div>

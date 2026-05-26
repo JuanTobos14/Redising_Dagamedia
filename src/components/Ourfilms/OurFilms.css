@@ -41,34 +41,55 @@
   font-weight: 600;
 }
 
-/* 3 Film Cards Row */
-.films-cards-row {
-  display: flex;
-  gap: 80px;
-  justify-content: center;
-  align-items: center;
+/* Short Films Carousel */
+.shortfilms-carousel-wrapper {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
   margin-bottom: 80px;
+  padding: 20px 0;
+  mask-image: linear-gradient(to right, transparent, white 15%, white 85%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, white 15%, white 85%, transparent);
 }
 
-.film-card {
+.shortfilms-carousel-track {
+  display: flex;
+  gap: 40px;
+  width: max-content;
+  animation: shortfilmsScroll 25s linear infinite;
+}
+
+.shortfilms-carousel-track:hover {
+  animation-play-state: paused;
+}
+
+@keyframes shortfilmsScroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(calc(-50% - 20px));
+  }
+}
+
+.shortfilm-card-block {
+  flex-shrink: 0;
   width: 520px;
   height: 580px;
+  position: relative;
   border-radius: 20px;
   overflow: hidden;
-  flex-shrink: 0;
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
-  transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.3s ease;
-  border: 1px solid transparent;
   cursor: pointer;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
 }
 
-.film-card:hover {
+.shortfilm-card-block:hover {
   transform: translateY(-8px) scale(1.02);
   box-shadow: 0 25px 60px rgba(255, 102, 0, 0.15);
-  border-color: var(--accent-orange);
 }
 
-.film-card img {
+.shortfilm-img {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -76,8 +97,47 @@
   transition: transform 0.4s ease;
 }
 
-.film-card:hover img {
-  transform: scale(1.05);
+.shortfilm-card-block:hover .shortfilm-img {
+  transform: scale(1.03);
+}
+
+.shortfilm-placeholder {
+  width: 100%;
+  height: 100%;
+  border: 3px dashed rgba(255, 102, 0, 0.25);
+  border-radius: 20px;
+  background-color: rgba(26, 26, 26, 0.55);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  transition: var(--transition-smooth);
+}
+
+.shortfilm-card-block:hover .shortfilm-placeholder {
+  border-color: var(--accent-orange);
+  background-color: rgba(26, 26, 26, 0.85);
+  box-shadow: 0 10px 30px rgba(255, 102, 0, 0.2);
+}
+
+.placeholder-icon {
+  font-size: 55px;
+}
+
+.placeholder-title {
+  font-family: var(--font-display);
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: var(--text-main);
+}
+
+.placeholder-subtitle {
+  font-family: var(--font-display);
+  font-size: 15px;
+  color: var(--text-dark);
+  letter-spacing: 1px;
 }
 
 /* Tundama Banner */
@@ -134,89 +194,39 @@
   margin: 0 0 20px 0;
 }
 
-/* Laurels Infinite Carousel */
-.laurels-carousel-wrapper {
+/* Tundama Laurels Block */
+.tundama-laurels-block {
+  margin: 25px 0;
   width: 100%;
-  max-width: 600px;
-  overflow: hidden;
-  position: relative;
-  margin: 15px auto;
-  padding: 10px 0;
-  mask-image: linear-gradient(to right, transparent, white 20%, white 80%, transparent);
-  -webkit-mask-image: linear-gradient(to right, transparent, white 20%, white 80%, transparent);
 }
 
-.laurels-carousel-track {
+.laurels-static-row {
   display: flex;
-  gap: 20px;
-  width: max-content;
-  animation: laurelsScroll 16s linear infinite;
-}
-
-.laurels-carousel-track:hover {
-  animation-play-state: paused;
-}
-
-@keyframes laurelsScroll {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(calc(-50% - 10px)); /* Account for half items scroll */
-  }
-}
-
-.laurel-block {
-  flex-shrink: 0;
-  width: 160px;
-  height: 110px;
-  position: relative;
-}
-
-.laurel-img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  display: block;
-}
-
-.laurel-img-placeholder {
-  width: 100%;
-  height: 100%;
-  border: 2px dashed rgba(255, 102, 0, 0.25);
-  border-radius: 12px;
-  background-color: rgba(26, 26, 26, 0.45);
-  display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 6px;
-  transition: var(--transition-smooth);
+  gap: 40px;
+  flex-wrap: wrap;
 }
 
-.laurel-block:hover .laurel-img-placeholder {
-  border-color: var(--accent-orange);
-  background-color: rgba(26, 26, 26, 0.85);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(255, 102, 0, 0.15);
+.laurel-static-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-muted);
 }
 
-.placeholder-icon {
-  font-size: 20px;
+.laurel-static-icon {
+  font-size: 32px;
 }
 
-.placeholder-text {
+.laurel-static-name {
   font-family: var(--font-display);
   font-size: 11px;
-  font-weight: 500;
-  letter-spacing: 1px;
-  color: var(--text-dark);
+  letter-spacing: 1.5px;
   text-transform: uppercase;
-  text-align: center;
-}
-
-.laurel-block:hover .placeholder-text {
-  color: var(--text-main);
+  color: var(--text-dark);
+  font-weight: 500;
 }
 
 .tundama-desc {
