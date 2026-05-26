@@ -32,14 +32,25 @@
     "altPobla": "Personaje poblador"
   },
   "whatWeDo": {
+    "tag": "¿Qué hacemos?",
     "mainTitle": "Animación 2D y 3D",
     "animation2d": {
       "title": "Animación 2D",
-      "description": "Creamos personajes y mundos únicos con técnicas tradicionales y digitales. Nuestras historias cobran vida a través de un movimiento fluido y una estética cautivadora."
+      "intro": "Somos apasionados por el dibujo y la maravillosa expresión que nos brinda la animación 2D tradicional.",
+      "subtitle": "Dibujar secuencias es divertido",
+      "description": "Esta técnica nos permite una libertad absoluta en la creación de secuencias. Así como los animadores tradicionales trabajan con lápiz y papel, dibujando cuadro a cuadro, nosotros recreamos digitalmente ese proceso. Requiere mucha dedicación, pero el resultado es fantástico.",
+      "tag1": "Narrativa",
+      "tag2": "Diseño de personajes",
+      "tag3": "Cuadro por cuadro"
     },
     "animation3d": {
       "title": "Animación 3D",
-      "description": "Modelado, texturizado y renderizado de alta calidad. Llevamos la producción audiovisual al siguiente nivel con efectos visuales y entornos tridimensionales inmersivos."
+      "intro": "Nuestra técnica favorita es la animación 3D, ideal para contar historias en formatos cortos, medios y largometrajes.",
+      "subtitle": "Cortometrajes animados en 3D",
+      "description": "Nuestra técnica favorita es la animación 3D. Con ella podemos contar tus historias en piezas cortas, medianas y de largo metraje, ideales para promocionar marcas o ideas con un impacto significativo en comerciales para TV y cine, cortometrajes para proyección en salas y plataformas, o largometrajes para salas y la web.",
+      "tag1": "Renderizado",
+      "tag2": "VFX",
+      "tag3": "Cinematográfico"
     }
   },
   "films": {
@@ -112,54 +123,41 @@
       "successMessage": "¡Gracias {{name}}! Tu mensaje ha sido enviado."
     },
     "workForm": {
-  "name": "Nombre",
-  "namePlaceholder": "Ingresa tu nombre",
-
-  "email": "Correo electrónico",
-  "emailPlaceholder": "Ingresa tu correo",
-
-  "profession": "¿A qué te dedicas?",
-  "selectOption": "Selecciona una opción",
-
-  "message": "Mensaje",
-  "messagePlaceholder": "Escribe tu mensaje",
-
-  "reelLink": "Link de reel",
-  "reelPlaceholder": "Pega el enlace de tu portafolio o reel",
-
-  "cvUpload": "Adjunta tu hoja de vida en PDF",
-
-  "selectFile": "Seleccionar archivo",
-
-  "submit": "Enviar",
-
-  "successMessage": "¡Gracias {{name}}! Tu solicitud ha sido enviada.",
-
-  "options": {
-    "animator2d": "Animador 2D",
-    "animator3d": "Animador 3D",
-    "illustrator": "Ilustrador",
-    "modeler": "Modelador",
-    "composer": "Compositor / Diseñador de sonido",
-    "voiceActor": "Actor de voz",
-    "other": "Otro"
-  }
-}
+      "name": "Nombre",
+      "namePlaceholder": "Ingresa tu nombre",
+      "email": "Correo electrónico",
+      "emailPlaceholder": "Ingresa tu correo",
+      "profession": "¿A qué te dedicas?",
+      "selectOption": "Selecciona una opción",
+      "message": "Mensaje",
+      "messagePlaceholder": "Escribe tu mensaje",
+      "reelLink": "Link de reel",
+      "reelPlaceholder": "Pega el enlace de tu portafolio o reel",
+      "cvUpload": "Adjunta tu hoja de vida en PDF",
+      "selectFile": "Seleccionar archivo",
+      "submit": "Enviar",
+      "successMessage": "¡Gracias {{name}}! Tu solicitud ha sido enviada.",
+      "options": {
+        "animator2d": "Animador 2D",
+        "animator3d": "Animador 3D",
+        "illustrator": "Ilustrador",
+        "modeler": "Modelador",
+        "composer": "Compositor / Diseñador de sonido",
+        "voiceActor": "Actor de voz",
+        "other": "Otro"
+      }
+    }
   },
   "footer": {
-  "copyright": "© 2026 Daga Media | Tunja - Boyacá - Colombia",
-
-  "mobile": "Celular",
-
-  "logoAlt": "Dagamedia logo",
-
-  "address": "68 Street 6-66 Tunja – Boyacá – Colombia",
-
-  "social": {
-    "facebook": "FB",
-    "twitter": "TW",
-    "instagram": "IG",
-    "youtube": "YT"
+    "copyright": "© 2026 Daga Media | Tunja - Boyacá - Colombia",
+    "mobile": "Celular",
+    "logoAlt": "Dagamedia logo",
+    "address": "68 Street 6-66 Tunja – Boyacá – Colombia",
+    "social": {
+      "facebook": "FB",
+      "twitter": "TW",
+      "instagram": "IG",
+      "youtube": "YT"
+    }
   }
-}
 }

@@ -32,14 +32,25 @@
     "altPobla": "Villager character"
   },
   "whatWeDo": {
+    "tag": "What do we do?",
     "mainTitle": "2D and 3D Animation",
     "animation2d": {
       "title": "2D Animation",
-      "description": "We create unique characters and worlds with traditional and digital techniques. Our stories come to life through fluid movement and captivating aesthetics."
+      "intro": "We are passionate about drawing and the wonderful expression that traditional 2D animation provides us.",
+      "subtitle": "Drawing sequences is fun",
+      "description": "This technique allows us absolute freedom in creating sequences. Just as traditional animators work with pencil and paper, drawing frame by frame, we digitally recreate that process. It requires a lot of dedication, but the result is fantastic.",
+      "tag1": "Storytelling",
+      "tag2": "Character Design",
+      "tag3": "Frame by Frame"
     },
     "animation3d": {
       "title": "3D Animation",
-      "description": "High-quality modeling, texturing and rendering. We take audiovisual production to the next level with visual effects and immersive three-dimensional environments."
+      "intro": "Our favorite technique is 3D animation, ideal for creating stories in short, medium, and feature-length formats.",
+      "subtitle": "Short animated films in 3D",
+      "description": "Our favorite technique is 3D animation. With it, we can tell your stories in short, medium, and feature-length pieces, ideal for promoting brands or ideas with a significant impact in commercials for TV and cinema, short films for screening in theaters and platforms, or feature films for theaters and the internet.",
+      "tag1": "Rendering",
+      "tag2": "VFX",
+      "tag3": "Cinematic"
     }
   },
   "films": {
@@ -138,18 +149,15 @@
     }
   },
   "footer": {
-  "copyright": "© 2026 Daga Media | Tunja - Boyacá - Colombia",
-
-  "mobile": "Mobile",
-
-  "logoAlt": "Dagamedia logo",
-
-  "address": "68 Street 6-66 Tunja – Boyacá – Colombia",
-
-  "social": {
-    "facebook": "FB",
-    "twitter": "TW",
-    "instagram": "IG",
-    "youtube": "YT"
+    "copyright": "© 2026 Daga Media | Tunja - Boyacá - Colombia",
+    "mobile": "Mobile",
+    "logoAlt": "Dagamedia logo",
+    "address": "68 Street 6-66 Tunja – Boyacá – Colombia",
+    "social": {
+      "facebook": "FB",
+      "twitter": "TW",
+      "instagram": "IG",
+      "youtube": "YT"
+    }
   }
-}}
+}
