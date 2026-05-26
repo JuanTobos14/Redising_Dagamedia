@@ -104,21 +104,25 @@ export default function App() {
     
     const observerOptions = {
       root: null,
-      rootMargin: '-20% 0px -20% 0px',
-      threshold: 0.1
+      rootMargin: '-5% 0px -5% 0px',
+      threshold: 0.02
     };
 
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
+          // Permanently mark as visible once intersected to prevent black spaces
           entry.target.classList.add('visible');
+          // Add animating class to run squash and stretch
+          entry.target.classList.add('animating');
           
           const sectionId = entry.target.getAttribute('id');
           if (sectionId) {
             setCurrentSection(sectionId);
           }
         } else {
-          entry.target.classList.remove('visible');
+          // Remove animating on exit so it is ready to re-trigger when scrolled back in
+          entry.target.classList.remove('animating');
         }
       });
     }, observerOptions);
@@ -148,6 +152,13 @@ export default function App() {
 
     const target = document.getElementById(sectionId);
     if (target) {
+      // Re-trigger the squash and stretch animation on click
+      target.classList.remove('animating');
+      // Trigger reflow to restart CSS animation
+      void target.offsetWidth;
+      target.classList.add('visible');
+      target.classList.add('animating');
+
       target.scrollIntoView({ behavior: 'smooth' });
     }
   };
@@ -216,43 +227,48 @@ export default function App() {
             />
           </div>
 
-          {/* Language switch — right side of nav bar */}
-          <div className="nav-lang-area">
-            <span className={`lang-text ${language === 'en' ? 'active' : ''}`}>EN</span>
-            <button 
-              className="lang-flag-btn"
+          {/* iOS-style Sliding Language Switch with 3D Coin Flip Flag */}
+          <div className="navbar-controls-group">
+            <div 
+              className={`navbar-lang-switch lang-${language}`}
               onClick={() => toggleLanguage(language === 'es' ? 'en' : 'es')}
-              title={language === 'es' ? "Switch to English" : "Cambiar a Español"}
+              title={language === 'es' ? "Cambiar a Inglés" : "Switch to Spanish"}
             >
-              {/* Flag icon circle */}
-              <div className="flag-coin-mini">
-                <div className={`flag-face-mini ${language === 'es' ? 'show' : ''}`}>
-                  <svg viewBox="0 0 100 100" width="100%" height="100%">
-                    <clipPath id="fc-es"><circle cx="50" cy="50" r="50"/></clipPath>
-                    <g clipPath="url(#fc-es)">
-                      <rect width="100" height="100" fill="#c60b1e"/>
-                      <rect width="100" height="50" y="25" fill="#ffc400"/>
-                    </g>
-                  </svg>
-                </div>
-                <div className={`flag-face-mini ${language === 'en' ? 'show' : ''}`}>
-                  <svg viewBox="0 0 100 100" width="100%" height="100%">
-                    <clipPath id="fc-en"><circle cx="50" cy="50" r="50"/></clipPath>
-                    <g clipPath="url(#fc-en)">
-                      <rect width="100" height="100" fill="#00247d"/>
-                      <path d="M0,0 L100,100 M100,0 L0,100" stroke="#fff" strokeWidth="12"/>
-                      <path d="M0,0 L100,100 M100,0 L0,100" stroke="#cf142b" strokeWidth="6"/>
-                      <path d="M50,0 L50,100 M0,50 L100,50" stroke="#fff" strokeWidth="20"/>
-                      <path d="M50,0 L50,100 M0,50 L100,50" stroke="#cf142b" strokeWidth="12"/>
-                    </g>
-                  </svg>
+              <span className={`switch-label label-es ${language === 'es' ? 'active' : ''}`}>ES</span>
+              <span className={`switch-label label-en ${language === 'en' ? 'active' : ''}`}>EN</span>
+              
+              <div className="switch-thumb">
+                <div className="flag-coin">
+                  {/* Spanish flag on the front side */}
+                  <div className="flag-face flag-face-es">
+                    <svg viewBox="0 0 100 100" width="100%" height="100%">
+                      <clipPath id="circle-clip-es-thumb">
+                        <circle cx="50" cy="50" r="50"/>
+                      </clipPath>
+                      <g clipPath="url(#circle-clip-es-thumb)">
+                        <rect width="100" height="100" fill="#c60b1e"/>
+                        <rect width="100" height="50" y="25" fill="#ffc400"/>
+                      </g>
+                    </svg>
+                  </div>
+                  {/* UK flag on the back side */}
+                  <div className="flag-face flag-face-en">
+                    <svg viewBox="0 0 100 100" width="100%" height="100%">
+                      <clipPath id="circle-clip-en-thumb">
+                        <circle cx="50" cy="50" r="50"/>
+                      </clipPath>
+                      <g clipPath="url(#circle-clip-en-thumb)">
+                        <rect width="100" height="100" fill="#00247d"/>
+                        <path d="M0,0 L100,100 M100,0 L0,100" stroke="#fff" strokeWidth="12"/>
+                        <path d="M0,0 L100,100 M100,0 L0,100" stroke="#cf142b" strokeWidth="6"/>
+                        <path d="M50,0 L50,100 M0,50 L100,50" stroke="#fff" strokeWidth="20"/>
+                        <path d="M50,0 L50,100 M0,50 L100,50" stroke="#cf142b" strokeWidth="12"/>
+                      </g>
+                    </svg>
+                  </div>
                 </div>
               </div>
-            </button>
-            {/* Down triangle arrow */}
-            <svg className="lang-dropdown-arrow" viewBox="0 0 10 6">
-              <polygon points="0,0 10,0 5,6" fill="#ffcd00"/>
-            </svg>
+            </div>
           </div>
         </nav>
       </header>
