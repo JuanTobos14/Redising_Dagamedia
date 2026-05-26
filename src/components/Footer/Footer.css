@@ -1,16 +1,18 @@
+/* src/components/Footer/Footer.css */
 .contact-footer {
-  border-top: 1px solid var(--contact-border);
-  padding: 40px 20px;
-  background-color: var(--contact-bg);
-  color: var(--contact-text);
-  font-family: var(--contact-font);
+  border-top: 1px solid var(--border-color);
+  padding: 60px 40px;
+  background-color: var(--bg-primary);
+  color: var(--text-main);
+  font-family: var(--font-main);
   display: flex;
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
   gap: 30px;
-  max-width: 1000px;
-  margin: 0 auto;
+  width: 100%;
+  position: relative;
+  z-index: 10;
 }
 
 .footer-left {
@@ -21,33 +23,34 @@
 
 .social-links {
   display: flex;
-  gap: 12px;
+  gap: 15px;
 }
 
 .social-icon {
-  width: 36px;
-  height: 36px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
   background-color: transparent;
-  border: 1px solid var(--contact-primary);
+  border: 1px solid var(--border-color);
   display: flex;
   justify-content: center;
   align-items: center;
-  color: var(--contact-primary);
+  color: var(--text-muted);
   transition: var(--transition-smooth);
   cursor: pointer;
 }
 
 .social-icon:hover {
-  background-color: var(--contact-primary);
+  background-color: var(--accent-orange);
+  border-color: var(--accent-orange);
   color: #ffffff;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 10px rgba(255, 107, 0, 0.3);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 15px rgba(255, 107, 0, 0.25);
 }
 
 .social-icon svg {
-  width: 16px;
-  height: 16px;
+  width: 18px;
+  height: 18px;
   fill: currentColor;
 }
 
@@ -58,21 +61,21 @@
 }
 
 .phone-label {
-  font-size: 12px;
+  font-size: 11px;
   text-transform: uppercase;
-  color: var(--contact-text-muted);
+  color: var(--text-dark);
   letter-spacing: 1px;
 }
 
 .phone-numbers {
   font-size: 14px;
-  color: var(--contact-text);
+  color: var(--text-muted);
   font-weight: 500;
 }
 
 .footer-center {
   font-size: 13px;
-  color: var(--contact-text-muted);
+  color: var(--text-dark);
 }
 
 .footer-right {
@@ -87,12 +90,12 @@
 .footer-logo {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
 }
 
 .logo-icon-svg {
-  width: 28px;
-  height: 28px;
+  width: 32px;
+  height: 32px;
 }
 
 .logo-text-wrapper {
@@ -103,22 +106,22 @@
 }
 
 .logo-main-text {
-  font-size: 18px;
+  font-size: 20px;
   font-weight: 800;
-  color: var(--contact-text);
+  color: var(--text-main);
   letter-spacing: -0.5px;
 }
 
 .logo-sub-text {
-  font-size: 8px;
-  font-weight: 500;
-  color: var(--contact-text-muted);
+  font-size: 9px;
+  font-weight: 600;
+  color: var(--text-dark);
   letter-spacing: 0.5px;
 }
 
 .footer-address {
   font-size: 13px;
-  color: var(--contact-text-muted);
+  color: var(--text-muted);
   max-width: 250px;
 }
 
@@ -128,8 +131,8 @@
     flex-direction: column;
     text-align: center;
     align-items: center;
-    gap: 24px;
-    padding-bottom: 40px;
+    gap: 30px;
+    padding: 40px 20px;
   }
   
   .footer-right {

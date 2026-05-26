@@ -1,50 +1,55 @@
+import React from 'react';
+import VideoCube from '../VideoCube/VideoCube';
+import { useLanguage } from '../../context/LanguageContext';
 import './OurFilms.css';
 
-function OurFilms() {
+function OurFilms({ setContactFormType }) {
+  const { t } = useLanguage();
+
+  const handleScrollToContact = (formType) => {
+    if (setContactFormType) {
+      setContactFormType(formType);
+    }
+    const contactSection = document.getElementById('contacto');
+    if (contactSection) {
+      contactSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
-    <section className="films-container">
-      <h2 className="films-title">OUR FILMS</h2>
-
-      {/* Slider de Películas */}
-      <div className="slider-wrapper">
-        <button className="slider-arrow">{"<"}</button>
-        <div className="slider-content">
-          <div className="film-mini">
-            <img src="https://dagamedia.com/wp-content/uploads/2021/02/tundama-poster.jpg" alt="Film" />
-          </div>
-          <div className="film-featured">
-            <img src="https://dagamedia.com/wp-content/uploads/2021/02/tundama-poster.jpg" alt="Film Featured" />
-            <div className="film-overlay">ESTRENO</div>
-          </div>
-          <div className="film-mini">
-            <img src="https://dagamedia.com/wp-content/uploads/2021/02/tundama-poster.jpg" alt="Film" />
-          </div>
-        </div>
-        <button className="slider-arrow">{">"}</button>
-      </div>
-
-      {/* Sección Tundama (3 columnas según tu dibujo) */}
-      <div className="tundama-header">
-        <h3>TUNDAMA</h3>
-      </div>
+    <section className="films-container reveal-on-scroll" id="peliculas">
+      <h2 className="films-title">{t('films_title')}</h2>
       
-      <div className="tundama-grid">
-        {/* Columna 1: Póster */}
-        <div className="grid-col poster">
-          <img src="https://dagamedia.com/wp-content/uploads/2021/02/tundama-poster.jpg" alt="Tundama Poster" />
-        </div>
-
-        {/* Columna 2: Info y Trailer */}
-        <div className="grid-col info">
-          <p>La historia de un héroe que defendió su pueblo con valor. Una producción épica de animación 3D.</p>
-          <div className="video-placeholder">
-            <span>TRAILER (VIDEO)</span>
+      <div className="films-grid-layout">
+        {/* Left Column: Text description and Call To Actions */}
+        <div className="films-text-column">
+          <h3 className="films-subtitle">{t('films_subtitle')}</h3>
+          <p className="films-paragraph">{t('films_desc_1')}</p>
+          <p className="films-paragraph">{t('films_tundama_header')}</p>
+          <p className="films-paragraph">{t('films_tundama_desc_1')}</p>
+          <p className="films-paragraph films-highlight-desc">{t('films_tundama_desc_2')}</p>
+          
+          <div className="films-actions">
+            <button 
+              type="button" 
+              className="films-cta-btn btn-primary"
+              onClick={() => handleScrollToContact('standard')}
+            >
+              {t('btn_contact')}
+            </button>
+            <button 
+              type="button" 
+              className="films-cta-btn btn-secondary"
+              onClick={() => handleScrollToContact('work')}
+            >
+              {t('btn_work_with_us')}
+            </button>
           </div>
         </div>
 
-        {/* Columna 3: Personaje */}
-        <div className="grid-col character">
-          <img src="https://dagamedia.com/wp-content/uploads/2021/02/servicios-post.jpg" alt="Character Design" />
+        {/* Right Column: 3D Video Cube */}
+        <div className="films-cube-column">
+          <VideoCube />
         </div>
       </div>
     </section>

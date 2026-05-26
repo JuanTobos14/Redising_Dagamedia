@@ -1,33 +1,101 @@
-* {
-  box-sizing: border-box;
-}
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap');
 
 :root {
-  --contact-bg: #0b0b0b;
-  --contact-form-bg: #121212;
-  --contact-input-bg: #1a1a1a;
-  --contact-border: #262626;
-  --contact-primary: #ff6b00; /* Dagamedia Orange */
-  --contact-secondary: #ffc502; /* Dagamedia Yellow */
-  --contact-text: #ffffff;
-  --contact-text-muted: #888888;
-  --contact-text-label: #cccccc;
-  --contact-font: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --bg-primary: #121212;
+  --bg-secondary: #1a1a1a;
+  --bg-card: #1e1e1e;
+  --border-color: #2f2f2f;
+  --accent-orange: #ff6b00;
+  --accent-yellow: #ffc502;
+  
+  --text-main: #f5f5f5;
+  --text-muted: #c3c3c3;
+  --text-dark: #888888;
+  
+  --font-main: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --transition-smooth: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
-html {
+* {
+  box-sizing: border-box;
   scroll-behavior: smooth;
 }
 
 html, body {
   margin: 0;
   padding: 0;
-  background-color: var(--contact-bg);
-  color: var(--contact-text);
-  font-family: var(--contact-font);
+  background-color: var(--bg-primary);
+  color: var(--text-main);
+  font-family: var(--font-main);
+  overflow-x: hidden;
 }
 
-section[id] {
-  scroll-margin-top: 80px;
+/* Premium title typography structure: 100pt/50pt, Bold, 5% spacing */
+h1.section-title-huge {
+  font-size: clamp(3rem, 8vw, 100px);
+  line-height: 1.1;
+  font-weight: 800;
+  letter-spacing: 0.05em; /* 5% letter spacing */
+  color: var(--text-main);
+  text-transform: uppercase;
+  margin: 0 0 20px 0;
+  text-align: center;
+}
+
+h2.section-title-sub {
+  font-size: clamp(1.8rem, 4vw, 50px);
+  line-height: 1.2;
+  font-weight: 700;
+  letter-spacing: 0.05em; /* 5% letter spacing */
+  color: var(--text-muted);
+  text-transform: uppercase;
+  margin: 0 0 40px 0;
+  text-align: center;
+}
+
+/* Squash and Stretch Scroll Entrance Animation */
+.reveal-on-scroll {
+  opacity: 0;
+  transform: scale(0.9, 0.9) translateY(40px);
+  transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.reveal-on-scroll.visible {
+  opacity: 1;
+  transform: scale(1, 1) translateY(0);
+  animation: squashStretch 0.8s cubic-bezier(0.25, 0.8, 0.25, 1.1) forwards;
+}
+
+@keyframes squashStretch {
+  0% {
+    transform: scale(0.3, 0.3) translateY(80px);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.1, 0.85) translateY(-10px);
+    opacity: 0.8;
+  }
+  75% {
+    transform: scale(0.95, 1.05) translateY(5px);
+    opacity: 0.95;
+  }
+  100% {
+    transform: scale(1, 1) translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Scrollbar customizations */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 5px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-orange);
 }

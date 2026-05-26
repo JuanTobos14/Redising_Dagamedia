@@ -1,0 +1,290 @@
+/* src/components/VideoCube/VideoCube.css */
+.animation-section-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 100px 20px;
+  background-color: var(--bg-secondary);
+  border-top: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
+  position: relative;
+  overflow: hidden;
+}
+
+.cube-instruction-text {
+  font-size: 14px;
+  color: var(--text-dark);
+  margin-top: 20px;
+  margin-bottom: 40px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.cube-instruction-icon {
+  animation: bounce-left-right 1.5s infinite;
+  color: var(--accent-orange);
+}
+
+/* 3D Perspective Viewport */
+.cube-viewport {
+  width: 320px;
+  height: 320px;
+  perspective: 1000px;
+  margin: 60px auto;
+  cursor: grab;
+  position: relative;
+  z-index: 10;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.cube-viewport:active {
+  cursor: grabbing;
+}
+
+/* 3D Space Element */
+.cube-space {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  transform-style: preserve-3d;
+  transition: transform 0.1s ease-out; /* Keeps dragging responsive but smooth */
+}
+
+/* Base Face styling */
+.cube-face {
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  left: 10px;
+  top: 10px;
+  background: rgba(30, 30, 30, 0.9);
+  border: 2px solid var(--border-color);
+  border-radius: 0px;
+  overflow: hidden;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+  backface-visibility: visible; /* Render backfaces so cube feels solid */
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.cube-face:hover {
+  border-color: var(--accent-orange);
+  box-shadow: 0 0 25px rgba(255, 107, 0, 0.25);
+}
+
+/* Cube Face Positioning: 150px translations for a 300px wide cube */
+.face-front  { transform: rotateY(0deg) translateZ(150px); }
+.face-back   { transform: rotateY(180deg) translateZ(150px); }
+.face-left   { transform: rotateY(-90deg) translateZ(150px); }
+.face-right  { transform: rotateY(90deg) translateZ(150px); }
+.face-top    { transform: rotateX(90deg) translateZ(150px); }
+.face-bottom { transform: rotateX(-90deg) translateZ(150px); }
+
+/* Card components inside faces */
+.face-card-link {
+  width: 100%;
+  height: 100%;
+  color: var(--text-main);
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  outline: none;
+}
+
+.face-image-wrapper {
+  flex: 1;
+  position: relative;
+  background: #000;
+  overflow: hidden;
+}
+
+.face-poster-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.65;
+  transition: var(--transition-smooth);
+}
+
+.face-card-link:hover .face-poster-img {
+  opacity: 0.85;
+  transform: scale(1.05);
+}
+
+/* Glassmorphic Project Info Footer on Face */
+.face-info-bar {
+  background: rgba(18, 18, 18, 0.85);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-top: 1px solid var(--border-color);
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.face-project-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-main);
+  margin: 0;
+  letter-spacing: 0.5px;
+}
+
+.face-project-tag {
+  font-size: 11px;
+  color: var(--accent-yellow);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Play/View Hover Overlay */
+.face-play-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(255, 107, 0, 0.15);
+  opacity: 0;
+  transition: var(--transition-smooth);
+  z-index: 5;
+}
+
+.face-card-link:hover .face-play-overlay {
+  opacity: 1;
+}
+
+.face-play-icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: var(--accent-orange);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 0 15px rgba(255, 107, 0, 0.6);
+  transform: scale(0.8);
+  transition: var(--transition-smooth);
+}
+
+.face-card-link:hover .face-play-icon {
+  transform: scale(1);
+}
+
+.face-play-icon svg {
+  width: 20px;
+  height: 20px;
+  fill: #fff;
+  margin-left: 3px;
+}
+
+@keyframes bounce-left-right {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(5px);
+  }
+}
+
+/* Lightbox Modal Styles */
+.cube-lightbox-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(10, 10, 10, 0.95);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+  animation: modalFadeIn 0.3s ease forwards;
+}
+
+.cube-lightbox-content {
+  position: relative;
+  width: 90%;
+  max-width: 1280px;
+  max-height: 85vh;
+  aspect-ratio: 16 / 9;
+  background: #000;
+  border-radius: 20px;
+  overflow: hidden;
+  border: 1px solid var(--border-color);
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8);
+  transform: scale(0.9);
+  animation: modalScaleUp 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+.cube-lightbox-close {
+  position: absolute;
+  top: 30px;
+  right: 30px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: rgba(18, 18, 18, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #fff;
+  font-size: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  z-index: 2010;
+  transition: var(--transition-smooth);
+}
+
+.cube-lightbox-close:hover {
+  background: var(--accent-orange);
+  border-color: var(--accent-orange);
+  color: #fff;
+  transform: scale(1.1) rotate(90deg);
+  box-shadow: 0 0 20px rgba(255, 107, 0, 0.4);
+}
+
+@media (max-width: 768px) {
+  .cube-lightbox-close {
+    top: 20px;
+    right: 20px;
+    width: 44px;
+    height: 44px;
+    font-size: 20px;
+  }
+}
+
+.cube-lightbox-video-wrapper {
+  width: 100%;
+  height: 100%;
+}
+
+.cube-lightbox-video-wrapper iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+@keyframes modalFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes modalScaleUp {
+  from { transform: scale(0.85); }
+  to { transform: scale(1); }
+}

@@ -1,6 +1,9 @@
+import { useLanguage } from '../../context/LanguageContext';
 import './Footer.css';
 
 function Footer() {
+  const { t } = useLanguage();
+
   return (
     <footer className="contact-footer">
       <div className="footer-left">
@@ -27,7 +30,7 @@ function Footer() {
           </a>
         </div>
         <div className="phone-info">
-          <span className="phone-label">Móvil</span>
+          <span className="phone-label">{t('footer_phone_label')}</span>
           <span className="phone-numbers">+57 3112225433 / +57 3112225455</span>
         </div>
       </div>
@@ -48,7 +51,7 @@ function Footer() {
           </div>
         </div>
         <div className="footer-address">
-          Calle 68 6-66 Tunja – Boyacá – Colombia
+          {t('footer_address')}
         </div>
       </div>
     </footer>

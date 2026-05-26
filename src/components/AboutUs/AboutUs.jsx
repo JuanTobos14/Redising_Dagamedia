@@ -1,38 +1,62 @@
+import React from 'react';
+import { useLanguage } from '../../context/LanguageContext';
 import './AboutUs.css';
 
 function AboutUs() {
+  const { t } = useLanguage();
+
   return (
-    <section className="about-container">
+    <section className="about-container reveal-on-scroll" id="nosotros">
       <div className="about-header">
-        <h2>ABOUT US</h2>
+        <h2>{t('about_title')}</h2>
       </div>
 
       <div className="about-main-content">
         <div className="about-image-large">
-          {/* Imagen principal de Tundama/Daga */}
-          <img src="https://dagamedia.com/wp-content/uploads/2021/02/tundama-poster.jpg" alt="Daga Media Project" />
+          <img 
+            src="https://dagamedia.com/wp-content/uploads/2021/02/tundama-poster.jpg" 
+            alt="Daga Media Project Poster" 
+          />
         </div>
         <div className="about-text">
-          <p>
-            En <strong>Daga Media</strong>, somos apasionados por la narrativa visual. 
-            Desde Boyacá para el mundo, creamos contenidos que inspiran y conectan.
-          </p>
-          <p>
-            Especializados en animación 2D, 3D y producción cinematográfica de alto impacto.
-          </p>
+          <p>{t('about_desc_1')}</p>
+          <p>{t('about_desc_2')}</p>
         </div>
       </div>
 
-      {/* Las 3 imágenes que dibujaste abajo */}
+      {/* Las 3 imágenes con información */}
       <div className="about-grid">
         <div className="grid-item">
-          <img src="https://dagamedia.com/wp-content/uploads/2021/02/servicios-animacion.jpg" alt="Animación" />
+          <img 
+            src="https://dagamedia.com/wp-content/uploads/2021/02/servicios-animacion.jpg" 
+            alt="Servicios de Animación Dagamedia" 
+          />
+          <div className="grid-info-box">
+            <h4>{t('about_team_title')}</h4>
+            <p>{t('about_team_desc')}</p>
+          </div>
         </div>
+        
         <div className="grid-item">
-          <img src="https://dagamedia.com/wp-content/uploads/2021/02/servicios-produccion.jpg" alt="Producción" />
+          <img 
+            src="https://dagamedia.com/wp-content/uploads/2021/02/servicios-produccion.jpg" 
+            alt="Servicios de Producción Dagamedia" 
+          />
+          <div className="grid-info-box">
+            <h4>{t('about_directing_title')}</h4>
+            <p>{t('about_directing_desc')}</p>
+          </div>
         </div>
+        
         <div className="grid-item">
-          <img src="https://dagamedia.com/wp-content/uploads/2021/02/servicios-post.jpg" alt="Post-producción" />
+          <img 
+            src="https://dagamedia.com/wp-content/uploads/2021/02/servicios-post.jpg" 
+            alt="Servicios de Post-producción Dagamedia" 
+          />
+          <div className="grid-info-box">
+            <h4>{t('about_company_title')}</h4>
+            <p>{t('about_company_desc')}</p>
+          </div>
         </div>
       </div>
     </section>

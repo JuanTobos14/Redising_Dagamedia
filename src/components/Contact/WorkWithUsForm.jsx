@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
+import { useLanguage } from '../../context/LanguageContext';
 
 export default function WorkWithUsForm() {
   const [fileName, setFileName] = useState('');
+  const { t } = useLanguage();
 
   const handleFileChange = (e) => {
     if (e.target.files && e.target.files[0]) {
@@ -15,35 +17,35 @@ export default function WorkWithUsForm() {
     <form className="contact-form">
       <div className="form-group">
         <label htmlFor="name">
-          Name <span className="required-asterisk">*</span>
+          {t('form_name')}
         </label>
         <input type="text" id="name" name="name" required />
       </div>
       
       <div className="form-group">
         <label htmlFor="email">
-          Email <span className="required-asterisk">*</span>
+          {t('form_email')}
         </label>
         <input type="email" id="email" name="email" required />
       </div>
       
       <div className="form-group">
-        <label htmlFor="profession">What do you do for a living?</label>
+        <label htmlFor="profession">{t('form_work_question')}</label>
         <select id="profession" name="profession">
-          <option value="">Select an option</option>
-          <option value="2d-animator">2D Animator</option>
-          <option value="3d-animator">3D Animator</option>
-          <option value="illustrator">Illustrator</option>
-          <option value="modeler">Modeler</option>
-          <option value="composer">Composer / Sound Designer</option>
-          <option value="voice-actor">Voice Actor</option>
-          <option value="other">Other</option>
+          <option value="">{t('form_work_select')}</option>
+          <option value="2d-animator">{t('form_work_2d')}</option>
+          <option value="3d-animator">{t('form_work_3d')}</option>
+          <option value="illustrator">{t('form_work_illustrator')}</option>
+          <option value="modeler">{t('form_work_modeler')}</option>
+          <option value="composer">{t('form_work_composer')}</option>
+          <option value="voice-actor">{t('form_work_voice')}</option>
+          <option value="other">{t('form_work_other')}</option>
         </select>
       </div>
       
       <div className="form-group">
         <label htmlFor="message">
-          Message <span className="required-asterisk">*</span>
+          {t('form_message')}
         </label>
         <textarea id="message" name="message" required />
       </div>
@@ -51,18 +53,18 @@ export default function WorkWithUsForm() {
       <div className="form-row">
         <div className="form-group">
           <label htmlFor="reelLink">
-            Link de Reel <span className="required-asterisk">*</span>
+            {t('form_work_reel')}
           </label>
           <input type="url" id="reelLink" name="reelLink" required />
         </div>
         
         <div className="form-group file-upload-container">
           <label htmlFor="cvUpload">
-            Attach your CV in PDF format <span className="required-asterisk">*</span>
+            {t('form_work_cv')}
           </label>
           <div className="file-upload-wrapper">
             <label htmlFor="cvUpload" className="custom-file-upload">
-              Select file
+              {t('form_work_select_file')}
             </label>
             <input 
               type="file" 
@@ -78,7 +80,7 @@ export default function WorkWithUsForm() {
         </div>
       </div>
       
-      <button type="submit" className="submit-btn">Send</button>
+      <button type="submit" className="submit-btn">{t('form_send')}</button>
     </form>
   );
 }

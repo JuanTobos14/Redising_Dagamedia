@@ -1,10 +1,18 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { useLanguage } from '../../context/LanguageContext';
 import StandardForm from './StandardForm';
 import WorkWithUsForm from './WorkWithUsForm';
 import './Contact.css';
 
-export default function ContactLayout({ activeForm = 'standard' }) {
-  const [currentForm, setCurrentForm] = useState(activeForm);
+export default function ContactLayout({ activeForm = 'standard', onChangeActiveForm }) {
+  const { t } = useLanguage();
+  const currentForm = activeForm;
+
+  const setCurrentForm = (formType) => {
+    if (onChangeActiveForm) {
+      onChangeActiveForm(formType);
+    }
+  };
 
   return (
     <div className="contact-container">
@@ -17,7 +25,7 @@ export default function ContactLayout({ activeForm = 'standard' }) {
         >
           {currentForm === 'standard' && <span className="tab-bullet">● </span>}
           {currentForm === 'work' && <span className="tab-arrow">◀ </span>}
-          Contact
+          {t('contact_tab_contact')}
         </button>
         
         <button 
@@ -25,7 +33,7 @@ export default function ContactLayout({ activeForm = 'standard' }) {
           className={`contact-tab ${currentForm === 'work' ? 'active' : ''}`}
           onClick={() => setCurrentForm('work')}
         >
-          Work whit us
+          {t('contact_tab_work')}
           {currentForm === 'work' && <span className="tab-bullet"> ●</span>}
           {currentForm === 'standard' && <span className="tab-arrow"> ▶</span>}
         </button>
@@ -34,8 +42,8 @@ export default function ContactLayout({ activeForm = 'standard' }) {
       {/* Subtitle */}
       <p className="contact-subtitle">
         {currentForm === 'work' 
-          ? "Join us!" 
-          : "If you have a question or wish to contact us"
+          ? t('contact_sub_work') 
+          : t('contact_sub_contact')
         }
       </p>
 
