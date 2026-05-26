@@ -63,6 +63,90 @@ function OurFilms({ setContactFormType }) {
             className="tundama-logo"
           />
           <p className="tundama-premiere">{t('films_tundama_header')}</p>
+          
+          {/* Awards/Laurels Infinite Carousel */}
+          <div className="laurels-carousel-wrapper">
+            <div className="laurels-carousel-track">
+              {/* Laurel Block 1 */}
+              <div className="laurel-block">
+                {/* NOTA PARA COMPAÑEROS: Para reemplazar con imagen real, descomenta la línea de abajo y añade la ruta: */}
+                {/* <img src="RUTA_DE_LA_IMAGEN" alt="Laurel Award" className="laurel-img" /> */}
+                <div className="laurel-img-placeholder">
+                  <span className="placeholder-icon">🏆</span>
+                  <span className="placeholder-text">Laurel 1</span>
+                </div>
+              </div>
+              
+              {/* Laurel Block 2 */}
+              <div className="laurel-block">
+                {/* <img src="RUTA_DE_LA_IMAGEN" alt="Laurel Award" className="laurel-img" /> */}
+                <div className="laurel-img-placeholder">
+                  <span className="placeholder-icon">🎬</span>
+                  <span className="placeholder-text">Laurel 2</span>
+                </div>
+              </div>
+
+              {/* Laurel Block 3 */}
+              <div className="laurel-block">
+                {/* <img src="RUTA_DE_LA_IMAGEN" alt="Laurel Award" className="laurel-img" /> */}
+                <div className="laurel-img-placeholder">
+                  <span className="placeholder-icon">🌟</span>
+                  <span className="placeholder-text">Laurel 3</span>
+                </div>
+              </div>
+
+              {/* Laurel Block 4 */}
+              <div className="laurel-block">
+                {/* <img src="RUTA_DE_LA_IMAGEN" alt="Laurel Award" className="laurel-img" /> */}
+                <div className="laurel-img-placeholder">
+                  <span className="placeholder-icon">🎖️</span>
+                  <span className="placeholder-text">Laurel 4</span>
+                </div>
+              </div>
+
+              {/* Laurel Block 5 */}
+              <div className="laurel-block">
+                {/* <img src="RUTA_DE_LA_IMAGEN" alt="Laurel Award" className="laurel-img" /> */}
+                <div className="laurel-img-placeholder">
+                  <span className="placeholder-icon">🎥</span>
+                  <span className="placeholder-text">Laurel 5</span>
+                </div>
+              </div>
+
+              {/* Duplicate blocks for seamless loop */}
+              <div className="laurel-block">
+                <div className="laurel-img-placeholder">
+                  <span className="placeholder-icon">🏆</span>
+                  <span className="placeholder-text">Laurel 1</span>
+                </div>
+              </div>
+              <div className="laurel-block">
+                <div className="laurel-img-placeholder">
+                  <span className="placeholder-icon">🎬</span>
+                  <span className="placeholder-text">Laurel 2</span>
+                </div>
+              </div>
+              <div className="laurel-block">
+                <div className="laurel-img-placeholder">
+                  <span className="placeholder-icon">🌟</span>
+                  <span className="placeholder-text">Laurel 3</span>
+                </div>
+              </div>
+              <div className="laurel-block">
+                <div className="laurel-img-placeholder">
+                  <span className="placeholder-icon">🎖️</span>
+                  <span className="placeholder-text">Laurel 4</span>
+                </div>
+              </div>
+              <div className="laurel-block">
+                <div className="laurel-img-placeholder">
+                  <span className="placeholder-icon">🎥</span>
+                  <span className="placeholder-text">Laurel 5</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
           <p className="tundama-desc">{t('films_tundama_desc_1')}</p>
         </div>
         <div className="tundama-side-img">
