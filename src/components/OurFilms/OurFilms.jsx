@@ -1,4 +1,19 @@
+import React from 'react';
 import "./OurFilms.css";
+
+// Importaciones de imágenes de la Galería Superior
+import viejaImg from "../../assets/Vieja.png";
+import osoImg from "../../assets/Oso.png";
+import hombreSiCamisaImg from "../../assets/Hombre si camisa.png";
+
+// Importaciones de imágenes de la Sección Tundama (Fila asimétrica)
+import dibujoLapizImg from "../../assets/Dibujo-lapiz.jpg";
+import tundamaInfoImg from "../../assets/Tundama.png";
+import premiosHonorImg from "../../assets/Premios de honor.png";
+import tundamaPosterImg from "../../assets/Tundama-Poster.jpg";
+
+// Importación de imagen para el Tráiler
+import trailerPreviewImg from "../../assets/Hombre alza una vara.png";
 
 function OurFilms() {
   return (
@@ -10,7 +25,6 @@ function OurFilms() {
           We invite you to <br />
           watch our selection.
         </h3>
-
         <p>
           Some of our <span>short films</span> are about to premiere, while
           others are still in progress. We present them to you.
@@ -19,65 +33,57 @@ function OurFilms() {
 
       {/* Galería superior */}
       <div className="our-films-gallery">
-        <img
-          className="film-image-main"
-          src="https://picsum.photos/1000/460?random=1"
-          alt="Film preview"
-        />
-
-        <img
-          className="film-image-vertical"
-          src="https://picsum.photos/380/460?random=2"
-          alt="Film vertical preview"
-        />
-
-        <img
-          className="film-image-vertical"
-          src="https://picsum.photos/380/460?random=3"
-          alt="Film character preview"
-        />
-      </div>
-
-      {/* Sección Tundama con barra horizontal */}
-      <div className="tundama-scroll-section">
-        <div className="tundama-scroll-track">
-          <div className="tundama-image-card">
-            <img
-              src="https://picsum.photos/900/480?random=4"
-              alt="Tundama sketch"
-            />
-          </div>
-
-          <div className="tundama-image-card">
-            <img
-              src="https://picsum.photos/900/480?random=5"
-              alt="Tundama information"
-            />
-          </div>
-
-          <div className="tundama-image-card">
-            <img
-              src="https://picsum.photos/900/480?random=6"
-              alt="Tundama poster"
-            />
-          </div>
+        <div className="gallery-item">
+          <img src={viejaImg} alt="Anciana junto al fuego" />
+        </div>
+        <div className="gallery-item">
+          <img src={osoImg} alt="Oso en la cascada" />
+        </div>
+        <div className="gallery-item">
+          <img src={hombreSiCamisaImg} alt="Guerrero de frente" />
         </div>
       </div>
 
-      {/* Trailer */}
+      {/* Bloque Central Especial Tundama */}
+      <div className="tundama-grid-container">
+        <div className="tundama-card-boceto">
+          <img src={dibujoLapizImg} alt="Boceto a lápiz Tundama" />
+        </div>
+        
+        {/* Columna Central Organizada por Filas de Contenido */}
+        <div className="tundama-card-info">
+          <img src={tundamaInfoImg} className="tundama-logo-main" alt="Logo oficial Tundama" />
+          
+          <p className="tundama-text-top">
+            We premiered in commercial movie theaters in Colombia in 2021 and in
+            Spain in February 2022, soon to be available on digital platforms.
+          </p>
+          
+          <img src={premiosHonorImg} className="tundama-premios" alt="Premios de honor Tundama" />
+          
+          <p className="tundama-text-bottom">
+            Tundama is the first film that rescues the Muisca language from central
+            Colombia, declared extinct since the 18th century.
+          </p>
+        </div>
+        
+        <div className="tundama-card-poster">
+          <img src={tundamaPosterImg} alt="Póster oficial Tundama" />
+        </div>
+      </div>
+
+      {/* Sección del Tráiler Oficial */}
       <div className="trailer-section">
         <h3 className="trailer-title">
           We present to you the official trailer.
         </h3>
 
         <div className="trailer-video">
-          <img
-            src="https://picsum.photos/1100/420?random=7"
-            alt="Official trailer preview"
-          />
-
+          <img src={trailerPreviewImg} alt="Escena oficial del tráiler" />
           <button className="trailer-play" aria-label="Play trailer">
-            ▶
+            <svg viewBox="0 0 24 24" className="play-svg-icon">
+              <path d="M8 5v14l11-7z" />
+            </svg>
           </button>
         </div>
 

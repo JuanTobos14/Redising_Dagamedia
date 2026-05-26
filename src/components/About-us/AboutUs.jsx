@@ -9,6 +9,7 @@ import dibujoImg from '../../assets/Dibujo.png';
 function AboutUs() {
   return (
     <section className="about-section">
+      <h2 className="about-top-tag">About-us</h2>
       
       {/* Encabezado principal centrado */}
       <div className="about-main-header">

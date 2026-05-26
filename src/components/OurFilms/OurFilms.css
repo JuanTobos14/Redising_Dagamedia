@@ -1,173 +1,162 @@
 .our-films {
   width: 100%;
-  max-width: 100%;
-  background-color: #000;
-  color: #fff;
-  padding: 25px 52px 60px;
-  font-family: Arial, sans-serif;
+  box-sizing: border-box;
+  background-color: #000000;
+  color: #ffffff;
+  padding: 40px 50px 80px 50px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   overflow-x: hidden;
 }
 
-/* Título pequeño */
+/* Etiqueta de sección */
 .our-films-label {
-  margin: 0 0 24px;
-  color: #2f2f2f;
-  font-size: 28px;
+  margin: 0 0 30px 0;
+  color: #222222;
+  font-size: 1.4rem;
   font-weight: 700;
 }
 
-/* Encabezado */
+/* Encabezado Principal */
 .our-films-header {
-  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  gap: 80px;
-  margin-bottom: 28px;
+  gap: 40px;
+  margin-bottom: 40px;
 }
 
 .our-films-header h3 {
   margin: 0;
-  max-width: 500px;
-
-  font-size: 34px;
-  line-height: 1.28;
-  letter-spacing: 8px;
+  font-size: 2.2rem;
+  line-height: 1.2;
   font-weight: 800;
+  letter-spacing: 0.5px;
 }
 
 .our-films-header p {
   margin: 0;
-  max-width: 540px;
-  padding-top: 10px;
-
-  text-align: center;
-  font-size: 14px;
-  line-height: 1.8;
-  letter-spacing: 3px;
-  color: #f1f1f1;
+  max-width: 450px;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: #888888;
 }
 
 .our-films-header span {
-  color: #ffb800;
+  color: #ff6b00;
 }
 
-/* Galería superior */
+/* --- GALERÍA SUPERIOR --- */
 .our-films-gallery {
-  width: 100%;
-  max-width: 100%;
-
   display: grid;
-  grid-template-columns: 2.7fr 0.85fr 0.85fr;
-  gap: 52px;
-
-  align-items: stretch;
-  margin-bottom: 35px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-bottom: 50px;
 }
 
-.our-films-gallery img {
+.gallery-item img {
   width: 100%;
-  height: 360px;
-
-  display: block;
+  height: 250px;
   object-fit: cover;
-  border-radius: 10px;
+  border-radius: 12px;
+  display: block;
 }
 
-.film-image-main {
-  height: 360px;
-}
-
-.film-image-vertical {
-  height: 360px;
-  object-position: center;
-}
-
-/* Sección Tundama con barra horizontal */
-.tundama-scroll-section {
-  width: 100%;
-  max-width: 100%;
-
-  overflow-x: auto;
-  overflow-y: hidden;
-
-  padding-bottom: 18px;
-  margin-bottom: 28px;
-}
-
-/* Contenedor interno */
-.tundama-scroll-track {
-  display: flex;
+/* --- GRID ASIMÉTRICO CENTRAL (TUNDAMA COMPLETO) --- */
+.tundama-grid-container {
+  display: grid;
+  grid-template-columns: 1.2fr 3fr 1.5fr;
+  gap: 30px;
   align-items: center;
-  gap: 34px;
-  width: max-content;
+  margin-bottom: 60px;
 }
 
-/* Las 3 imágenes tienen el mismo tamaño */
-.tundama-image-card {
-  flex: 0 0 760px;
-  height: 430px;
-
-  border-radius: 10px;
-  overflow: hidden;
-  background-color: #1a1a1a;
-}
-
-.tundama-image-card img {
+.tundama-grid-container img {
   width: 100%;
-  height: 100%;
-
-  object-fit: cover;
   display: block;
+  height: auto;
 }
 
-/* Barra horizontal solo para Tundama */
-.tundama-scroll-section::-webkit-scrollbar {
-  height: 7px;
+.tundama-card-boceto img {
+  border-radius: 12px;
+  max-height: 480px;
+  object-fit: cover;
 }
 
-.tundama-scroll-section::-webkit-scrollbar-track {
-  background-color: #111;
+/* Contenedor central con textos integrados */
+.tundama-card-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 0 30px;
 }
 
-.tundama-scroll-section::-webkit-scrollbar-thumb {
-  background-color: #ffb800;
-  border-radius: 10px;
+.tundama-logo-main {
+  max-width: 440px;
+  width: 100%;
+  margin-bottom: 25px;
 }
 
-/* Trailer */
+/* Texto Informativo Superior */
+.tundama-text-top {
+  margin: 0 0 30px 0;
+  max-width: 580px;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: #a0a0a0;
+  letter-spacing: 0.8px;
+}
+
+.tundama-premios {
+  max-width: 320px;
+  width: 100%;
+  margin-bottom: 35px;
+  opacity: 0.95;
+}
+
+/* Texto Informativo Inferior */
+.tundama-text-bottom {
+  margin: 0;
+  max-width: 580px;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: #808080; /* Un tono un poco más sutil para dar jerarquía visual */
+  letter-spacing: 0.8px;
+}
+
+.tundama-card-poster img {
+  border-radius: 12px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.8);
+}
+
+/* --- SECCIÓN TRÁILER --- */
 .trailer-section {
   width: 100%;
-  max-width: 100%;
-  margin-top: 10px;
+  max-width: 1100px;
+  margin: 0 auto;
 }
 
 .trailer-title {
   text-align: center;
-  color: #ffb800;
-
-  font-size: 26px;
-  font-weight: 800;
-  letter-spacing: 2px;
-
-  margin: 0 0 22px;
+  color: #ffd000;
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin-bottom: 30px;
 }
 
 .trailer-video {
   position: relative;
-
   width: 100%;
-  height: 310px;
-
-  border-radius: 8px;
+  height: 480px;
+  border-radius: 16px;
   overflow: hidden;
-  background-color: #1b1b1b;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.9);
 }
 
 .trailer-video img {
   width: 100%;
   height: 100%;
-
   object-fit: cover;
   display: block;
 }
@@ -176,100 +165,73 @@
   position: absolute;
   top: 50%;
   left: 50%;
-
   transform: translate(-50%, -50%);
-
-  width: 82px;
-  height: 82px;
-
-  border: 3px solid #fff;
+  width: 90px;
+  height: 90px;
+  border: 3px solid #ffffff;
   border-radius: 50%;
-  background-color: transparent;
-
-  color: #fff;
-  font-size: 36px;
+  background-color: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(4px);
   cursor: pointer;
-
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.trailer-play:hover {
+  transform: translate(-50%, -50%) scale(1.1);
+  background-color: rgba(255, 107, 0, 0.4);
+}
+
+.play-svg-icon {
+  width: 40px;
+  height: 40px;
+  fill: #ffffff;
+  margin-left: 6px;
 }
 
 .trailer-description {
-  max-width: 980px;
-  margin: 18px auto 0;
-
+  max-width: 950px;
+  margin: 30px auto 0 auto;
   text-align: center;
-  color: #f2f2f2;
-
-  font-size: 13px;
+  color: #888888;
+  font-size: 0.95rem;
   line-height: 1.6;
-  letter-spacing: 2px;
 }
 
-/* Responsive */
-@media (max-width: 768px) {
+/* --- RESPONSIVE --- */
+@media (max-width: 900px) {
   .our-films {
-    padding: 25px 22px 45px;
+    padding: 30px 20px 50px 20px;
   }
 
   .our-films-header {
     flex-direction: column;
-    gap: 20px;
-  }
-
-  .our-films-header h3 {
-    font-size: 27px;
-    letter-spacing: 4px;
-  }
-
-  .our-films-header p {
-    text-align: left;
-    max-width: 100%;
+    gap: 15px;
   }
 
   .our-films-gallery {
-    display: flex;
-    overflow-x: auto;
-    gap: 18px;
-    padding-bottom: 14px;
+    grid-template-columns: 1fr;
+    gap: 16px;
   }
 
-  .film-image-main {
-    min-width: 330px;
-    height: 210px;
+  .tundama-grid-container {
+    grid-template-columns: 1fr;
+    gap: 35px;
   }
 
-  .film-image-vertical {
-    min-width: 170px;
-    height: 210px;
+  .tundama-card-info {
+    order: -1;
+    padding: 0 10px;
   }
 
-  .tundama-scroll-track {
-    gap: 20px;
-  }
-
-  .tundama-image-card {
-    flex: 0 0 330px;
-    height: 210px;
-  }
-
-  .trailer-title {
-    font-size: 21px;
+  .tundama-text-top,
+  .tundama-text-bottom {
+    font-size: 0.85rem;
   }
 
   .trailer-video {
-    height: 210px;
-  }
-
-  .trailer-play {
-    width: 64px;
-    height: 64px;
-    font-size: 28px;
-  }
-
-  .trailer-description {
-    font-size: 12px;
-    text-align: center;
+    height: 280px;
   }
 }
