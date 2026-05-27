@@ -1,5 +1,7 @@
 import { useLanguage } from '../../context/LanguageContext';
 import './AboutUs.css';
+import gif2D from '../../assets/2d gif.gif';
+import gif3D from '../../assets/3d gif.gif';
 
 function AboutUs() {
   const { t } = useLanguage();
@@ -47,11 +49,11 @@ function AboutUs() {
       <div className="about-bottom-row">
         <div className="about-photos-grid">
           <div className="team-photo">
-            <img src="https://dagamedia.com/wp-content/uploads/2021/02/animacion-2d.jpg" alt="Animación 2D" />
+            <img src={gif2D} alt="Animación 2D" />
           </div>
 
           <div className="team-photo">
-            <img src="https://dagamedia.com/wp-content/uploads/2021/02/animacion-3d.jpg" alt="Animación 3D" />
+            <img src={gif3D} alt="Animación 3D" />
           </div>
 
           <div className="team-photo">
