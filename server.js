@@ -9,110 +9,108 @@ const app = express();
 app.use(cors());
 
 const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+const __dirname  = path.dirname(__filename);
 
-// Serve static assets from Vite's build directory (dist) in production
+// Serve Vite build in production
 app.use(express.static(path.join(__dirname, 'dist')));
 
-// Healthcheck route
+// Healthcheck
 app.get('/health', (req, res) => {
-  res.send('WebSocket server is healthy and running.');
+  res.json({
+    status: 'ok',
+    activeUsers: activeUsers.size,
+    uptime: process.uptime().toFixed(1) + 's'
+  });
 });
 
 const httpServer = createServer(app);
 
-// Configure Socket.io with CORS to support local development and remote deployments
 const io = new Server(httpServer, {
-  cors: {
-    origin: "*", // Allow connections from Vercel preview URLs or any domain
-    methods: ["GET", "POST"]
-  }
+  cors: { origin: '*', methods: ['GET', 'POST'] },
+  pingTimeout: 20000,
+  pingInterval: 10000,
 });
 
-// State storage
-// activeUsers: Set of active socket IDs
-const activeUsers = new Set();
-// userSections: socketId -> sectionId
-const userSections = new Map();
+// ──────────────────────────────────────────────────────
+//  State
+// ──────────────────────────────────────────────────────
+const VALID_SECTIONS = ['inicio', 'nosotros', 'servicios', 'peliculas', 'contacto'];
+const VALID_EMOJIS   = ['🔥', '🚀', '❤️', '🎉', '😮', '👏'];
 
-// Helper to calculate section counts
+const activeUsers    = new Set();       // socket IDs online
+const userSections   = new Map();       // socketId → sectionId
+const reactionThrottle = new Map();     // socketId → last reaction timestamp
+
+// ──────────────────────────────────────────────────────
+//  Helpers
+// ──────────────────────────────────────────────────────
 function getSectionCounts() {
-  const counts = {
-    inicio: 0,
-    nosotros: 0,
-    servicios: 0,
-    peliculas: 0,
-    contacto: 0
-  };
-  
-  for (const [socketId, sectionId] of userSections.entries()) {
-    if (counts.hasOwnProperty(sectionId)) {
-      counts[sectionId]++;
-    }
+  const counts = Object.fromEntries(VALID_SECTIONS.map(s => [s, 0]));
+  for (const [, section] of userSections) {
+    if (counts[section] !== undefined) counts[section]++;
   }
   return counts;
 }
 
+// ──────────────────────────────────────────────────────
+//  Socket Handlers
+// ──────────────────────────────────────────────────────
 io.on('connection', (socket) => {
-  console.log(`User connected: ${socket.id}`);
-  
-  // Register the new user
+  console.log(`[+] User connected  ${socket.id}  (total: ${activeUsers.size + 1})`);
+
   activeUsers.add(socket.id);
-  // Default section is 'inicio'
   userSections.set(socket.id, 'inicio');
 
-  // Send current users list to the newly connected user
+  // Welcome the new user with current state
   socket.emit('init_users', Array.from(activeUsers));
-
-  // Broadcast to other users that a new user connected
   socket.broadcast.emit('user_connected', socket.id);
-
-  // Broadcast updated section counts
   io.emit('section_counts_update', getSectionCounts());
 
-  // Handle section changes
+  // ── Section tracking ─────────────────────────────
   socket.on('enter_section', (sectionId) => {
-    console.log(`User ${socket.id} entered section: ${sectionId}`);
-    if (sectionId && ['inicio', 'nosotros', 'servicios', 'peliculas', 'contacto'].includes(sectionId)) {
-      userSections.set(socket.id, sectionId);
-      io.emit('section_counts_update', getSectionCounts());
-    }
+    if (!VALID_SECTIONS.includes(sectionId)) return;
+    if (userSections.get(socket.id) === sectionId) return; // no change
+    userSections.set(socket.id, sectionId);
+    io.emit('section_counts_update', getSectionCounts());
   });
 
-  // Handle live reactions
+  // ── Reactions with throttle (max 1 per 600 ms per user) ─
   socket.on('send_reaction', (emoji) => {
-    console.log(`Reaction sent: ${emoji} from ${socket.id}`);
-    // Broadcast the reaction to ALL clients (including the sender, or client can render locally too)
+    if (!VALID_EMOJIS.includes(emoji)) return;
+
+    const now  = Date.now();
+    const last = reactionThrottle.get(socket.id) || 0;
+    if (now - last < 600) return; // silently drop spam
+    reactionThrottle.set(socket.id, now);
+
     io.emit('new_reaction', {
-      id: `${socket.id}-${Date.now()}-${Math.random()}`,
-      emoji: emoji
+      id:    `${socket.id}-${now}-${Math.random().toString(36).slice(2)}`,
+      emoji,
     });
   });
 
-  // Handle disconnection
-  socket.on('disconnect', () => {
-    console.log(`User disconnected: ${socket.id}`);
+  // ── Disconnect ───────────────────────────────────
+  socket.on('disconnect', (reason) => {
+    console.log(`[-] User disconnected ${socket.id}  reason: ${reason}  (total: ${activeUsers.size - 1})`);
     activeUsers.delete(socket.id);
     userSections.delete(socket.id);
-    
-    // Broadcast to everyone that this user disconnected
+    reactionThrottle.delete(socket.id);
+
     io.emit('user_disconnected', socket.id);
-    
-    // Broadcast updated section counts
     io.emit('section_counts_update', getSectionCounts());
   });
 });
 
-// Fallback route to serve the React SPA index.html
+// ──────────────────────────────────────────────────────
+//  Fallback — serve React SPA
+// ──────────────────────────────────────────────────────
 app.get('/{*splat}', (req, res) => {
   res.sendFile(path.join(__dirname, 'dist', 'index.html'), (err) => {
-    if (err) {
-      res.status(200).send('WebSocket server is active. Please compile the frontend using build scripts to view the client.');
-    }
+    if (err) res.status(200).send('WebSocket server active. Build the frontend to see the client.');
   });
 });
 
 const PORT = process.env.PORT || 4000;
 httpServer.listen(PORT, () => {
-  console.log(`WebSocket server is listening on port ${PORT}`);
+  console.log(`\n  WebSocket server listening on port ${PORT}\n`);
 });

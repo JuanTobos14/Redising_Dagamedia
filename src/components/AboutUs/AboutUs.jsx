@@ -27,10 +27,10 @@ function AboutUs() {
         </div>
         <div className="about-directors-photos">
           <div className="director-photo">
-            <img src="https://dagamedia.com/wp-content/uploads/2021/02/servicios-produccion.jpg" alt="Director 1" />
+            <img src="https://dagamedia.com/wp-content/uploads/2021/04/Reel_animacion_3D.jpg" alt="Reel animación 3D – Dagamedia" />
           </div>
           <div className="director-photo">
-            <img src="https://dagamedia.com/wp-content/uploads/2021/02/servicios-animacion.jpg" alt="Director 2" />
+            <img src="https://dagamedia.com/wp-content/uploads/2021/05/3d-animacion-home_optimizada.jpg" alt="Animación 3D – Dagamedia" />
           </div>
         </div>
       </div>
@@ -39,16 +39,16 @@ function AboutUs() {
       <div className="about-bottom-row">
         <div className="about-photos-grid">
           <div className="team-photo">
-            <img src="https://dagamedia.com/wp-content/uploads/2021/02/animacion-2d.jpg" alt="Team 1" />
+            <img src="https://dagamedia.com/wp-content/uploads/2021/02/animacion-2d.jpg" alt="Animación 2D" />
           </div>
           <div className="team-photo">
-            <img src="https://dagamedia.com/wp-content/uploads/2021/02/animacion-3d.jpg" alt="Team 2" />
+            <img src="https://dagamedia.com/wp-content/uploads/2021/02/animacion-3d.jpg" alt="Animación 3D" />
           </div>
           <div className="team-photo">
-            <img src="https://dagamedia.com/wp-content/uploads/2021/02/tundama-poster.jpg" alt="Team 3" />
+            <img src="https://dagamedia.com/wp-content/uploads/2024/04/poblador-dos-724x1024.jpg" alt="Personaje 2D Dagamedia" />
           </div>
           <div className="team-photo">
-            <img src="https://dagamedia.com/wp-content/uploads/2021/02/servicios-post.jpg" alt="Team 4" />
+            <img src="https://dagamedia.com/wp-content/uploads/2021/05/Reel.jpg" alt="Reel Dagamedia" />
           </div>
         </div>
         <div className="about-company-info">

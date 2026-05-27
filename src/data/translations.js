@@ -80,7 +80,11 @@ export const translations = {
     footer_address: "Calle 68 6-66 Tunja – Boyacá – Colombia",
     reactions_title: "reacciones en vivo",
     reactions_viewers: "espectadores en esta sección",
-    reactions_active: "activos"
+    reactions_active: "activos",
+    cube_instruction: "Arrastra para rotar · haz clic para reproducir",
+    ws_live: "en vivo",
+    ws_connecting: "conectando…",
+    ws_offline: "sin conexión"
   },
   en: {
     // Navbar
@@ -162,6 +166,10 @@ export const translations = {
     footer_address: "Street 68 6-66 Tunja – Boyacá – Colombia",
     reactions_title: "live reactions",
     reactions_viewers: "viewers in this section",
-    reactions_active: "active"
+    reactions_active: "active",
+    cube_instruction: "Drag to rotate · click to play",
+    ws_live: "live",
+    ws_connecting: "connecting…",
+    ws_offline: "offline"
   }
 };

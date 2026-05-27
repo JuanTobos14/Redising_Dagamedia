@@ -64,12 +64,8 @@
 }
 
 @keyframes shortfilmsScroll {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(calc(-50% - 20px));
-  }
+  0% { transform: translateX(0); }
+  100% { transform: translateX(calc(-50% - 20px)); }
 }
 
 .shortfilm-card-block {
@@ -101,66 +97,53 @@
   transform: scale(1.03);
 }
 
-.shortfilm-placeholder {
-  width: 100%;
-  height: 100%;
-  border: 3px dashed rgba(255, 102, 0, 0.25);
-  border-radius: 20px;
-  background-color: rgba(26, 26, 26, 0.55);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 15px;
-  transition: var(--transition-smooth);
-}
-
-.shortfilm-card-block:hover .shortfilm-placeholder {
-  border-color: var(--accent-orange);
-  background-color: rgba(26, 26, 26, 0.85);
-  box-shadow: 0 10px 30px rgba(255, 102, 0, 0.2);
-}
-
-.placeholder-icon {
-  font-size: 55px;
-}
-
-.placeholder-title {
+.shortfilm-label {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 40px 22px 18px;
+  background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 100%);
   font-family: var(--font-display);
-  font-size: 24px;
+  font-size: 15px;
   font-weight: 700;
   letter-spacing: 2px;
   color: var(--text-main);
+  text-transform: uppercase;
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
-.placeholder-subtitle {
-  font-family: var(--font-display);
-  font-size: 15px;
-  color: var(--text-dark);
-  letter-spacing: 1px;
+.shortfilm-card-block:hover .shortfilm-label {
+  opacity: 1;
+  transform: translateY(0);
 }
 
-/* Tundama Banner */
+/* ── Tundama Banner Ajustes de Encajado (No se corta) ───────────────── */
 .tundama-banner {
   display: flex;
-  gap: 50px;
+  gap: 40px;
   align-items: center;
+  justify-content: space-between;
   margin-bottom: 80px;
-  min-height: 500px;
+  width: 100%;
 }
 
 .tundama-side-img {
-  width: 615px;
-  flex-shrink: 0;
+  width: 28%; /* Escalado porcentual respecto al contenedor padre */
+  max-width: 450px;
+  aspect-ratio: 4 / 5; /* Asegura proporciones perfectas */
   border-radius: 20px;
   overflow: hidden;
   box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+  flex-shrink: 0;
 }
 
 .tundama-side-img img {
   width: 100%;
-  height: 500px;
-  object-fit: cover;
+  height: 100%;
+  object-fit: cover; /* Evita recortes bruscos y mantiene la relación de aspecto */
   display: block;
   transition: transform 0.4s ease;
 }
@@ -175,65 +158,47 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 30px;
+  gap: 20px;
+  padding: 0 10px;
 }
 
 .tundama-logo {
-  max-width: 500px;
+  max-width: 380px;
   width: 100%;
   height: auto;
 }
 
 .tundama-premiere {
   font-family: var(--font-display);
-  font-size: 18px;
-  line-height: 34px;
-  letter-spacing: 2px;
+  font-size: 16px;
+  line-height: 1.6;
+  letter-spacing: 1.5px;
   color: var(--text-muted);
   text-align: center;
-  margin: 0 0 20px 0;
+  margin: 0;
 }
 
-/* Tundama Laurels Block */
-.tundama-laurels-block {
-  margin: 25px 0;
+/* Contenedor e Imagen de los Laureles Reales */
+.tundama-laurels-container {
   width: 100%;
-}
-
-.laurels-static-row {
+  max-width: 420px;
+  margin: 15px 0;
   display: flex;
   justify-content: center;
-  align-items: center;
-  gap: 40px;
-  flex-wrap: wrap;
 }
 
-.laurel-static-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
-  color: var(--text-muted);
-}
-
-.laurel-static-icon {
-  font-size: 32px;
-}
-
-.laurel-static-name {
-  font-family: var(--font-display);
-  font-size: 11px;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-  color: var(--text-dark);
-  font-weight: 500;
+.tundama-laurels-img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 4px 15px rgba(0,0,0,0.5));
 }
 
 .tundama-desc {
   font-family: var(--font-display);
-  font-size: 18px;
-  line-height: 34px;
-  letter-spacing: 2px;
+  font-size: 16px;
+  line-height: 1.7;
+  letter-spacing: 1.5px;
   color: var(--text-muted);
   text-align: center;
   margin: 0;
@@ -378,20 +343,15 @@
   padding: 40px 0;
 }
 
+/* Responsividad */
 @media (max-width: 1200px) {
-  .films-cards-row {
-    flex-wrap: wrap;
-    gap: 30px;
-  }
-  .film-card {
-    width: calc(50% - 15px);
-    height: 400px;
-  }
   .tundama-banner {
     flex-direction: column;
+    gap: 40px;
   }
   .tundama-side-img {
-    width: 100%;
+    width: 70%;
+    max-width: 400px;
   }
 }
 
@@ -406,9 +366,8 @@
   .films-subtitle-right {
     text-align: left;
   }
-  .film-card {
+  .tundama-side-img {
     width: 100%;
-    height: 300px;
   }
   .trailer-play-btn {
     width: 70px;

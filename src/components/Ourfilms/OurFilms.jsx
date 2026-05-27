@@ -4,6 +4,39 @@ import VideoCube from '../VideoCube/VideoCube';
 import { useLanguage } from '../../context/LanguageContext';
 import './OurFilms.css';
 
+const SHORT_FILMS = [
+  {
+    src:   'https://dagamedia.com/wp-content/uploads/2021/05/Tundama-grito-batalla.jpg',
+    alt:   'Tundama – Grito de batalla',
+    label: 'Tundama',
+  },
+  {
+    src:   'https://dagamedia.com/wp-content/uploads/2021/05/Osito_video.jpg',
+    alt:   'Oso – Cortometraje animación',
+    label: 'Oso',
+  },
+  {
+    src:   'https://dagamedia.com/wp-content/uploads/2021/05/cerditos.jpg',
+    alt:   'Cerdos – Comercial animación 3D',
+    label: 'Cerdos',
+  },
+  {
+    src:   'https://dagamedia.com/wp-content/uploads/2021/05/Vena_Boyaca.jpg',
+    alt:   'Vena Boyacá – Campaña',
+    label: 'Vena Boyacá',
+  },
+  {
+    src:   'https://dagamedia.com/wp-content/uploads/2021/04/Portafolio_nena_bici.jpg',
+    alt:   'Niña en bici – Animación',
+    label: 'Personaje',
+  },
+  {
+    src:   'https://dagamedia.com/wp-content/uploads/2021/05/queso-Paipa.jpg',
+    alt:   'Queso Paipa – Comercial',
+    label: 'Queso Paipa',
+  },
+];
+
 function OurFilms({ setContactFormType }) {
   const { t } = useLanguage();
   const [playTrailer, setPlayTrailer] = useState(false);
@@ -23,125 +56,88 @@ function OurFilms({ setContactFormType }) {
     if (el) el.scrollIntoView({ behavior: 'smooth' });
   };
 
+  const carouselItems = [...SHORT_FILMS, ...SHORT_FILMS];
+
   return (
     <section className="films-section reveal-on-scroll" id="peliculas">
-      {/* Section label */}
+      {/* Label de la Sección */}
       <h2 className="section-label">{t('films_title')}</h2>
 
-      {/* Subtitle row: bold left + description right */}
+      {/* Fila de subtítulos */}
       <div className="films-subtitle-row">
         <h3 className="films-subtitle-left">{t('films_subtitle')}</h3>
         <p className="films-subtitle-right">
           {t('films_desc_1').split('short films')[0]}
           <span className="text-orange">short films</span>
-          {t('films_desc_1').split('short films')[1] || ' are about to premiere, while others are still in progress. We present them to you.'}
+          {t('films_desc_1').split('short films')[1] || ' están por estrenarse, mientras otros siguen en proceso.'}
         </p>
       </div>
 
-      {/* 3 Film Cards Carousel (ShortFilms) */}
+      {/* Carrusel Infinito */}
       <div className="shortfilms-carousel-wrapper">
         <div className="shortfilms-carousel-track">
-          {/* Card 1: Campfire Scene */}
-          <div className="shortfilm-card-block">
-            {/* NOTA PARA COMPAÑEROS: Para cambiar la imagen del cortometraje (ej. Campfire Scene), descomenta la línea de abajo y añade la ruta: */}
-            {/* <img src="RUTA_DE_LA_IMAGEN_CAMPFIRE" alt="Campfire Scene" className="shortfilm-img" /> */}
-            <div className="shortfilm-placeholder">
-              <span className="placeholder-icon">🔥</span>
-              <span className="placeholder-title">Cortometraje 1</span>
-              <span className="placeholder-subtitle">(Escena de la fogata)</span>
+          {carouselItems.map((film, idx) => (
+            <div key={idx} className="shortfilm-card-block">
+              <img
+                src={film.src}
+                alt={film.alt}
+                className="shortfilm-img"
+                loading="lazy"
+              />
+              <div className="shortfilm-label">{film.label}</div>
             </div>
-          </div>
-
-          {/* Card 2: Bear Scene */}
-          <div className="shortfilm-card-block">
-            {/* <img src="RUTA_DE_LA_IMAGEN_OSO" alt="Waterfall Bear Scene" className="shortfilm-img" /> */}
-            <div className="shortfilm-placeholder">
-              <span className="placeholder-icon">🐻</span>
-              <span className="placeholder-title">Cortometraje 2</span>
-              <span className="placeholder-subtitle">(Oso en la cascada)</span>
-            </div>
-          </div>
-
-          {/* Card 3: Tundama Scene */}
-          <div className="shortfilm-card-block">
-            {/* <img src="RUTA_DE_LA_IMAGEN_TUNDAMA" alt="Tundama Character" className="shortfilm-img" /> */}
-            <div className="shortfilm-placeholder">
-              <span className="placeholder-icon">🏹</span>
-              <span className="placeholder-title">Cortometraje 3</span>
-              <span className="placeholder-subtitle">(Personaje Tundama)</span>
-            </div>
-          </div>
-
-          {/* Duplicate cards for seamless infinite scroll */}
-          <div className="shortfilm-card-block">
-            <div className="shortfilm-placeholder">
-              <span className="placeholder-icon">🔥</span>
-              <span className="placeholder-title">Cortometraje 1</span>
-              <span className="placeholder-subtitle">(Escena de la fogata)</span>
-            </div>
-          </div>
-          <div className="shortfilm-card-block">
-            <div className="shortfilm-placeholder">
-              <span className="placeholder-icon">🐻</span>
-              <span className="placeholder-title">Cortometraje 2</span>
-              <span className="placeholder-subtitle">(Oso en la cascada)</span>
-            </div>
-          </div>
-          <div className="shortfilm-card-block">
-            <div className="shortfilm-placeholder">
-              <span className="placeholder-icon">🏹</span>
-              <span className="placeholder-title">Cortometraje 3</span>
-              <span className="placeholder-subtitle">(Personaje Tundama)</span>
-            </div>
-          </div>
+          ))}
         </div>
       </div>
 
-      {/* Tundama Banner Section */}
+      {/* ── Banner Tundama (Layout Corregido) ─────────────────────────── */}
       <div className="tundama-banner">
+        {/* Imagen lateral izquierda — Poster Oficial */}
         <div className="tundama-side-img">
-          <img src="https://dagamedia.com/wp-content/uploads/2021/02/tundama-poster.jpg" alt="Tundama Scene" />
+          <img
+            src="https://dagamedia.com/wp-content/uploads/2021/04/POSTER-Oficial-DagaM_Redes.jpg"
+            alt="Poster oficial Tundama"
+          />
         </div>
+
+        {/* Bloque Central */}
         <div className="tundama-center">
-          <img 
-            src="https://dagamedia.com/wp-content/uploads/2021/02/logo-tundama.png" 
-            alt="Logo Tundama" 
+          <img
+            src="https://dagamedia.com/wp-content/uploads/2021/04/Logo-Tundama.png"
+            alt="Logo Tundama"
             className="tundama-logo"
           />
-          <p className="tundama-premiere">{t('films_tundama_header')}</p>
           
-          {/* Static Laurels / Awards block as designed in Figma */}
-          <div className="tundama-laurels-block">
-            <div className="laurels-static-row">
-              <div className="laurel-static-item">
-                <span className="laurel-static-icon">🏆</span>
-                <span className="laurel-static-name">Oniros Film Awards</span>
-              </div>
-              <div className="laurel-static-item">
-                <span className="laurel-static-icon">🎬</span>
-                <span className="laurel-static-name">River Atreyee Festival</span>
-              </div>
-              <div className="laurel-static-item">
-                <span className="laurel-static-icon">🌟</span>
-                <span className="laurel-static-name">Cine en las Montañas</span>
-              </div>
-            </div>
+          <p className="tundama-premiere">{t('films_tundama_header')}</p>
+
+          {/* Imagen Oficial de los Premios (Laureles Reales del Sitio) */}
+          <div className="tundama-laurels-container">
+            <img
+              src="https://dagamedia.com/wp-content/uploads/2021/04/Premios_Laurel.png"
+              alt="Premios Tundama Oficial"
+              className="tundama-laurels-img"
+            />
           </div>
 
           <p className="tundama-desc">{t('films_tundama_desc_1')}</p>
         </div>
+
+        {/* Imagen lateral derecha — Boceto de Producción */}
         <div className="tundama-side-img">
-          <img src="https://dagamedia.com/wp-content/uploads/2021/02/animacion-3d.jpg" alt="Tundama Scene" />
+          <img
+            src="https://dagamedia.com/wp-content/uploads/2021/04/Tundama_Boceto.jpg"
+            alt="Boceto de producción Tundama"
+          />
         </div>
       </div>
 
-      {/* Official Trailer Section */}
+      {/* Sección del Tráiler */}
       <div className="trailer-section">
-        <h3 className="trailer-title">{t('films_trailer_title') || 'We present to you the official trailer.'}</h3>
+        <h3 className="trailer-title">{t('films_trailer_title') || 'Te presentamos el tráiler oficial.'}</h3>
         <div className="trailer-video-box" onClick={() => setPlayTrailer(true)}>
-          <img 
-            src="https://img.youtube.com/vi/SUbnWx93k8c/maxresdefault.jpg" 
-            alt="Tundama Trailer" 
+          <img
+            src="https://img.youtube.com/vi/110eJJP_QVs/maxresdefault.jpg"
+            alt="Tundama Trailer"
             className="trailer-poster"
           />
           <div className="trailer-play-btn">
@@ -153,17 +149,17 @@ function OurFilms({ setContactFormType }) {
         <p className="trailer-synopsis">{t('films_tundama_desc_2')}</p>
       </div>
 
-      {/* CTA Buttons */}
+      {/* CTAs */}
       <div className="films-actions">
-        <button 
-          type="button" 
+        <button
+          type="button"
           className="films-cta-btn btn-primary"
           onClick={() => handleScrollToContact('standard')}
         >
           {t('btn_contact')}
         </button>
-        <button 
-          type="button" 
+        <button
+          type="button"
           className="films-cta-btn btn-secondary"
           onClick={() => handleScrollToContact('work')}
         >
@@ -171,24 +167,24 @@ function OurFilms({ setContactFormType }) {
         </button>
       </div>
 
-      {/* Interactive 3D Video Cube */}
+      {/* Cubo 3D Interactivo */}
       <div className="films-cube-section">
         <VideoCube />
       </div>
 
-      {/* Trailer Lightbox */}
+      {/* Lightbox del trailer */}
       {playTrailer && createPortal(
         <div className="cube-lightbox-modal" onClick={() => setPlayTrailer(false)}>
           <button className="cube-lightbox-close" onClick={() => setPlayTrailer(false)} aria-label="Close">✕</button>
           <div className="cube-lightbox-content" onClick={(e) => e.stopPropagation()}>
             <div className="cube-lightbox-video-wrapper">
               <iframe
-                src="https://www.youtube.com/embed/SUbnWx93k8c?autoplay=1"
+                src="https://www.youtube.com/embed/110eJJP_QVs?autoplay=1"
                 title="Tundama Trailer"
                 frameBorder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                 allowFullScreen
-              ></iframe>
+              />
             </div>
           </div>
         </div>,
