@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useLanguage } from '../../context/LanguageContext';
 
 export default function WorkWithUsForm() {
@@ -16,21 +16,26 @@ export default function WorkWithUsForm() {
   return (
     <form className="contact-form">
       <div className="form-group">
-        <label htmlFor="name">
+        <label className="text-small" htmlFor="name">
           {t('form_name')}
         </label>
+
         <input type="text" id="name" name="name" required />
       </div>
-      
+
       <div className="form-group">
-        <label htmlFor="email">
+        <label className="text-small" htmlFor="email">
           {t('form_email')}
         </label>
+
         <input type="email" id="email" name="email" required />
       </div>
-      
+
       <div className="form-group">
-        <label htmlFor="profession">{t('form_work_question')}</label>
+        <label className="text-small" htmlFor="profession">
+          {t('form_work_question')}
+        </label>
+
         <select id="profession" name="profession">
           <option value="">{t('form_work_select')}</option>
           <option value="2d-animator">{t('form_work_2d')}</option>
@@ -42,46 +47,56 @@ export default function WorkWithUsForm() {
           <option value="other">{t('form_work_other')}</option>
         </select>
       </div>
-      
+
       <div className="form-group">
-        <label htmlFor="message">
+        <label className="text-small" htmlFor="message">
           {t('form_message')}
         </label>
+
         <textarea id="message" name="message" required />
       </div>
-      
+
       <div className="form-row">
         <div className="form-group">
-          <label htmlFor="reelLink">
+          <label className="text-small" htmlFor="reelLink">
             {t('form_work_reel')}
           </label>
+
           <input type="url" id="reelLink" name="reelLink" required />
         </div>
-        
+
         <div className="form-group file-upload-container">
-          <label htmlFor="cvUpload">
+          <label className="text-small" htmlFor="cvUpload">
             {t('form_work_cv')}
           </label>
+
           <div className="file-upload-wrapper">
             <label htmlFor="cvUpload" className="custom-file-upload">
               {t('form_work_select_file')}
             </label>
-            <input 
-              type="file" 
-              id="cvUpload" 
-              name="cvUpload" 
+
+            <input
+              type="file"
+              id="cvUpload"
+              name="cvUpload"
               accept=".pdf"
-              style={{ display: 'none' }} 
+              style={{ display: 'none' }}
               onChange={handleFileChange}
               required
             />
-            {fileName && <span className="file-name-display">{fileName}</span>}
+
+            {fileName && (
+              <span className="file-name-display text-small">
+                {fileName}
+              </span>
+            )}
           </div>
         </div>
       </div>
-      
-      <button type="submit" className="submit-btn">{t('form_send')}</button>
+
+      <button type="submit" className="submit-btn">
+        {t('form_send')}
+      </button>
     </form>
   );
 }
-

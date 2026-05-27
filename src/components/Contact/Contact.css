@@ -9,7 +9,7 @@
   z-index: 5;
 }
 
-/* Tabs switcher styling */
+/* Tabs */
 .contact-tabs {
   display: flex;
   justify-content: center;
@@ -25,16 +25,11 @@
   background: var(--accent-orange);
   flex-shrink: 0;
   box-shadow: 0 0 15px rgba(255, 102, 0, 0.4);
-  transition: box-shadow 0.3s ease;
 }
 
 .contact-tab {
   background: none;
   border: none;
-  font-family: var(--font-display);
-  font-size: clamp(1.8rem, 4vw, 42px);
-  font-weight: 700;
-  letter-spacing: 3px;
   color: var(--text-section-label);
   cursor: pointer;
   padding: 5px 10px;
@@ -75,19 +70,13 @@
   fill: currentColor;
 }
 
-/* Subtitle styling */
+/* Subtitle */
 .contact-subtitle {
   text-align: center;
-  font-family: var(--font-display);
-  font-size: 18px;
-  color: var(--text-muted);
   margin-bottom: 50px;
-  font-weight: 400;
-  letter-spacing: 1.5px;
-  line-height: 1.6;
 }
 
-/* Form Styles */
+/* Form */
 .contact-form {
   background-color: var(--bg-secondary);
   border: 1px solid var(--border-color);
@@ -111,25 +100,20 @@
 }
 
 .form-group label {
-  font-family: var(--font-display);
-  font-size: 13px;
-  font-weight: 500;
-  color: var(--text-muted);
   margin-bottom: 10px;
-  letter-spacing: 1px;
   text-transform: uppercase;
   display: flex;
   align-items: center;
 }
 
-/* Inputs & Textareas & Selects styling */
+/* Inputs, textareas and selects */
 .contact-form input[type="text"],
 .contact-form input[type="email"],
 .contact-form input[type="tel"],
 .contact-form input[type="url"],
 .contact-form select,
 .contact-form textarea {
-  background-color: #1a1a1a;
+  background-color: var(--color-cell);
   border: 1px solid var(--border-color);
   border-radius: 20px;
   color: var(--text-main);
@@ -161,15 +145,17 @@
   appearance: none;
   -webkit-appearance: none;
   -moz-appearance: none;
+
   background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23ffcd00' width='24px' height='24px'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
   background-position: right 24px center;
   background-repeat: no-repeat;
   background-size: 20px;
+
   padding-right: 50px;
   cursor: pointer;
 }
 
-/* Dual Column Row */
+/* Dual column row */
 .form-row {
   display: flex;
   gap: 20px;
@@ -182,7 +168,7 @@
   margin-bottom: 0;
 }
 
-/* Custom File Upload */
+/* Custom file upload */
 .file-upload-container {
   display: flex;
   flex-direction: column;
@@ -192,7 +178,7 @@
   display: flex;
   align-items: center;
   gap: 15px;
-  background-color: #1a1a1a;
+  background-color: var(--color-cell);
   border: 1px solid var(--border-color);
   border-radius: 20px;
   padding: 8px 12px;
@@ -202,7 +188,7 @@
 .custom-file-upload {
   display: inline-block;
   background-color: var(--accent-orange);
-  color: #ffffff;
+  color: var(--color-white);
   padding: 10px 20px;
   border-radius: 14px;
   font-family: var(--font-display);
@@ -221,17 +207,15 @@
 }
 
 .file-name-display {
-  font-size: 13px;
-  color: var(--text-muted);
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
-/* Submit Button */
+/* Submit button */
 .submit-btn {
   background-color: var(--accent-yellow);
-  color: #000000;
+  color: var(--color-black);
   border: none;
   border-radius: 20px;
   font-family: var(--font-display);
@@ -256,7 +240,7 @@
   transform: translateY(0);
 }
 
-/* Dot pagination styling */
+/* Pagination */
 .contact-pagination {
   display: flex;
   justify-content: center;
@@ -283,7 +267,7 @@
   background-color: #555555;
 }
 
-/* Google Map styling */
+/* Google Map */
 .contact-map-container {
   height: 350px;
   width: 100%;
@@ -305,24 +289,20 @@
   filter: invert(90%) hue-rotate(180deg) grayscale(0%) contrast(95%);
 }
 
-/* Responsiveness */
+/* Responsive */
 @media (max-width: 768px) {
   .contact-container {
     padding: 60px 15px;
   }
-  
+
   .contact-tabs {
     gap: 20px;
   }
-  
-  .contact-tab {
-    font-size: 1.5rem;
-  }
-  
+
   .contact-form {
     padding: 30px 20px;
   }
-  
+
   .form-row {
     flex-direction: column;
     gap: 20px;

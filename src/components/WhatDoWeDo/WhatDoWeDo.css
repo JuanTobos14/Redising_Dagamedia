@@ -1,4 +1,5 @@
 /* src/components/WhatDoWeDo/WhatDoWeDo.css */
+
 .wdwd-section {
   padding: 80px 100px;
   background-color: var(--bg-primary);
@@ -25,15 +26,15 @@
 .wdwd-tab {
   background: none;
   border: none;
-  font-family: var(--font-display);
-  font-size: clamp(2.5rem, 6vw, 80px);
-  font-weight: 700;
-  letter-spacing: 5px;
+
   color: var(--text-section-label);
   cursor: pointer;
   padding: 0;
-  transition: color 0.3s ease, text-shadow 0.3s ease;
+
+  text-transform: none;
   white-space: nowrap;
+
+  transition: color 0.3s ease, text-shadow 0.3s ease;
 }
 
 .wdwd-tab.active {
@@ -62,11 +63,6 @@
 
 /* Subtitle */
 .wdwd-subtitle {
-  font-family: var(--font-display);
-  font-size: 20px;
-  font-weight: 400;
-  letter-spacing: 2.5px;
-  color: var(--text-muted);
   text-align: center;
   margin-bottom: 50px;
 }
@@ -87,24 +83,33 @@
   box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
   transform-style: preserve-3d;
   will-change: transform;
-  transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
+  transition:
+    border-color 0.3s ease,
+    box-shadow 0.3s ease,
+    transform 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
 .wdwd-image:hover {
   border-color: var(--accent-orange);
-  box-shadow: 0 25px 50px rgba(255, 107, 0, 0.15);
-  transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0s;
+  box-shadow: 0 25px 50px rgba(255, 102, 0, 0.15);
+  transition:
+    border-color 0.3s ease,
+    box-shadow 0.3s ease,
+    transform 0s;
 }
 
 .card-shine {
   position: absolute;
   top: 0;
   left: 0;
+
   width: 100%;
   height: 100%;
+
   pointer-events: none;
   z-index: 3;
   mix-blend-mode: overlay;
+
   border-radius: 25px;
 }
 
@@ -121,22 +126,11 @@
   padding-top: 10px;
 }
 
-.wdwd-text h3 {
-  font-family: var(--font-display);
-  font-size: clamp(1.8rem, 4vw, 48px);
-  font-weight: 700;
-  color: var(--text-main);
+.wdwd-content-title {
   margin: 0 0 25px 0;
-  line-height: 1.2;
 }
 
-.wdwd-text p {
-  font-family: var(--font-display);
-  font-size: 18px;
-  font-weight: 400;
-  line-height: 36px;
-  letter-spacing: 2px;
-  color: var(--text-muted);
+.wdwd-content-description {
   margin: 0;
 }
 
@@ -144,13 +138,12 @@
   .wdwd-section {
     padding: 60px 30px;
   }
+
   .wdwd-tabs {
     flex-wrap: wrap;
     gap: 20px;
   }
-  .wdwd-tab {
-    font-size: 2rem;
-  }
+
   .wdwd-content {
     flex-direction: column;
     gap: 30px;

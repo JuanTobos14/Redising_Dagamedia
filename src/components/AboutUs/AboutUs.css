@@ -1,38 +1,24 @@
 /* src/components/AboutUs/AboutUs.css */
+
 .about-section {
   padding: 80px 100px;
   background-color: var(--bg-primary);
 }
 
-/* Team Title — large centered */
+/* Team title: tipografía tomada desde index.css */
 .about-team-title {
-  font-family: var(--font-display);
-  font-size: clamp(3rem, 7vw, 100px);
-  font-weight: 700;
-  letter-spacing: 5px;
-  color: var(--text-main);
   text-align: center;
   margin: 40px 0 30px;
-  line-height: 1.15;
 }
 
-.text-orange {
-  color: var(--accent-orange);
-}
-
+/* Team description: tipografía tomada desde index.css */
 .about-team-desc {
-  font-family: var(--font-display);
-  font-size: 20px;
-  font-weight: 400;
-  line-height: 36px;
-  letter-spacing: 2.5px;
-  color: var(--text-muted);
   text-align: center;
   max-width: 1720px;
   margin: 0 auto 70px;
 }
 
-/* Directors row: text left, photos right */
+/* Directors row */
 .about-directors-row {
   display: flex;
   gap: 60px;
@@ -44,25 +30,16 @@
   flex: 1;
 }
 
+/* Subsection titles: tipografía tomada desde index.css */
 .about-subsection-title {
-  font-family: var(--font-display);
-  font-size: clamp(1.5rem, 3vw, 50px);
-  font-weight: 700;
-  color: var(--text-main);
-  margin: 0 0 20px;
   text-align: center;
-  letter-spacing: 2px;
+  margin: 0 0 20px;
 }
 
+/* Paragraphs: tipografía tomada desde index.css */
 .about-subsection-text {
-  font-family: var(--font-display);
-  font-size: 18px;
-  font-weight: 400;
-  line-height: 36px;
-  letter-spacing: 2px;
-  color: var(--text-muted);
-  margin: 0;
   text-align: center;
+  margin: 0;
 }
 
 .about-directors-photos {
@@ -74,8 +51,10 @@
 .director-photo {
   width: 396px;
   height: 560px;
+
   border-radius: 20px;
   overflow: hidden;
+
   box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
   transition: transform 0.4s ease, box-shadow 0.4s ease;
 }
@@ -90,6 +69,7 @@
   height: 100%;
   object-fit: cover;
   display: block;
+
   transition: transform 0.4s ease;
 }
 
@@ -97,7 +77,7 @@
   transform: scale(1.03);
 }
 
-/* Bottom row: photos grid left, company info right */
+/* Bottom row */
 .about-bottom-row {
   display: flex;
   gap: 60px;
@@ -114,8 +94,10 @@
 .team-photo {
   width: 380px;
   height: 351px;
+
   border-radius: 20px;
   overflow: hidden;
+
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
   transition: transform 0.4s ease, box-shadow 0.4s ease;
 }
@@ -130,6 +112,7 @@
   height: 100%;
   object-fit: cover;
   display: block;
+
   transition: transform 0.4s ease;
 }
 
@@ -146,19 +129,24 @@
   .about-directors-row {
     flex-direction: column;
   }
+
   .about-directors-photos {
     justify-content: center;
   }
+
   .about-bottom-row {
     flex-direction: column;
   }
+
   .about-photos-grid {
     justify-self: center;
   }
+
   .director-photo {
     width: 300px;
     height: 420px;
   }
+
   .team-photo {
     width: 100%;
     height: 280px;
@@ -169,18 +157,22 @@
   .about-section {
     padding: 60px 20px;
   }
+
   .about-directors-photos {
     flex-direction: column;
     align-items: center;
   }
+
   .director-photo {
     width: 100%;
     max-width: 380px;
     height: 400px;
   }
+
   .about-photos-grid {
     grid-template-columns: 1fr;
   }
+
   .team-photo {
     width: 100%;
     height: 250px;
