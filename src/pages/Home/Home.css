@@ -1,11 +1,14 @@
 /* src/pages/Home/Home.css */
+
 .home-container {
   background-color: var(--bg-primary);
   min-height: calc(100vh - 130px);
+
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
+
   padding: 40px 100px 80px;
   position: relative;
 }
@@ -17,27 +20,16 @@
   z-index: 2;
 }
 
+/* Tipografía tomada desde index.css:
+   title-main, text-normal y text-yellow */
 .hero-main-title {
-  font-family: var(--font-display);
-  font-size: clamp(4rem, 10vw, 100px);
-  font-weight: 700;
-  letter-spacing: 5px;
-  color: var(--text-main);
-  margin: 0;
+  text-align: center;
   line-height: 1.15;
 }
 
 .hero-subtitle {
-  font-family: var(--font-display);
-  font-size: clamp(1rem, 2.2vw, 25px);
-  font-weight: 300;
-  letter-spacing: 2.5px;
-  color: var(--text-muted);
+  text-align: center;
   margin-top: 15px;
-}
-
-.text-yellow {
-  color: var(--accent-yellow);
 }
 
 /* Large video poster */
@@ -51,9 +43,11 @@
   position: relative;
   width: 100%;
   aspect-ratio: 1720 / 625;
+
   border-radius: 50px;
   overflow: hidden;
   cursor: pointer;
+
   box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
   transition: transform 0.4s ease, box-shadow 0.4s ease;
 }
@@ -68,6 +62,7 @@
   height: 100%;
   object-fit: cover;
   display: block;
+
   opacity: 0.7;
   transition: opacity 0.4s ease, transform 0.4s ease;
 }
@@ -82,14 +77,19 @@
   position: absolute;
   top: 50%;
   left: 50%;
+
   transform: translate(-50%, -50%);
+
   width: 120px;
   height: 120px;
+
   background: rgba(255, 102, 0, 0.85);
   border-radius: 50%;
+
   display: flex;
   justify-content: center;
   align-items: center;
+
   box-shadow: 0 0 40px rgba(255, 102, 0, 0.5);
   transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
 }
@@ -109,29 +109,41 @@
   position: fixed;
   top: 0;
   left: 0;
+
   width: 100vw;
   height: 100vh;
+
   background: rgba(0, 0, 0, 0.92);
+
   display: flex;
   justify-content: center;
   align-items: center;
+
   z-index: 10000;
   animation: fadeIn 0.3s ease;
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
 }
 
 .cube-lightbox-close {
   position: absolute;
   top: 30px;
   right: 40px;
+
   background: none;
   border: none;
-  color: white;
+
+  color: var(--color-white);
   font-size: 32px;
+
   cursor: pointer;
   z-index: 10001;
   transition: transform 0.3s ease, color 0.3s ease;
@@ -150,15 +162,17 @@
 .cube-lightbox-video-wrapper {
   position: relative;
   width: 100%;
-  padding-bottom: 56.25%; /* 16:9 */
+  padding-bottom: 56.25%;
 }
 
 .cube-lightbox-video-wrapper iframe {
   position: absolute;
   top: 0;
   left: 0;
+
   width: 100%;
   height: 100%;
+
   border: none;
   border-radius: 16px;
 }
@@ -167,13 +181,16 @@
   .home-container {
     padding: 30px 20px 60px;
   }
+
   .hero-video-box {
     border-radius: 20px;
   }
+
   .hero-play-btn {
     width: 70px;
     height: 70px;
   }
+
   .hero-play-btn svg {
     width: 30px;
     height: 30px;
