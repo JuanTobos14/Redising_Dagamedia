@@ -46,18 +46,8 @@
 }
 
 @keyframes shortfilmsScroll {
-<<<<<<< HEAD
   0% { transform: translateX(0); }
   100% { transform: translateX(calc(-50% - 20px)); }
-=======
-  0% {
-    transform: translateX(0);
-  }
-
-  100% {
-    transform: translateX(calc(-50% - 20px));
-  }
->>>>>>> 6d752d5a49f86f7e9e7d2ce15688c1b66251642b
 }
 
 .shortfilm-card-block {
@@ -89,7 +79,6 @@
   transform: scale(1.03);
 }
 
-<<<<<<< HEAD
 .shortfilm-label {
   position: absolute;
   bottom: 0;
@@ -111,42 +100,6 @@
 .shortfilm-card-block:hover .shortfilm-label {
   opacity: 1;
   transform: translateY(0);
-=======
-.shortfilm-placeholder {
-  width: 100%;
-  height: 100%;
-  border: 3px dashed rgba(255, 102, 0, 0.25);
-  border-radius: 20px;
-  background-color: rgba(26, 26, 26, 0.55);
-
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 15px;
-
-  transition: var(--transition-smooth);
-}
-
-.shortfilm-card-block:hover .shortfilm-placeholder {
-  border-color: var(--accent-orange);
-  background-color: rgba(26, 26, 26, 0.85);
-  box-shadow: 0 10px 30px rgba(255, 102, 0, 0.2);
-}
-
-.placeholder-icon {
-  font-size: 55px;
-}
-
-.placeholder-title {
-  color: var(--text-main);
-  font-weight: 700;
-  text-transform: uppercase;
-}
-
-.placeholder-subtitle {
-  color: var(--text-dark);
->>>>>>> 6d752d5a49f86f7e9e7d2ce15688c1b66251642b
 }
 
 /* ── Tundama Banner Ajustes de Encajado (No se corta) ───────────────── */
@@ -199,14 +152,11 @@
 }
 
 .tundama-premiere {
-<<<<<<< HEAD
   font-family: var(--font-display);
   font-size: 16px;
   line-height: 1.6;
   letter-spacing: 1.5px;
   color: var(--text-muted);
-=======
->>>>>>> 6d752d5a49f86f7e9e7d2ce15688c1b66251642b
   text-align: center;
   margin: 0;
 }
@@ -218,7 +168,6 @@
   margin: 15px 0;
   display: flex;
   justify-content: center;
-<<<<<<< HEAD
 }
 
 .tundama-laurels-img {
@@ -234,34 +183,6 @@
   line-height: 1.7;
   letter-spacing: 1.5px;
   color: var(--text-muted);
-=======
-  align-items: center;
-  gap: 40px;
-
-  flex-wrap: wrap;
-}
-
-.laurel-static-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
-
-  color: var(--text-muted);
-}
-
-.laurel-static-icon {
-  font-size: 32px;
-}
-
-.laurel-static-name {
-  text-transform: uppercase;
-  color: var(--text-dark);
-  font-weight: 500;
-}
-
-.tundama-desc {
->>>>>>> 6d752d5a49f86f7e9e7d2ce15688c1b66251642b
   text-align: center;
   margin: 0;
 }
@@ -424,15 +345,8 @@
   .films-subtitle-right {
     text-align: left;
   }
-<<<<<<< HEAD
   .tundama-side-img {
     width: 100%;
-=======
-
-  .shortfilm-card-block {
-    width: 320px;
-    height: 360px;
->>>>>>> 6d752d5a49f86f7e9e7d2ce15688c1b66251642b
   }
 
   .trailer-play-btn {
