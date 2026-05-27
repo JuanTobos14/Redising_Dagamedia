@@ -141,7 +141,6 @@ export default function VideoCube() {
             const faceName  = FACES[idx];
             const faceKey   = `${faceName}-${project.id}`;
             const isHovered = hoveredFace === faceKey || hoveredFace === faceKey + '_ready';
-            const showIframe = hoveredFace === faceKey + '_ready';
 
             return (
               <div
@@ -159,23 +158,21 @@ export default function VideoCube() {
                   <div className="face-image-wrapper">
                     {/* Thumbnail always visible as base layer */}
                     <img
-                      src={`https://img.youtube.com/vi/${project.id}/hqdefault.jpg`}
+                      src={`https://i.ytimg.com/vi/${project.id}/hqdefault.jpg`}
                       alt={project.title}
                       className="face-poster-img"
                       loading="lazy"
+                      style={{ opacity: 0.2 }}
                     />
 
-                    {/* Iframe injected only on hover (after delay) — saves bandwidth */}
-                    {showIframe && (
-                      <iframe
-                        src={`https://www.youtube.com/embed/${project.id}?autoplay=1&mute=1&controls=0&loop=1&playlist=${project.id}&modestbranding=1&rel=0`}
-                        title={project.title}
-                        frameBorder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media"
-                        className="face-video-preview face-video-lazy"
-                        style={{ pointerEvents: 'none' }}
-                      />
-                    )}
+                    <iframe
+                      src={`https://www.youtube-nocookie.com/embed/${project.id}?autoplay=1&mute=1&controls=0&loop=1&playlist=${project.id}&modestbranding=1&rel=0&playsinline=1&enablejsapi=1`}
+                      title={project.title}
+                      frameBorder="0"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media"
+                      className="face-video-preview"
+                      style={{ pointerEvents: 'none' }}
+                    />
 
                     {/* Play overlay */}
                     <div className="face-play-overlay">
@@ -210,7 +207,7 @@ export default function VideoCube() {
           <div className="cube-lightbox-content" onClick={(e) => e.stopPropagation()}>
             <div className="cube-lightbox-video-wrapper">
               <iframe
-                src={`https://www.youtube.com/embed/${activeModalVideo}?autoplay=1`}
+                src={`https://www.youtube-nocookie.com/embed/${activeModalVideo}?autoplay=1&controls=0&modestbranding=1&rel=0&iv_load_policy=3`}
                 title="Dagamedia Project Video"
                 frameBorder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"

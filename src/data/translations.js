@@ -4,7 +4,7 @@ export const translations = {
     // Navbar
     nav_inicio: "Inicio",
     nav_peliculas: "Películas",
-    nav_servicios: "Servicios",
+    nav_servicios: "Qué hacemos",
     nav_nosotros: "Nosotros",
     nav_contacto: "Contacto",
     status_active: "servidor activo",
@@ -14,7 +14,7 @@ export const translations = {
     home_title: "DAGA MEDIA",
     home_subtitle: "CREATIVIDAD Y TECNOLOGÍA",
     home_creativity: "Creatividad",
-    home_look_productions: "Ven, dale una mirada a nuestras productions",
+    home_look_productions: "Ven, dale una mirada a nuestras producciones",
 
     // Películas (Our Films)
     films_title: "Nuestras Películas",
@@ -28,7 +28,7 @@ export const translations = {
     btn_work_with_us: "Trabaja con nosotros",
 
     // Servicios (WhatDoWeDo)
-    services_title: "Nuestros Servicios",
+    services_title: "Qué hacemos",
     services_2d_title: "Animación 2D",
     services_2d_desc: "Nos apasiona el dibujo y la maravillosa expresión que nos brinda la animación tradicional 2D.",
     services_2d_fun: "Dibujar secuencias es divertido",

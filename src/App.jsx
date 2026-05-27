@@ -12,7 +12,7 @@ import headerLogo from './assets/Logo-DAGAMEDIA-Encabezado.png';
 import { useLanguage } from './context/LanguageContext';
 import CustomCursor from './components/CustomCursor/CustomCursor';
 import FloatingAssets from './components/FloatingAssets/FloatingAssets';
-import './App.css';
+import './App.modules.css';
 
 // Subcomponent to render characters individually for link-specific animations
 const NavLink = ({ label, target, active, animating, onClick }) => {

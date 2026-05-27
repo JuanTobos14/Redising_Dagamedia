@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useLanguage } from "../../context/LanguageContext";
 import "./WhatDoWeDo.css";
+import VideoCube from "../VideoCube/VideoCube";
 
 // IMPORTS CORRECTOS
 import gif2D from "../../assets/2d gif.gif";
@@ -93,20 +94,20 @@ function WhatDoWeDo() {
       </h2>
 
       <div className="wdwd-tabs">
-        <div className="wdwd-tab-dot" />
-
-        {SERVICES.map((svc) => (
-          <button
-            key={svc.id}
-            className={`wdwd-tab subtitle-main ${
-              activeTab === svc.id ? "active" : ""
-            }`}
-            onClick={() => setActiveTab(svc.id)}
-            type="button"
-          >
-            {t(svc.titleKey)}
-          </button>
-        ))}
+        {SERVICES.map((svc) => {
+          const isActive = activeTab === svc.id;
+          return (
+            <button
+              key={svc.id}
+              className={`wdwd-tab subtitle-main ${isActive ? "active" : ""}`}
+              onClick={() => setActiveTab(svc.id)}
+              type="button"
+            >
+              <span className={`wdwd-indicator ${isActive ? "circle" : "triangle"}`} />
+              <span className="wdwd-tab-text">{t(svc.titleKey)}</span>
+            </button>
+          );
+        })}
 
         <button
           className="wdwd-tab-arrow"
@@ -131,16 +132,21 @@ function WhatDoWeDo() {
 
       <div className="wdwd-content">
         <div
-          className="wdwd-image tilt-card"
-          onMouseMove={handleMouseMove}
-          onMouseLeave={handleMouseLeave}
+          className={`wdwd-image ${activeTab === '2d' ? 'tilt-card' : 'cube-card'}`}
+          onMouseMove={activeTab === '2d' ? handleMouseMove : undefined}
+          onMouseLeave={activeTab === '2d' ? handleMouseLeave : undefined}
+          style={activeTab === '3d' ? { transform: 'none', border: 'none', boxShadow: 'none', background: 'transparent' } : {}}
         >
-          <div className="card-shine" />
+          {activeTab === '2d' && <div className="card-shine" />}
 
-          <img
-            src={active.image}
-            alt={t(active.titleKey)}
-          />
+          {activeTab === '3d' ? (
+            <VideoCube />
+          ) : (
+            <img
+              src={active.image}
+              alt={t(active.titleKey)}
+            />
+          )}
         </div>
 
         <div className="wdwd-text">

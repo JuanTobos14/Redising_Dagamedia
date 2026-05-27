@@ -1,36 +1,41 @@
 import { useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
-import VideoCube from '../VideoCube/VideoCube';
 import { useLanguage } from '../../context/LanguageContext';
 import './OurFilms.css';
 
 const SHORT_FILMS = [
   {
+    id:    '110eJJP_QVs',
     src:   'https://dagamedia.com/wp-content/uploads/2021/05/Tundama-grito-batalla.jpg',
     alt:   'Tundama – Grito de batalla',
     label: 'Tundama',
   },
   {
+    id:    'ohnGoV38SB4',
     src:   'https://dagamedia.com/wp-content/uploads/2021/05/Osito_video.jpg',
     alt:   'Oso – Cortometraje animación',
     label: 'Oso',
   },
   {
+    id:    'HVHsgO69FSA',
     src:   'https://dagamedia.com/wp-content/uploads/2021/05/cerditos.jpg',
     alt:   'Cerdos – Comercial animación 3D',
     label: 'Cerdos',
   },
   {
+    id:    'NRC4f_Z29RY',
     src:   'https://dagamedia.com/wp-content/uploads/2021/05/Vena_Boyaca.jpg',
     alt:   'Vena Boyacá – Campaña',
     label: 'Vena Boyacá',
   },
   {
+    id:    '4HZfzn7s_Pw',
     src:   'https://dagamedia.com/wp-content/uploads/2021/04/Portafolio_nena_bici.jpg',
     alt:   'Niña en bici – Animación',
     label: 'Personaje',
   },
   {
+    id:    'kyKcj-UieCY',
     src:   'https://dagamedia.com/wp-content/uploads/2021/05/queso-Paipa.jpg',
     alt:   'Queso Paipa – Comercial',
     label: 'Queso Paipa',
@@ -40,18 +45,22 @@ const SHORT_FILMS = [
 function OurFilms({ setContactFormType }) {
   const { t } = useLanguage();
   const [playTrailer, setPlayTrailer] = useState(false);
+  const [activeCarouselVideo, setActiveCarouselVideo] = useState(null);
 
   useEffect(() => {
-    if (playTrailer) {
+    if (playTrailer || activeCarouselVideo) {
       document.body.style.overflow = 'hidden';
+      document.documentElement.style.overflow = 'hidden';
     } else {
       document.body.style.overflow = '';
+      document.documentElement.style.overflow = '';
     }
 
     return () => {
       document.body.style.overflow = '';
+      document.documentElement.style.overflow = '';
     };
-  }, [playTrailer]);
+  }, [playTrailer, activeCarouselVideo]);
 
   const handleScrollToContact = (formType) => {
     if (setContactFormType) setContactFormType(formType);
@@ -84,7 +93,12 @@ function OurFilms({ setContactFormType }) {
       <div className="shortfilms-carousel-wrapper">
         <div className="shortfilms-carousel-track">
           {carouselItems.map((film, idx) => (
-            <div key={idx} className="shortfilm-card-block">
+            <div 
+              key={idx} 
+              className="shortfilm-card-block" 
+              onClick={() => setActiveCarouselVideo(film.id)}
+              style={{ cursor: 'pointer' }}
+            >
               <img
                 src={film.src}
                 alt={film.alt}
@@ -145,7 +159,7 @@ function OurFilms({ setContactFormType }) {
         <h3 className="trailer-title">{t('films_trailer_title') || 'Te presentamos el tráiler oficial.'}</h3>
         <div className="trailer-video-box" onClick={() => setPlayTrailer(true)}>
           <img
-            src="https://img.youtube.com/vi/110eJJP_QVs/maxresdefault.jpg"
+            src="https://i.ytimg.com/vi/110eJJP_QVs/maxresdefault.jpg"
             alt="Tundama Trailer"
             className="trailer-poster"
           />
@@ -180,11 +194,6 @@ function OurFilms({ setContactFormType }) {
         </button>
       </div>
 
-      {/* Cubo 3D Interactivo */}
-      <div className="films-cube-section">
-        <VideoCube />
-      </div>
-
       {/* Lightbox del trailer */}
       {playTrailer && createPortal(
         <div className="cube-lightbox-modal" onClick={() => setPlayTrailer(false)}>
@@ -192,8 +201,27 @@ function OurFilms({ setContactFormType }) {
           <div className="cube-lightbox-content" onClick={(e) => e.stopPropagation()}>
             <div className="cube-lightbox-video-wrapper">
               <iframe
-                src="https://www.youtube.com/embed/110eJJP_QVs?autoplay=1"
+                src="https://www.youtube-nocookie.com/embed/110eJJP_QVs?autoplay=1&controls=0&modestbranding=1&rel=0&iv_load_policy=3"
                 title="Tundama Trailer"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowFullScreen
+              />
+            </div>
+          </div>
+        </div>,
+        document.body
+      )}
+
+      {/* Lightbox for carousel items */}
+      {activeCarouselVideo && createPortal(
+        <div className="cube-lightbox-modal" onClick={() => setActiveCarouselVideo(null)}>
+          <button className="cube-lightbox-close" onClick={() => setActiveCarouselVideo(null)} aria-label="Close">✕</button>
+          <div className="cube-lightbox-content" onClick={(e) => e.stopPropagation()}>
+            <div className="cube-lightbox-video-wrapper">
+              <iframe
+                src={`https://www.youtube-nocookie.com/embed/${activeCarouselVideo}?autoplay=1&controls=0&modestbranding=1&rel=0&iv_load_policy=3`}
+                title="Dagamedia Film Preview"
                 frameBorder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                 allowFullScreen

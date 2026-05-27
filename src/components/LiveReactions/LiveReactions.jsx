@@ -8,9 +8,16 @@ export default function LiveReactions({ socket, currentSection, sectionCounts, a
   const [floatingEmojis, setFloatingEmojis] = useState([]);
   const [showTray, setShowTray]             = useState(false);
   const [connectionState, setConnectionState] = useState('connecting'); // 'connected'|'connecting'|'offline'
+  const [cooldown, setCooldown]             = useState(false);
+  const [cooldownProgress, setCooldownProgress] = useState(100);
+
   const trayRef  = useRef(null);
   const btnRef   = useRef(null);
   const { t, language } = useLanguage();
+
+  const PHRASES = language === 'es'
+    ? ['¡Increíble!', '¡Espectacular!', '¡Buenísimo!', '¡Me encanta!']
+    : ['Awesome!', 'Amazing!', 'Spectacular!', 'Love it!'];
 
   /* Track socket connection state for indicator */
   useEffect(() => {
@@ -33,9 +40,11 @@ export default function LiveReactions({ socket, currentSection, sectionCounts, a
   useEffect(() => {
     if (!socket) return;
     const handle = (reaction) => {
+      const isPhrase = reaction.emoji.length > 2; // Simple heuristic for phrase reactions
       const newR = {
         id:     reaction.id,
         emoji:  reaction.emoji,
+        isPhrase,
         drift1: `${(Math.random() - 0.5) * 60}px`,
         drift2: `${(Math.random() - 0.5) * 150}px`,
         drift3: `${(Math.random() - 0.5) * 220}px`,
@@ -62,8 +71,34 @@ export default function LiveReactions({ socket, currentSection, sectionCounts, a
     return () => document.removeEventListener('mousedown', handler);
   }, [showTray]);
 
-  const sendReaction = (emoji) => {
-    if (socket && socket.connected) socket.emit('send_reaction', emoji);
+  /* Cooldown progress interval */
+  useEffect(() => {
+    if (!cooldown) return;
+    const duration = 1500;
+    const intervalTime = 30;
+    const step = (intervalTime / duration) * 100;
+    
+    const timer = setInterval(() => {
+      setCooldownProgress((prev) => {
+        if (prev >= 100) {
+          clearInterval(timer);
+          setCooldown(false);
+          return 100;
+        }
+        return prev + step;
+      });
+    }, intervalTime);
+    
+    return () => clearInterval(timer);
+  }, [cooldown]);
+
+  const sendReaction = (emojiOrPhrase) => {
+    if (cooldown) return;
+    if (socket && socket.connected) {
+      socket.emit('send_reaction', emojiOrPhrase);
+    }
+    setCooldown(true);
+    setCooldownProgress(0);
     setShowTray(false);
   };
 
@@ -92,7 +127,7 @@ export default function LiveReactions({ socket, currentSection, sectionCounts, a
         {floatingEmojis.map((r) => (
           <div
             key={r.id}
-            className="floating-emoji-item"
+            className={`floating-emoji-item ${r.isPhrase ? 'floating-phrase-item' : ''}`}
             style={{ '--drift-1': r.drift1, '--drift-2': r.drift2, '--drift-3': r.drift3 }}
           >
             {r.emoji}
@@ -100,10 +135,8 @@ export default function LiveReactions({ socket, currentSection, sectionCounts, a
         ))}
       </div>
 
-      {/* Controls Overlay */}
-      <div className="reactions-overlay-container">
-
-        {/* Stats widget */}
+      {/* Stats Widget (Bottom-Left) */}
+      <div className="reactions-stats-container">
         <div className={`section-stats-widget status-${connectionState}`}>
           <div className={`stats-dot-active dot-${connectionState}`} />
           <span className="stats-text">
@@ -114,44 +147,73 @@ export default function LiveReactions({ socket, currentSection, sectionCounts, a
             <span className={`stats-status-label status-label-${connectionState}`}>{statusLabel}</span>
           </span>
         </div>
+      </div>
 
-        {/* Action Row */}
+      {/* Controls Overlay (Bottom-Right) */}
+      <div className="reactions-controls-container">
         <div className="controls-row">
 
           {/* Reactions panel */}
           <div className="reaction-button-wrapper">
 
-            {/* Emoji tray — controlled by state now (fixes the CSS-only hover bug) */}
+            {/* Emoji & Phrase tray */}
             <div
               ref={trayRef}
-              className={`emoji-tray ${showTray ? 'tray-open' : ''}`}
+              className={`emoji-tray ${showTray ? 'tray-open' : ''} ${cooldown ? 'disabled' : ''}`}
               role="toolbar"
-              aria-label="Reaction emojis"
+              aria-label="Reaction tray"
             >
-              {EMOJIS.map((emoji) => (
-                <button
-                  key={emoji}
-                  type="button"
-                  className="emoji-option"
-                  onClick={() => sendReaction(emoji)}
-                  title={`Send ${emoji}`}
-                >
-                  {emoji}
-                </button>
-              ))}
+              <div className="emoji-tray-section">
+                {EMOJIS.map((emoji) => (
+                  <button
+                    key={emoji}
+                    type="button"
+                    className="emoji-option"
+                    onClick={() => sendReaction(emoji)}
+                    disabled={cooldown}
+                    title={`Send ${emoji}`}
+                  >
+                    {emoji}
+                  </button>
+                ))}
+              </div>
+              <div className="phrase-tray-section">
+                {PHRASES.map((phrase) => (
+                  <button
+                    key={phrase}
+                    type="button"
+                    className="phrase-option"
+                    onClick={() => sendReaction(phrase)}
+                    disabled={cooldown}
+                    title={`Send "${phrase}"`}
+                  >
+                    {phrase}
+                  </button>
+                ))}
+              </div>
             </div>
 
             <button
               ref={btnRef}
               type="button"
-              className={`action-btn-circle ${showTray ? 'btn-active' : ''}`}
+              className={`action-btn-circle ${showTray ? 'btn-active' : ''} ${cooldown ? 'btn-cooldown' : ''}`}
               aria-label="Send Reaction"
               aria-expanded={showTray}
-              onClick={() => setShowTray(p => !p)}
+              onClick={() => !cooldown && setShowTray(p => !p)}
+              disabled={cooldown}
+              style={{
+                background: cooldown 
+                  ? `conic-gradient(var(--accent-orange) ${cooldownProgress}%, rgba(22, 22, 22, 0.9) ${cooldownProgress}%)`
+                  : ''
+              }}
             >
-              <svg viewBox="0 0 24 24">
-                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-              </svg>
+              {cooldown ? (
+                <span className="cooldown-timer">⏳</span>
+              ) : (
+                <svg viewBox="0 0 24 24">
+                  <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                </svg>
+              )}
             </button>
           </div>
 
@@ -168,7 +230,6 @@ export default function LiveReactions({ socket, currentSection, sectionCounts, a
             </svg>
           </button>
         </div>
-
       </div>
     </>
   );

@@ -55,48 +55,48 @@ body {
 /* SISTEMA TIPOGRÁFICO GLOBAL */
 /* ============================= */
 
-/* Títulos principales: 100px, Bold, 5% */
+/* Títulos principales: 100 pt, Bold, Espaciado 5% */
 .title-main,
 .section-title-huge {
   font-family: var(--font-display);
-  font-size: clamp(3rem, 8vw, 100px);
+  font-size: clamp(32pt, 8vw, 100pt);
   line-height: 1.1;
   font-weight: 700;
-  letter-spacing: var(--letter-title);
+  letter-spacing: 0.05em;
   color: var(--color-white);
   margin: 0;
 }
 
-/* Subtítulos: 50px–60px, Bold, 5% */
+/* Subtítulos: 50 a 60 pt, Bold, Espaciado 5% */
 .subtitle-main {
   font-family: var(--font-display);
-  font-size: clamp(2.5rem, 5vw, 56px);
+  font-size: clamp(24pt, 5vw, 55pt);
   line-height: 1.2;
   font-weight: 700;
-  letter-spacing: var(--letter-title);
+  letter-spacing: 0.05em;
   color: var(--color-white);
   margin: 0;
 }
 
-/* Títulos de sección: 50px, Regular, gris */
+/* Títulos de sección: 50 pt, Regular, Gris (#4D4D4D), Espaciado 5% */
 .section-title,
 .section-label {
   font-family: var(--font-display);
-  font-size: clamp(2rem, 4vw, 50px);
+  font-size: clamp(20pt, 4vw, 50pt);
   font-weight: 400;
-  letter-spacing: var(--letter-title);
+  letter-spacing: 0.05em;
   color: var(--color-gray-section);
   margin: 0 0 40px 0;
 }
 
-/* Texto normal: 25px, Regular, gris, 10% */
+/* Texto normal: 25 pt, Regular, Gris (#C3C3C3), Espaciado 10% */
 .text-normal,
 .body-text {
   font-family: var(--font-display);
-  font-size: clamp(1rem, 2vw, 25px);
+  font-size: clamp(12pt, 2vw, 25pt);
   font-weight: 400;
   line-height: 1.6;
-  letter-spacing: var(--letter-text);
+  letter-spacing: 0.10em;
   color: var(--color-gray-text);
   margin: 0;
 }
@@ -104,20 +104,20 @@ body {
 /* Texto pequeño */
 .text-small {
   font-family: var(--font-display);
-  font-size: 18px;
+  font-size: 14pt;
   font-weight: 400;
   line-height: 1.6;
-  letter-spacing: var(--letter-text);
+  letter-spacing: 0.10em;
   color: var(--color-gray-text);
   margin: 0;
 }
 
-/* Título de formulario */
+/* Título de formulario: 25 pt, Blanco, Espaciado 10%, Color celda (#1A1A1A) */
 .form-title {
   font-family: var(--font-display);
-  font-size: 25px;
+  font-size: clamp(12pt, 2vw, 25pt);
   font-weight: 400;
-  letter-spacing: var(--letter-text);
+  letter-spacing: 0.10em;
   color: var(--color-white);
   background-color: var(--color-cell);
   margin: 0;

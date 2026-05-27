@@ -13,28 +13,38 @@
   margin-bottom: 40px;
 }
 
-.wdwd-tab-dot {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  background: var(--accent-orange);
-  flex-shrink: 0;
-  box-shadow: 0 0 20px rgba(255, 102, 0, 0.4);
-  transition: box-shadow 0.3s ease;
-}
-
 .wdwd-tab {
   background: none;
   border: none;
-
   color: var(--text-section-label);
   cursor: pointer;
   padding: 0;
-
   text-transform: none;
   white-space: nowrap;
-
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
   transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+
+.wdwd-indicator {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  display: inline-block;
+}
+
+.wdwd-indicator.circle {
+  border-radius: 50%;
+  background: var(--accent-yellow);
+  box-shadow: 0 0 15px rgba(255, 205, 0, 0.6);
+  transform: scale(1.05);
+}
+
+.wdwd-indicator.triangle {
+  background: var(--text-section-label);
+  clip-path: polygon(50% 10%, 0% 90%, 100% 90%);
 }
 
 .wdwd-tab.active {
@@ -44,6 +54,10 @@
 
 .wdwd-tab:hover:not(.active) {
   color: #777;
+}
+
+.wdwd-tab:hover:not(.active) .wdwd-indicator.triangle {
+  background: #777;
 }
 
 .wdwd-tab-arrow {

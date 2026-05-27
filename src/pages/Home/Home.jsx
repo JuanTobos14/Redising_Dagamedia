@@ -5,7 +5,7 @@ import './Home.css';
 
 function Home() {
   const [play, setPlay] = useState(false);
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
 
   // Disable background scrolling when video lightbox is open
   useEffect(() => {
@@ -23,6 +23,9 @@ function Home() {
     };
   }, [play]);
 
+  const highlightWord = language === 'es' ? 'producciones' : 'productions';
+  const subtitleParts = t('home_look_productions').split(highlightWord);
+
   return (
     <div className="home-container reveal-on-scroll" id="inicio">
       {/* Hero text */}
@@ -32,8 +35,9 @@ function Home() {
         </h1>
 
         <p className="hero-subtitle text-normal">
-          {t('home_look_productions').split('productions')[0]}
-          <span className="text-yellow">productions</span>
+          {subtitleParts[0]}
+          <span className="text-yellow">{highlightWord}</span>
+          {subtitleParts[1]}
         </p>
       </div>
 
@@ -41,7 +45,7 @@ function Home() {
       <div className="hero-video-wrapper">
         <div className="hero-video-box" onClick={() => setPlay(true)}>
           <img
-            src="https://img.youtube.com/vi/SUbnWx93k8c/maxresdefault.jpg"
+            src="https://i.ytimg.com/vi/SUbnWx93k8c/maxresdefault.jpg"
             alt="Daga Media Video Preview"
             className="hero-video-poster"
           />
@@ -72,7 +76,7 @@ function Home() {
             >
               <div className="cube-lightbox-video-wrapper">
                 <iframe
-                  src="https://www.youtube.com/embed/SUbnWx93k8c?autoplay=1"
+                  src="https://www.youtube-nocookie.com/embed/SUbnWx93k8c?autoplay=1&controls=0&modestbranding=1&rel=0&iv_load_policy=3"
                   title="Dagamedia Trailer"
                   frameBorder="0"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
