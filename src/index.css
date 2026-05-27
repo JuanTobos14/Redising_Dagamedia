@@ -67,36 +67,36 @@ body {
   margin: 0;
 }
 
-/* Subtítulos: 50 a 60 pt, Bold, Espaciado 5% */
+/* Subtítulos: escala más legible en web */
 .subtitle-main {
   font-family: var(--font-display);
-  font-size: clamp(24pt, 5vw, 55pt);
-  line-height: 1.2;
+  font-size: clamp(18pt, 3vw, 32pt);
+  line-height: 1.25;
   font-weight: 700;
   letter-spacing: 0.05em;
   color: var(--color-white);
   margin: 0;
 }
 
-/* Títulos de sección: 50 pt, Regular, Gris (#4D4D4D), Espaciado 5% */
+/* Títulos de sección: 50 pt a clamp de 24pt */
 .section-title,
 .section-label {
   font-family: var(--font-display);
-  font-size: clamp(20pt, 4vw, 50pt);
+  font-size: clamp(18pt, 2.5vw, 30pt);
   font-weight: 400;
   letter-spacing: 0.05em;
   color: var(--color-gray-section);
   margin: 0 0 40px 0;
 }
 
-/* Texto normal: 25 pt, Regular, Gris (#C3C3C3), Espaciado 10% */
+/* Texto normal: escala cómoda para lectura */
 .text-normal,
 .body-text {
   font-family: var(--font-display);
-  font-size: clamp(12pt, 2vw, 25pt);
+  font-size: clamp(11pt, 1.2vw, 16pt);
   font-weight: 400;
   line-height: 1.6;
-  letter-spacing: 0.10em;
+  letter-spacing: 0.06em;
   color: var(--color-gray-text);
   margin: 0;
 }
@@ -104,20 +104,20 @@ body {
 /* Texto pequeño */
 .text-small {
   font-family: var(--font-display);
-  font-size: 14pt;
+  font-size: 11pt;
   font-weight: 400;
-  line-height: 1.6;
-  letter-spacing: 0.10em;
+  line-height: 1.5;
+  letter-spacing: 0.05em;
   color: var(--color-gray-text);
   margin: 0;
 }
 
-/* Título de formulario: 25 pt, Blanco, Espaciado 10%, Color celda (#1A1A1A) */
+/* Título de formulario: alineado al nuevo tamaño de texto estándar */
 .form-title {
   font-family: var(--font-display);
-  font-size: clamp(12pt, 2vw, 25pt);
+  font-size: clamp(11pt, 1.2vw, 16pt);
   font-weight: 400;
-  letter-spacing: 0.10em;
+  letter-spacing: 0.08em;
   color: var(--color-white);
   background-color: var(--color-cell);
   margin: 0;
