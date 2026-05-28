@@ -1,0 +1,78 @@
+.about-section {
+  /* usa .section-padded de shared.css */
+}
+
+.about-team-title { text-align: center; margin: 40px 0 30px; }
+
+.about-team-desc {
+  text-align: center;
+  max-width: 1720px;
+  margin: 0 auto 70px;
+}
+
+/* Fila de directores */
+.about-directors-row {
+  display: flex;
+  gap: 60px;
+  align-items: flex-start;
+  margin-bottom: 70px;
+}
+
+.about-directors-text { flex: 1; }
+
+.about-subsection-title { text-align: center; margin: 0 0 20px; }
+.about-subsection-text  { text-align: center; margin: 0; }
+
+.about-directors-photos {
+  display: flex;
+  gap: 40px;
+  flex-shrink: 0;
+}
+
+/* Foto de director — extiende .img-card */
+.director-photo {
+  width: 396px;
+  height: 560px;
+}
+
+/* Fila inferior */
+.about-bottom-row {
+  display: flex;
+  gap: 60px;
+  align-items: flex-start;
+}
+
+.about-photos-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 35px;
+  flex-shrink: 0;
+}
+
+/* Foto de equipo — extiende .img-card */
+.team-photo {
+  width: 380px;
+  height: 351px;
+}
+
+.about-company-info {
+  flex: 1;
+  padding-top: 80px;
+}
+
+/* ── Responsive ── */
+@media (max-width: 1200px) {
+  .about-directors-row    { flex-direction: column; }
+  .about-directors-photos { justify-content: center; }
+  .about-bottom-row       { flex-direction: column; }
+  .about-photos-grid      { justify-self: center; }
+  .director-photo         { width: 300px; height: 420px; }
+  .team-photo             { width: 100%; height: 280px; }
+}
+
+@media (max-width: 768px) {
+  .about-directors-photos { flex-direction: column; align-items: center; }
+  .director-photo         { width: 100%; max-width: 380px; height: 400px; }
+  .about-photos-grid      { grid-template-columns: 1fr; }
+  .team-photo             { width: 100%; height: 250px; }
+}

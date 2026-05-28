@@ -1,0 +1,125 @@
+/* src/components/Footer/Footer.css */
+
+/* Nota: el footer usaba .contact-footer; se renombra a .site-footer para
+   evitar confusión con el componente Contact. El JSX se actualiza en consecuencia. */
+
+.site-footer {
+  border-top: 1px solid var(--border-color);
+  padding: 60px 40px;
+  background-color: var(--bg-primary);
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+
+  gap: 30px;
+  width: 100%;
+
+  position: relative;
+  z-index: 10;
+}
+
+.footer-left {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.social-links {
+  display: flex;
+  gap: 15px;
+}
+
+.social-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #040404;
+  transition: var(--transition-smooth);
+  cursor: pointer;
+}
+
+.social-icon.facebook,
+.social-icon.youtube   { background-color: var(--accent-orange); }
+
+.social-icon.instagram,
+.social-icon.x         { background-color: var(--accent-yellow); }
+
+.social-icon:hover {
+  transform: translateY(-3px) scale(1.08);
+  filter: brightness(1.12);
+}
+
+.social-icon.facebook:hover,
+.social-icon.youtube:hover  { box-shadow: 0 6px 18px rgba(255, 102, 0, 0.45); }
+
+.social-icon.instagram:hover,
+.social-icon.x:hover        { box-shadow: 0 6px 18px rgba(255, 205, 0, 0.45); }
+
+.social-icon svg { width: 20px; height: 20px; fill: currentColor; }
+
+.phone-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.phone-label   { text-transform: uppercase; color: var(--text-dark); }
+.phone-numbers { color: var(--text-muted); }
+
+.footer-center {
+  color: var(--text-dark);
+  text-align: center;
+}
+
+.footer-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 12px;
+  text-align: right;
+}
+
+.footer-logo {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.footer-logo-img {
+  height: 45px;
+  width: auto;
+  object-fit: contain;
+  filter: brightness(0.95);
+  transition: var(--transition-smooth);
+}
+
+.footer-logo-img:hover {
+  filter: brightness(1.1);
+  transform: scale(1.03);
+}
+
+.footer-address {
+  color: var(--text-muted);
+  max-width: 250px;
+}
+
+@media (max-width: 768px) {
+  .site-footer {
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    gap: 30px;
+    padding: 40px 20px;
+  }
+
+  .footer-right {
+    align-items: center;
+    text-align: center;
+  }
+}

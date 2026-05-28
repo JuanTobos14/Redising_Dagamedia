@@ -1,0 +1,270 @@
+/* src/index.css — Sistema global optimizado, limpio y centralizado */
+
+@import './styles/shared.css';
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@300;400;500;600;700;800&family=Karla:wght@400;700;800&display=swap');
+
+:root {
+  /* Paleta de colores */
+  --color-white: #ffffff;
+  --color-black: #000000;
+  --color-yellow: #ffcd00;
+  --color-orange: #ff6600;
+  --color-gray-text: #c3c3c3;
+  --color-gray-section: #4d4d4d;
+  --color-cell: #1a1a1a;
+
+  /* Tokens semánticos */
+  --bg-primary: var(--color-black);
+  --bg-secondary: #0a0a0a;
+  --bg-card: var(--color-cell);
+
+  --border-color: #2f2f2f;
+
+  --accent-orange: var(--color-orange);
+  --accent-yellow: var(--color-yellow);
+
+  --text-main: var(--color-white);
+  --text-muted: var(--color-gray-text);
+  --text-dark: var(--color-gray-section);
+
+  /* Tipografía global */
+  --font-base: 'Inter', 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-display: var(--font-base);
+  --font-main: var(--font-base);
+
+  /* Alias semánticos usados por componentes */
+  --text-section-label: var(--text-dark);
+
+  /* Espaciado tipográfico */
+  --letter-title: 0.05em;
+  --letter-text: 0.10em;
+
+  /* Tamaños globales */
+  --section-title-size: clamp(34px, 4vw, 64px);
+
+  /* Tokens visuales reutilizables */
+  --overlay-dark-strong: rgba(6, 6, 6, 0.96);
+  --glass-border-soft: rgba(255, 255, 255, 0.08);
+  --glass-border-medium: rgba(255, 255, 255, 0.14);
+  --shadow-dark-soft: rgba(0, 0, 0, 0.5);
+  --shadow-dark-strong: rgba(0, 0, 0, 0.85);
+  --glow-orange-soft: rgba(255, 107, 0, 0.08);
+  --glow-orange-medium: rgba(255, 107, 0, 0.45);
+
+  /* Transición estándar */
+  --transition-smooth: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+/* Reset y base */
+* {
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-base);
+  background-color: var(--bg-primary);
+  color: var(--text-main);
+  overflow-x: hidden;
+}
+
+/* ============================================================
+   Sistema tipográfico global
+   ============================================================ */
+
+.title-main {
+  font-size: clamp(48px, 4vw, 96px);
+  line-height: 1.1;
+  font-weight: 700;
+  letter-spacing: var(--letter-title);
+  color: var(--color-white);
+  margin: 0;
+}
+
+.subtitle-main {
+  font-size: clamp(24px, 2.5vw, 40px);
+  line-height: 1.25;
+  font-weight: 700;
+  letter-spacing: var(--letter-title);
+  color: var(--color-white);
+  margin: 0;
+}
+
+.section-label {
+  font-size: clamp(20px, 2vw, 32px);
+  font-weight: 400;
+  letter-spacing: var(--letter-title);
+  color: var(--color-gray-section);
+  margin: 0 0 40px 0;
+}
+
+.text-normal {
+  font-size: clamp(14px, 1.2vw, 18px);
+  font-weight: 400;
+  line-height: 1.6;
+  letter-spacing: var(--letter-text);
+  color: var(--color-gray-text);
+  margin: 0;
+}
+
+.text-small {
+  font-size: 14px;
+  line-height: 1.5;
+  letter-spacing: var(--letter-text);
+  color: var(--color-gray-text);
+  margin: 0;
+}
+
+.form-title {
+  font-size: clamp(14px, 1.2vw, 18px);
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  color: var(--color-white);
+  background-color: var(--color-cell);
+  margin: 0;
+}
+
+/* Helpers de color */
+.text-yellow {
+  color: var(--color-yellow);
+}
+
+.text-orange {
+  color: var(--color-orange);
+}
+
+.text-white {
+  color: var(--color-white);
+}
+
+.text-gray {
+  color: var(--color-gray-text);
+}
+
+/* ============================================================
+   Transiciones reutilizables
+   ============================================================ */
+
+.section-title-transition {
+  animation: sectionTitleFade 0.35s ease both;
+}
+
+.section-content-transition {
+  animation: sectionContentFade 0.45s ease both;
+}
+
+@keyframes sectionTitleFade {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes sectionContentFade {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ============================================================
+   Animaciones globales de scroll
+   ============================================================ */
+
+.reveal-on-scroll {
+  opacity: 0;
+  transform: scale(0.95) translateY(40px);
+  transition:
+    opacity 0.6s ease,
+    transform 0.6s ease;
+}
+
+.reveal-on-scroll.visible {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+}
+
+.reveal-on-scroll.visible.animating {
+  animation: squashStretch 0.8s cubic-bezier(0.25, 0.8, 0.25, 1.1) forwards;
+}
+
+@keyframes squashStretch {
+  0% {
+    transform: scale(1) translateY(0);
+  }
+
+  30% {
+    transform: scale(1.03, 0.97) translateY(10px);
+  }
+
+  65% {
+    transform: scale(0.98, 1.02) translateY(-6px);
+  }
+
+  100% {
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes buttonSquash {
+  0% {
+    transform: scale(1);
+  }
+
+  30% {
+    transform: scale(1.08, 0.9);
+  }
+
+  60% {
+    transform: scale(0.95, 1.05);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+.films-cta-btn:active,
+.contact-tab:active,
+.submit-btn:active,
+.btn-primary:active,
+.btn-secondary:active {
+  animation: buttonSquash 0.4s ease-out;
+}
+
+/* Scrollbar personalizada */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-orange);
+}
+
+@media (max-width: 576px) {
+  :root {
+    --section-title-size: clamp(30px, 9vw, 44px);
+  }
+}

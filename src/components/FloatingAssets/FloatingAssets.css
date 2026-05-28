@@ -1,0 +1,49 @@
+.floating-assets-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1; /* Render behind text contents but in front of particle background canvas */
+  overflow: hidden;
+}
+
+.floating-asset {
+  position: absolute;
+  opacity: 0.45;
+  filter: none;
+  transition: transform 0.1s linear, opacity 0.3s ease, filter 0.3s ease;
+  will-change: transform;
+}
+
+.floating-asset:hover {
+  opacity: 0.85;
+  filter: drop-shadow(0 0 20px rgba(255, 107, 0, 0.4));
+}
+.asset-star {
+  top: 15vh;
+  right: 6%;
+}
+
+.asset-reel {
+  top: 120vh;
+  left: 5%;
+}
+
+.asset-play {
+  top: 240vh;
+  right: 5%;
+}
+
+.asset-diamond {
+  top: 350vh;
+  left: 6%;
+}
+
+/* Hide floating assets on smaller tablets/mobiles to focus layout & speed up render */
+@media (max-width: 1024px) {
+  .floating-asset {
+    display: none !important;
+  }
+}

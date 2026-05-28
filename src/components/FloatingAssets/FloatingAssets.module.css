@@ -1,0 +1,46 @@
+/* src/components/FloatingAssets/FloatingAssets.css */
+
+.floating-assets-container {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.floating-asset {
+  position: absolute;
+  opacity: 0.45;
+  filter: none;
+  will-change: transform;
+}
+
+/* Posiciones */
+.asset-star {
+  top: 15vh;
+  right: 6%;
+}
+
+.asset-reel {
+  top: 120vh;
+  left: 5%;
+}
+
+.asset-play {
+  top: 240vh;
+  right: 5%;
+}
+
+.asset-diamond {
+  top: 350vh;
+  left: 6%;
+}
+
+/* Los assets son decorativos: se ocultan en pantallas pequeñas para mejorar rendimiento */
+@media (max-width: 1024px) {
+  .floating-asset {
+    display: none !important;
+  }
+}

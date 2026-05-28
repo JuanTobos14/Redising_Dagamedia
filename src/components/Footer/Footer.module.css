@@ -1,0 +1,148 @@
+/* src/components/Footer/Footer.css */
+
+.site-footer {
+  border-top: 1px solid var(--border-color);
+  padding: 48px 40px;
+  background-color: transparent;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 30px;
+  width: 100%;
+  position: relative;
+  z-index: 10;
+}
+
+/* Columna izquierda */
+.footer-left {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* Redes sociales */
+.social-links {
+  display: flex;
+  gap: 15px;
+}
+
+.social-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #040404;
+  transition: var(--transition-smooth);
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.social-icon.social-orange {
+  background-color: var(--accent-orange);
+}
+
+.social-icon.social-yellow {
+  background-color: var(--accent-yellow);
+}
+
+.social-icon:hover {
+  transform: translateY(-3px) scale(1.08);
+  filter: brightness(1.12);
+}
+
+.social-icon.social-orange:hover {
+  box-shadow: 0 6px 18px rgba(255, 102, 0, 0.45);
+}
+
+.social-icon.social-yellow:hover {
+  box-shadow: 0 6px 18px rgba(255, 205, 0, 0.45);
+}
+
+.social-icon svg {
+  width: 20px;
+  height: 20px;
+  fill: currentColor;
+}
+
+/* Teléfono */
+.phone-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.phone-label {
+  text-transform: uppercase;
+  color: var(--text-dark);
+}
+
+.phone-numbers {
+  color: var(--text-muted);
+}
+
+/* Centro */
+.footer-center {
+  color: var(--text-dark);
+  text-align: center;
+}
+
+/* Columna derecha */
+.footer-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 12px;
+  text-align: right;
+}
+
+.footer-logo {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.footer-logo-img {
+  height: 45px;
+  width: auto;
+  object-fit: contain;
+  filter: brightness(0.95);
+  transition: var(--transition-smooth);
+}
+
+.footer-logo-img:hover {
+  filter: brightness(1.1);
+  transform: scale(1.03);
+}
+
+.footer-address {
+  color: var(--text-muted);
+  max-width: 250px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .site-footer {
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    gap: 30px;
+    padding: 40px 20px;
+  }
+
+  .footer-left {
+    align-items: center;
+  }
+
+  .footer-right {
+    align-items: center;
+    text-align: center;
+  }
+
+  .footer-logo {
+    justify-content: center;
+  }
+}

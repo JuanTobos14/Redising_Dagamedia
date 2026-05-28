@@ -1,0 +1,68 @@
+/* src/pages/Home/Home.css */
+@import '../../styles/shared.css';
+
+.home-container {
+  background-color: var(--bg-primary);
+  min-height: calc(100vh - 130px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 40px 100px 80px;
+  position: relative;
+}
+
+/* Bloque de texto hero */
+.hero-text-block {
+  text-align: center;
+  margin-bottom: 50px;
+  z-index: 2;
+}
+
+.hero-main-title { text-align: center; line-height: 1.15; }
+.hero-subtitle   { text-align: center; margin-top: 15px; }
+
+/* Video principal */
+.hero-video-wrapper {
+  width: 100%;
+  max-width: 1720px;
+  z-index: 2;
+}
+
+.hero-video-box {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1720 / 625;
+  border-radius: 50px;
+  overflow: hidden;
+  cursor: pointer;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.hero-video-box:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 40px 100px rgba(255, 102, 0, 0.1);
+}
+
+.hero-video-poster {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  opacity: 0.7;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.hero-video-box:hover .hero-video-poster {
+  opacity: 0.85;
+  transform: scale(1.02);
+}
+
+/* El botón play usa .play-btn-circle de shared.css */
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .home-container  { padding: 30px 20px 60px; }
+  .hero-video-box  { border-radius: 20px; }
+}

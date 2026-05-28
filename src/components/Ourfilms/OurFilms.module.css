@@ -1,0 +1,386 @@
+/* src/components/Ourfilms/OurFilms.module.css */
+
+/* Fila de subtítulos */
+.films-subtitle-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 50px;
+  margin-bottom: 50px;
+}
+
+.films-subtitle-left {
+  flex: 1;
+}
+
+.films-subtitle-right {
+  flex: 1;
+  text-align: right;
+}
+
+/* Carrusel de cortometrajes */
+.shortfilms-carousel-wrapper {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  margin-bottom: 80px;
+  padding: 20px 0;
+  cursor: grab;
+  touch-action: pan-y;
+  user-select: none;
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    white 15%,
+    white 85%,
+    transparent
+  );
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent,
+    white 15%,
+    white 85%,
+    transparent
+  );
+}
+
+.shortfilms-carousel-wrapper.is-dragging {
+  cursor: grabbing;
+}
+
+.shortfilms-carousel-track {
+  display: flex;
+  gap: 40px;
+  width: max-content;
+  will-change: transform;
+}
+
+.shortfilm-card-block {
+  flex-shrink: 0;
+  width: 520px;
+  height: 580px;
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  cursor: inherit;
+  box-shadow: 0 15px 40px var(--color-black);
+  transition:
+    transform 0.4s ease,
+    box-shadow 0.4s ease;
+  border: 0;
+  padding: 0;
+  background: var(--color-black);
+  color: inherit;
+}
+
+.shortfilm-card-block:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 25px 60px var(--color-black);
+}
+
+.shortfilm-card-block:focus-visible {
+  outline: 2px solid var(--accent-yellow);
+  outline-offset: 4px;
+}
+
+.shortfilm-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s ease;
+  pointer-events: none;
+}
+
+.shortfilm-card-block:hover .shortfilm-img {
+  transform: scale(1.03);
+}
+
+.shortfilm-label {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 40px 22px 18px;
+  background:
+    linear-gradient(
+      to top,
+      color-mix(in srgb, var(--color-black) 85%, transparent) 0%,
+      transparent 100%
+    );
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: var(--text-main);
+  text-transform: uppercase;
+  opacity: 0;
+  transform: translateY(6px);
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease;
+  text-align: left;
+  pointer-events: none;
+}
+
+.shortfilm-card-block:hover .shortfilm-label {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Banner Tundama */
+.tundama-banner {
+  display: flex;
+  gap: 40px;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 80px;
+  width: 100%;
+}
+
+.tundama-side-img {
+  width: 28%;
+  max-width: 450px;
+  aspect-ratio: 4 / 5;
+  flex-shrink: 0;
+}
+
+.tundama-center {
+  flex: 1;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 0 10px;
+}
+
+.tundama-logo {
+  max-width: 380px;
+  width: 100%;
+  height: auto;
+}
+
+.tundama-premiere,
+.tundama-desc {
+  font-family: var(--font-display);
+  font-size: 16px;
+  line-height: 1.6;
+  letter-spacing: 1.5px;
+  color: var(--text-muted);
+  text-align: center;
+  margin: 0;
+}
+
+.tundama-desc {
+  line-height: 1.7;
+}
+
+.tundama-laurels-container {
+  width: 100%;
+  max-width: 420px;
+  margin: 15px 0;
+  display: flex;
+  justify-content: center;
+}
+
+.tundama-laurels-img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 4px 15px var(--color-black));
+}
+
+/* Tráiler */
+.trailer-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 38px;
+  margin-bottom: 80px;
+}
+
+.trailer-title {
+  text-align: center;
+}
+
+/*
+  Mismo ancho útil que Home:
+  - width: 100%
+  - max-width: none
+  - sin padding interno adicional
+
+  Misma altura visual que Home:
+  - aspect-ratio: 1720 / 625
+*/
+.trailer-video-box {
+  position: relative;
+  width: 100%;
+  max-width: none;
+  aspect-ratio: 1720 / 625;
+  border-radius: 50px;
+  overflow: hidden;
+  cursor: pointer;
+  box-shadow: 0 30px 80px var(--color-black);
+  transition:
+    transform 0.4s ease,
+    box-shadow 0.4s ease;
+  border: 0;
+  padding: 0;
+  background: var(--color-black);
+  color: inherit;
+}
+
+.trailer-video-box:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 40px 100px var(--color-black);
+}
+
+.trailer-video-box:focus-visible {
+  outline: 2px solid var(--accent-yellow);
+  outline-offset: 5px;
+}
+
+.trailer-poster {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  opacity: 0.7;
+  transition:
+    opacity 0.4s ease,
+    transform 0.4s ease;
+}
+
+.trailer-video-box:hover .trailer-poster {
+  opacity: 0.85;
+  transform: scale(1.02);
+}
+
+.trailer-synopsis {
+  text-align: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* CTAs */
+.films-actions {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  margin-bottom: 80px;
+}
+
+.films-cta-btn {
+  padding: 16px 32px;
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+
+.films-cta-btn.btn-primary {
+  background: var(--accent-orange);
+  color: var(--color-white);
+  border: 2px solid var(--accent-orange);
+}
+
+.films-cta-btn.btn-primary:hover {
+  background: transparent;
+  color: var(--accent-orange);
+  box-shadow: none;
+  transform: translateY(-3px);
+}
+
+.films-cta-btn.btn-secondary {
+  background: transparent;
+  color: var(--text-main);
+  border: 2px solid var(--border-color);
+}
+
+.films-cta-btn.btn-secondary:hover {
+  border-color: var(--accent-yellow);
+  color: var(--accent-yellow);
+  box-shadow: none;
+  transform: translateY(-3px);
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+  .tundama-banner {
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  .tundama-side-img {
+    width: 70%;
+    max-width: 400px;
+  }
+}
+
+@media (max-width: 768px) {
+  .films-subtitle-row {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .films-subtitle-right {
+    text-align: left;
+  }
+
+  .shortfilm-card-block {
+    width: 300px;
+    height: 380px;
+  }
+
+  .trailer-section {
+    gap: 28px;
+  }
+
+  .trailer-video-box {
+    border-radius: 20px;
+  }
+
+  .tundama-side-img {
+    width: 100%;
+  }
+
+  .films-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+
+@media (max-width: 480px) {
+  .shortfilm-card-block {
+    width: 220px;
+    height: 300px;
+  }
+
+  .shortfilm-label {
+    font-size: 12px;
+    letter-spacing: 1px;
+  }
+
+  .tundama-logo {
+    max-width: 180px;
+  }
+
+  .tundama-laurels-img {
+    max-width: 240px;
+  }
+
+  .trailer-video-box {
+    border-radius: 14px;
+  }
+
+  .films-cta-btn {
+    font-size: 14px;
+    padding: 14px 24px;
+  }
+}

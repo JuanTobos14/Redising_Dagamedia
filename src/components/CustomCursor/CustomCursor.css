@@ -1,0 +1,99 @@
+.custom-cursor-wrapper {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 3000;
+}
+
+/* Desktop only */
+@media (min-width: 1025px) {
+  body.custom-cursor-active,
+  body.custom-cursor-active a,
+  body.custom-cursor-active button,
+  body.custom-cursor-active input,
+  body.custom-cursor-active select,
+  body.custom-cursor-active textarea,
+  body.custom-cursor-active [role="button"] {
+    cursor: none !important;
+  }
+}
+
+/* Hide on mobile/tablet */
+@media (max-width: 1024px) {
+  .custom-cursor-wrapper {
+    display: none !important;
+  }
+}
+
+/* DOT */
+.cursor-dot {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background-color: var(--accent-orange);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  will-change: transform;
+  transition: background-color 0.25s ease;
+}
+
+/* RING */
+.cursor-ring {
+  position: absolute;
+  width: 32px;
+  height: 32px;
+  border: 1.5px solid rgba(255, 255, 255, 0.45);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  will-change: transform;
+  transition:
+    transform 0.25s cubic-bezier(0.25, 0.8, 0.25, 1),
+    border-color 0.3s ease,
+    background-color 0.3s ease;
+}
+
+/* CLICK */
+.custom-cursor-wrapper.clicking .cursor-dot {
+  transform: translate(-50%, -50%) scale(0.6);
+}
+
+.custom-cursor-wrapper.clicking .cursor-ring {
+  transform: translate(-50%, -50%) scale(0.9);
+  border-color: var(--accent-orange);
+}
+
+/* HOVER */
+.custom-cursor-wrapper.hovered .cursor-dot {
+  background-color: var(--accent-yellow);
+}
+
+.custom-cursor-wrapper.hovered .cursor-ring {
+  transform: translate(-50%, -50%) scale(1.6);
+  border-color: var(--accent-orange);
+  background-color: rgba(255, 107, 0, 0.05);
+  box-shadow: 0 0 15px rgba(255, 107, 0, 0.2);
+}
+
+/* TEXT MODE */
+.custom-cursor-wrapper.has-text .cursor-ring {
+  transform: translate(-50%, -50%) scale(2.2);
+  border-color: var(--accent-orange);
+  background-color: rgba(255, 107, 0, 0.12);
+  box-shadow: 0 0 25px rgba(255, 107, 0, 0.3);
+}
+
+/* CURSOR TEXT */
+.cursor-text {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  color: var(--text-main);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+  animation: cursorTextFade 0.25s ease-out forwards;
+  user-select: none;
+}
+
+@keyframes cursorTextFade {
+  from { opacity: 0; transform: scale(0.85); }
+  to   { opacity: 1; transform: scale(1); }
+}

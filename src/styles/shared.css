@@ -1,0 +1,309 @@
+/* src/styles/shared.css */
+
+/* ============================================================
+   Utilidades globales de texto
+   ============================================================ */
+
+.title-main {
+  font-family: var(--font-display);
+  font-size: clamp(52px, 6vw, 96px);
+  font-weight: 800;
+  line-height: 0.95;
+  letter-spacing: var(--letter-title);
+  color: var(--accent-yellow);
+  margin: 0;
+}
+
+.subtitle-main {
+  font-family: var(--font-display);
+  font-size: clamp(28px, 3vw, 48px);
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: var(--letter-title);
+  color: var(--text-main);
+  margin: 0;
+}
+
+.text-normal {
+  font-family: var(--font-main);
+  font-size: clamp(15px, 1.1vw, 20px);
+  font-weight: 400;
+  line-height: 1.65;
+  letter-spacing: var(--letter-text);
+  color: var(--text-secondary);
+}
+
+.text-yellow {
+  color: var(--accent-yellow);
+}
+
+.text-orange {
+  color: var(--accent-orange);
+}
+
+.section-label {
+  font-family: var(--font-display);
+  font-size: clamp(16px, 1.4vw, 24px);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: var(--letter-label);
+  text-transform: none;
+  color: var(--accent-orange);
+  margin: 0 0 28px;
+}
+
+/* ============================================================
+   Secciones
+   ============================================================ */
+
+/*
+  El padding general de la página lo controla App.module.css.
+  Esta clase solo mantiene compatibilidad con los componentes que la usan.
+*/
+.section-padded {
+  padding: 0;
+  background: transparent;
+}
+
+/* ============================================================
+   Imágenes y tarjetas
+   ============================================================ */
+
+.img-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 24px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+}
+
+.img-card img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+/* ============================================================
+   Botón circular de reproducción
+   ============================================================ */
+
+.play-btn-circle {
+  position: absolute;
+  inset: 50% auto auto 50%;
+  width: 118px;
+  height: 118px;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--accent-orange) 88%, transparent);
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 5;
+  transition:
+    transform 0.3s ease,
+    background-color 0.3s ease,
+    opacity 0.3s ease;
+}
+
+.play-btn-circle svg {
+  display: block;
+  margin-left: 5px;
+}
+
+.play-btn-circle:hover {
+  transform: translate(-50%, -50%) scale(1.06);
+  background: var(--accent-orange);
+}
+
+/* ============================================================
+   Botón de flecha reutilizable
+   ============================================================ */
+
+.tab-arrow-btn {
+  width: 46px;
+  height: 46px;
+  border: none;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--text-section-label);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  transition:
+    color 0.25s ease,
+    transform 0.25s ease;
+}
+
+.tab-arrow-btn:hover {
+  color: var(--accent-yellow);
+  transform: translateX(3px);
+}
+
+.tab-arrow-btn:focus-visible {
+  outline: 2px solid var(--accent-yellow);
+  outline-offset: 5px;
+}
+
+
+/* ============================================================
+   Reveal on scroll
+   ============================================================ */
+
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(34px);
+  transition:
+    opacity 0.65s ease,
+    transform 0.65s ease;
+}
+
+.reveal-on-scroll.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-on-scroll.animating {
+  will-change: opacity, transform;
+}
+
+/* ============================================================
+   Lightbox global
+   ============================================================ */
+
+.lightbox-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 5000;
+  background: color-mix(in srgb, var(--color-black) 88%, transparent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 32px;
+}
+
+.lightbox-close {
+  position: fixed;
+  top: 24px;
+  right: 28px;
+  z-index: 5010;
+  width: 46px;
+  height: 46px;
+  border: 1px solid var(--border-color);
+  border-radius: 50%;
+  background: var(--bg-secondary);
+  color: var(--text-main);
+  font-size: 22px;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition:
+    color 0.25s ease,
+    border-color 0.25s ease,
+    transform 0.25s ease;
+}
+
+.lightbox-close:hover {
+  color: var(--accent-yellow);
+  border-color: var(--accent-yellow);
+  transform: scale(1.06);
+}
+
+.lightbox-content {
+  width: min(100%, 1200px);
+  position: relative;
+}
+
+.lightbox-video-wrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: var(--color-black);
+  border-radius: 24px;
+  overflow: hidden;
+  border: 1px solid var(--border-color);
+}
+
+.lightbox-video-wrapper iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+/* ============================================================
+   Responsive global
+   ============================================================ */
+
+@media (max-width: 992px) {
+  .section-padded {
+    padding: 0;
+  }
+
+  .play-btn-circle {
+    width: 92px;
+    height: 92px;
+  }
+}
+
+@media (max-width: 768px) {
+  .section-padded {
+    padding: 0;
+  }
+
+  .section-label {
+    margin-bottom: 22px;
+  }
+
+  .play-btn-circle {
+    width: 76px;
+    height: 76px;
+  }
+
+  .lightbox-modal {
+    padding: 18px;
+  }
+
+  .lightbox-close {
+    top: 16px;
+    right: 16px;
+    width: 40px;
+    height: 40px;
+    font-size: 18px;
+  }
+
+  .lightbox-video-wrapper {
+    border-radius: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .play-btn-circle {
+    width: 56px;
+    height: 56px;
+  }
+
+  .play-btn-circle svg {
+    width: 22px;
+    height: 22px;
+  }
+
+  .lightbox-close {
+    top: 12px;
+    right: 12px;
+    width: 34px;
+    height: 34px;
+    font-size: 16px;
+  }
+
+  .lightbox-modal {
+    padding: 10px;
+  }
+
+  .lightbox-video-wrapper {
+    border-radius: 10px;
+  }
+}
