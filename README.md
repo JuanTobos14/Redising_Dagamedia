@@ -1,16 +1,72 @@
-# React + Vite
+# DAGAMEDIA
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Sitio web corporativo de DAGAMEDIA desarrollado con React y Vite. El proyecto presenta la identidad de la productora, sus servicios, piezas audiovisuales, secciones informativas, contacto y elementos interactivos para una experiencia de una sola pagina.
 
-Currently, two official plugins are available:
+Fecha de consolidacion del rediseño: 28 de mayo de 2026.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Estado del proyecto
 
-## React Compiler
+- Rediseño visual integrado en una experiencia One Page.
+- Navegacion por secciones con desplazamiento suave.
+- Secciones principales: inicio, que hacemos, sobre nosotros, films, contacto y footer.
+- Sistema de traduccion EN/ES.
+- Recursos visuales locales para evitar enlaces externos rotos.
+- Cursor personalizado, animaciones, assets flotantes, carruseles y reacciones en vivo.
+- Servidor Express opcional con Socket.IO para funcionalidades interactivas.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Tecnologias
 
-## Expanding the ESLint configuration
+- React
+- Vite
+- JavaScript
+- CSS Modules y CSS global
+- Express
+- Socket.IO
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Estructura principal
+
+```text
+src/
+  components/       Componentes reutilizables de la interfaz
+  data/             Contenido y configuraciones de secciones
+  hooks/            Hooks de soporte
+  pages/            Vistas principales
+  services/         Servicios de almacenamiento/contacto
+  styles/           Estilos compartidos
+public/             Assets publicos
+server.js           Servidor Express para produccion e interacciones
+```
+
+## Instalacion
+
+```bash
+npm install
+```
+
+## Desarrollo
+
+```bash
+npm run dev
+```
+
+## Build de produccion
+
+```bash
+npm run build
+```
+
+## Servidor de produccion
+
+```bash
+npm start
+```
+
+## Flujo de ramas sugerido
+
+La rama consolidada del rediseño debe usarse como base para el merge final hacia `main`. Las ramas antiguas de componentes o pruebas pueden conservarse solo como respaldo temporal hasta validar el merge.
+
+Rama recomendada para integrar:
+
+```text
+release/dagamedia-redesign
+```
