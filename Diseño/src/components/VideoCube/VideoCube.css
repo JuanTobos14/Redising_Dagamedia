@@ -1,21 +1,4 @@
-/* src/components/VideoCube/VideoCube.css */
-
-.animation-section-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 100px 20px;
-  background-color: var(--bg-secondary);
-  border-top: 1px solid var(--border-color);
-  border-bottom: 1px solid var(--border-color);
-  position: relative;
-  overflow: hidden;
-}
-
-/* ──────────────────────────────── */
-/*  Instruction Bar                 */
-/* ──────────────────────────────── */
+/* ── Instrucción ── */
 .cube-instruction-text {
   font-size: 13px;
   color: var(--text-dark);
@@ -35,9 +18,7 @@
   font-size: 10px;
 }
 
-/* ──────────────────────────────── */
-/*  Viewport & Glow Ring            */
-/* ──────────────────────────────── */
+/* ── Viewport ── */
 .cube-viewport {
   width: 340px;
   height: 340px;
@@ -50,11 +31,9 @@
   -webkit-user-drag: none;
 }
 
-.cube-viewport:active {
-  cursor: grabbing;
-}
+.cube-viewport:active { cursor: grabbing; }
 
-/* Soft ambient glow ring that sits behind the cube */
+/* Glow ring */
 .cube-glow-ring {
   position: absolute;
   inset: -30px;
@@ -75,9 +54,7 @@
   50%       { opacity: 1;   transform: scale(1.05); }
 }
 
-/* ──────────────────────────────── */
-/*  3D Space                        */
-/* ──────────────────────────────── */
+/* ── Espacio 3D ── */
 .cube-space {
   width: 100%;
   height: 100%;
@@ -87,9 +64,7 @@
   z-index: 1;
 }
 
-/* ──────────────────────────────── */
-/*  Faces                           */
-/* ──────────────────────────────── */
+/* ── Caras ── */
 .cube-face {
   position: absolute;
   width: 300px;
@@ -101,27 +76,26 @@
   border-radius: 2px;
   overflow: hidden;
   box-shadow:
-    0 0 0 1px rgba(0,0,0,0.6),
+    0 0 0 1px rgba(0, 0, 0, 0.6),
     0 12px 40px rgba(0, 0, 0, 0.6),
-    inset 0 1px 0 rgba(255,255,255,0.06);
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
   backface-visibility: visible;
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
   display: flex;
   flex-direction: column;
 }
 
-/* Hover / active face highlight */
 .cube-face.face-active,
 .cube-face:hover {
   border-color: rgba(255, 107, 0, 0.55);
   box-shadow:
-    0 0 0 1px rgba(0,0,0,0.6),
+    0 0 0 1px rgba(0, 0, 0, 0.6),
     0 0 28px rgba(255, 107, 0, 0.25),
     0 16px 50px rgba(0, 0, 0, 0.7),
-    inset 0 1px 0 rgba(255,255,255,0.08);
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
 }
 
-/* Face transforms — 150px half-size for 300px cube */
+/* Transforms de las caras */
 .face-front  { transform: rotateY(0deg)    translateZ(150px); }
 .face-back   { transform: rotateY(180deg)  translateZ(150px); }
 .face-left   { transform: rotateY(-90deg)  translateZ(150px); }
@@ -129,9 +103,7 @@
 .face-top    { transform: rotateX(90deg)   translateZ(150px); }
 .face-bottom { transform: rotateX(-90deg)  translateZ(150px); }
 
-/* ──────────────────────────────── */
-/*  Face Card Content               */
-/* ──────────────────────────────── */
+/* ── Contenido de la cara ── */
 .face-card-link {
   width: 100%;
   height: 100%;
@@ -150,7 +122,6 @@
   overflow: hidden;
 }
 
-/* Thumbnail base */
 .face-poster-img {
   position: absolute;
   inset: 0;
@@ -162,44 +133,34 @@
 }
 
 .face-card-link:hover .face-poster-img {
-  opacity: 0.25;  /* fade out to let iframe show through */
+  opacity: 0.25;
   transform: scale(1.04);
 }
 
-/* Lazy iframe — fades in on top of thumbnail */
 .face-video-preview {
   position: absolute;
-  inset: -10px;          /* slightly oversized to hide YT black bars */
+  inset: -10px;
   width: calc(100% + 20px);
   height: calc(100% + 20px);
   border: none;
   pointer-events: none;
 }
 
-.face-video-lazy {
-  animation: videoFadeIn 0.6s ease forwards;
-}
+.face-video-lazy { animation: videoFadeIn 0.6s ease forwards; }
 
 @keyframes videoFadeIn {
   from { opacity: 0; }
   to   { opacity: 1; }
 }
 
-/* 3D Specular shine overlay — simulates light hitting the face */
 .face-3d-shine {
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    135deg,
-    rgba(255,255,255,0.08) 0%,
-    transparent 50%,
-    rgba(0,0,0,0.15) 100%
-  );
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, transparent 50%, rgba(0, 0, 0, 0.15) 100%);
   pointer-events: none;
   z-index: 4;
 }
 
-/* Play icon overlay */
 .face-play-overlay {
   position: absolute;
   inset: 0;
@@ -212,9 +173,7 @@
   z-index: 5;
 }
 
-.face-card-link:hover .face-play-overlay {
-  opacity: 1;
-}
+.face-card-link:hover .face-play-overlay { opacity: 1; }
 
 .face-play-icon {
   width: 52px;
@@ -229,18 +188,11 @@
   transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.4);
 }
 
-.face-card-link:hover .face-play-icon {
-  transform: scale(1);
-}
+.face-card-link:hover .face-play-icon { transform: scale(1); }
 
-.face-play-icon svg {
-  width: 20px;
-  height: 20px;
-  fill: #fff;
-  margin-left: 3px;
-}
+.face-play-icon svg { width: 20px; height: 20px; fill: #fff; margin-left: 3px; }
 
-/* Info bar at bottom */
+/* Barra de info */
 .face-info-bar {
   background: rgba(12, 12, 12, 0.92);
   backdrop-filter: blur(10px);
@@ -254,7 +206,6 @@
   z-index: 6;
 }
 
-/* Thin orange accent line on hover */
 .face-info-bar::before {
   content: '';
   position: absolute;
@@ -266,127 +217,25 @@
   transition: width 0.4s ease;
 }
 
-.face-card-link:hover .face-info-bar::before {
-  width: 100%;
-}
+.face-card-link:hover .face-info-bar::before { width: 100%; }
 
-.face-project-title {
-  font-size: 14px;
-  font-weight: 700;
-  color: var(--text-main);
-  margin: 0;
-  letter-spacing: 0.4px;
-}
+.face-project-title { font-size: 14px; font-weight: 700; color: var(--text-main); margin: 0; letter-spacing: 0.4px; }
+.face-project-tag   { font-size: 10px; color: var(--accent-yellow); font-weight: 600; text-transform: uppercase; letter-spacing: 1.2px; }
 
-.face-project-tag {
-  font-size: 10px;
-  color: var(--accent-yellow);
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 1.2px;
-}
-
-/* ──────────────────────────────── */
-/*  Lightbox                        */
-/* ──────────────────────────────── */
-.cube-lightbox-modal {
-  position: fixed;
-  inset: 0;
-  background: rgba(6, 6, 6, 0.96);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 2000;
-  animation: modalFadeIn 0.25s ease forwards;
-}
-
-.cube-lightbox-content {
-  position: relative;
-  width: 90%;
-  max-width: 1280px;
-  max-height: 85vh;
-  aspect-ratio: 16 / 9;
-  background: #000;
-  border-radius: 16px;
-  overflow: hidden;
-  border: 1px solid rgba(255,255,255,0.08);
-  box-shadow:
-    0 0 0 1px rgba(0,0,0,0.8),
-    0 30px 80px rgba(0, 0, 0, 0.85),
-    0 0 60px rgba(255, 107, 0, 0.08);
-  animation: modalScaleUp 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-}
-
-.cube-lightbox-close {
-  position: absolute;
-  top: 28px;
-  right: 28px;
-  width: 46px;
-  height: 46px;
-  border-radius: 50%;
-  background: rgba(18, 18, 18, 0.85);
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  color: #fff;
-  font-size: 22px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  z-index: 2010;
-  transition: background 0.25s, transform 0.3s, box-shadow 0.25s;
-  backdrop-filter: blur(8px);
-}
-
-.cube-lightbox-close:hover {
-  background: var(--accent-orange);
-  border-color: var(--accent-orange);
-  transform: scale(1.1) rotate(90deg);
-  box-shadow: 0 0 20px rgba(255, 107, 0, 0.45);
-}
-
-.cube-lightbox-video-wrapper {
-  width: 100%;
-  height: 100%;
-}
-
-.cube-lightbox-video-wrapper iframe {
-  width: 100%;
-  height: 100%;
-  border: none;
-}
-
-/* ──────────────────────────────── */
-/*  Keyframes                       */
-/* ──────────────────────────────── */
+/* ── Keyframes ── */
 @keyframes bounce-left-right {
   0%, 100% { transform: translateX(0); }
   50%       { transform: translateX(5px); }
 }
 
-@keyframes modalFadeIn {
-  from { opacity: 0; }
-  to   { opacity: 1; }
-}
-
-@keyframes modalScaleUp {
-  from { transform: scale(0.88); }
-  to   { transform: scale(1); }
-}
-
-/* ──────────────────────────────── */
-/*  Responsive                      */
-/* ──────────────────────────────── */
+/* ── Responsive ── */
 @media (max-width: 768px) {
   .cube-viewport { width: 280px; height: 280px; }
-  .cube-face { width: 260px; height: 260px; }
+  .cube-face     { width: 260px; height: 260px; }
   .face-front  { transform: rotateY(0deg)    translateZ(130px); }
   .face-back   { transform: rotateY(180deg)  translateZ(130px); }
   .face-left   { transform: rotateY(-90deg)  translateZ(130px); }
   .face-right  { transform: rotateY(90deg)   translateZ(130px); }
   .face-top    { transform: rotateX(90deg)   translateZ(130px); }
   .face-bottom { transform: rotateX(-90deg)  translateZ(130px); }
-
-  .cube-lightbox-close { top: 18px; right: 18px; width: 40px; height: 40px; font-size: 18px; }
 }

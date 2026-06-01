@@ -1,179 +1,257 @@
-import React, { useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
+import {
+  PARTICLE_CONFIG,
+  getRandomBetween,
+  getRandomParticleColor,
+} from '../../data/particlesConfig';
+import styles from './ParticlesBackground.module.css';
 
-export default function ParticlesBackground({ activeUsers }) {
+function getViewportCenter() {
+  return {
+    x: window.innerWidth / 2,
+    y: window.innerHeight / 2,
+  };
+}
+
+function createParticle(userId, width, height) {
+  const size = getRandomBetween(
+    PARTICLE_CONFIG.minSize,
+    PARTICLE_CONFIG.maxSize
+  );
+
+  const color = getRandomParticleColor();
+
+  return {
+    id: userId,
+    x: Math.random() * width,
+    y: Math.random() * height,
+    vx: (Math.random() - 0.5) * PARTICLE_CONFIG.maxSpeed,
+    vy: (Math.random() - 0.5) * PARTICLE_CONFIG.maxSpeed,
+    size,
+    depth: getRandomBetween(
+      PARTICLE_CONFIG.minDepth,
+      PARTICLE_CONFIG.maxDepth
+    ),
+    color,
+    alpha: 0,
+    targetAlpha: PARTICLE_CONFIG.targetAlpha,
+    isDying: false,
+    lastDrawX: 0,
+    lastDrawY: 0,
+  };
+}
+
+function updateParticleFade(particle) {
+  if (particle.isDying) {
+    particle.alpha -= PARTICLE_CONFIG.fadeSpeed;
+    return particle.alpha > 0;
+  }
+
+  if (particle.alpha < particle.targetAlpha) {
+    particle.alpha += PARTICLE_CONFIG.fadeSpeed;
+  }
+
+  return true;
+}
+
+function updateParticlePosition(particle, canvasWidth, canvasHeight) {
+  particle.x += particle.vx;
+  particle.y += particle.vy;
+
+  if (particle.x < particle.size || particle.x > canvasWidth - particle.size) {
+    particle.vx *= -1;
+  }
+
+  if (particle.y < particle.size || particle.y > canvasHeight - particle.size) {
+    particle.vy *= -1;
+  }
+
+  particle.x = Math.max(
+    particle.size,
+    Math.min(canvasWidth - particle.size, particle.x)
+  );
+
+  particle.y = Math.max(
+    particle.size,
+    Math.min(canvasHeight - particle.size, particle.y)
+  );
+}
+
+function drawParticle(ctx, particle, mouse, canvasWidth, canvasHeight) {
+  const offsetX =
+    (mouse.x - canvasWidth / 2) *
+    particle.depth *
+    PARTICLE_CONFIG.parallaxStrength;
+
+  const offsetY =
+    (mouse.y - canvasHeight / 2) *
+    particle.depth *
+    PARTICLE_CONFIG.parallaxStrength;
+
+  const drawX = particle.x + offsetX;
+  const drawY = particle.y + offsetY;
+
+  particle.lastDrawX = drawX;
+  particle.lastDrawY = drawY;
+
+  ctx.beginPath();
+  ctx.arc(drawX, drawY, particle.size, 0, Math.PI * 2);
+  ctx.fillStyle = `rgba(${particle.color.rgb}, ${
+    particle.alpha * particle.color.opacity
+  })`;
+  ctx.fill();
+
+  ctx.beginPath();
+  ctx.arc(drawX, drawY, PARTICLE_CONFIG.centerDotSize, 0, Math.PI * 2);
+  ctx.fillStyle = `rgba(245, 245, 245, ${
+    particle.alpha * PARTICLE_CONFIG.centerDotOpacity
+  })`;
+  ctx.fill();
+}
+
+function drawParticleLines(ctx, particles) {
+  for (let i = 0; i < particles.length; i += 1) {
+    for (let j = i + 1; j < particles.length; j += 1) {
+      const dx = particles[i].lastDrawX - particles[j].lastDrawX;
+      const dy = particles[i].lastDrawY - particles[j].lastDrawY;
+      const distance = Math.sqrt(dx * dx + dy * dy);
+
+      if (distance >= PARTICLE_CONFIG.lineDistance) {
+        continue;
+      }
+
+      const alpha =
+        (1 - distance / PARTICLE_CONFIG.lineDistance) *
+        PARTICLE_CONFIG.lineOpacity *
+        Math.min(particles[i].alpha, particles[j].alpha);
+
+      ctx.beginPath();
+      ctx.moveTo(particles[i].lastDrawX, particles[i].lastDrawY);
+      ctx.lineTo(particles[j].lastDrawX, particles[j].lastDrawY);
+      ctx.strokeStyle = `rgba(195, 195, 195, ${alpha})`;
+      ctx.lineWidth = 1;
+      ctx.stroke();
+    }
+  }
+}
+
+export default function ParticlesBackground({ activeUsers = [] }) {
   const canvasRef = useRef(null);
   const particlesRef = useRef([]);
 
-  // Mouse coordinate refs for parallax easing
-  const mouseRef = useRef({ x: window.innerWidth / 2, y: window.innerHeight / 2 });
-  const targetMouseRef = useRef({ x: window.innerWidth / 2, y: window.innerHeight / 2 });
+  const mouseRef = useRef(getViewportCenter());
+  const targetMouseRef = useRef(getViewportCenter());
+
+  const animationFrameRef = useRef(null);
+  const canvasSizeRef = useRef({
+    width: window.innerWidth,
+    height: window.innerHeight,
+  });
 
   useEffect(() => {
     const canvas = canvasRef.current;
-    if (!canvas) return;
+
+    if (!canvas) return undefined;
 
     const ctx = canvas.getContext('2d');
-    let animationFrameId;
 
-    // Resize handler
+    if (!ctx) return undefined;
+
     const resizeCanvas = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
+      const width = window.innerWidth;
+      const height = window.innerHeight;
+      const pixelRatio = window.devicePixelRatio || 1;
+
+      canvas.width = width * pixelRatio;
+      canvas.height = height * pixelRatio;
+
+      canvas.style.width = `${width}px`;
+      canvas.style.height = `${height}px`;
+
+      ctx.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
+
+      canvasSizeRef.current = {
+        width,
+        height,
+      };
     };
-    window.addEventListener('resize', resizeCanvas);
+
+    const handlePointerMove = (event) => {
+      targetMouseRef.current.x = event.clientX;
+      targetMouseRef.current.y = event.clientY;
+    };
+
+    const draw = () => {
+      const { width, height } = canvasSizeRef.current;
+
+      ctx.clearRect(0, 0, width, height);
+
+      mouseRef.current.x +=
+        (targetMouseRef.current.x - mouseRef.current.x) *
+        PARTICLE_CONFIG.mouseEase;
+
+      mouseRef.current.y +=
+        (targetMouseRef.current.y - mouseRef.current.y) *
+        PARTICLE_CONFIG.mouseEase;
+
+      particlesRef.current = particlesRef.current.filter(updateParticleFade);
+
+      particlesRef.current.forEach((particle) => {
+        updateParticlePosition(particle, width, height);
+        drawParticle(ctx, particle, mouseRef.current, width, height);
+      });
+
+      drawParticleLines(ctx, particlesRef.current);
+
+      animationFrameRef.current = requestAnimationFrame(draw);
+    };
+
     resizeCanvas();
 
-    // Mouse movement listener
-    const handleMouseMove = (e) => {
-      targetMouseRef.current.x = e.clientX;
-      targetMouseRef.current.y = e.clientY;
-    };
-    window.addEventListener('mousemove', handleMouseMove);
-
-    // Color choices with low opacity for premium subtle look
-    const colors = [
-      'rgba(255, 107, 0, 0.18)', // Muted Daga Orange
-      'rgba(255, 197, 2, 0.18)',  // Muted Daga Yellow
-      'rgba(245, 245, 245, 0.12)', // Muted Off-White
-      'rgba(195, 195, 195, 0.12)'  // Muted Grey
-    ];
-
-    // Update particles mapping based on activeUsers
-    const currentParticles = particlesRef.current;
-    
-    // 1. Identify users to remove (no longer in activeUsers)
-    currentParticles.forEach(p => {
-      if (!activeUsers.includes(p.id)) {
-        p.isDying = true;
-      }
+    window.addEventListener('resize', resizeCanvas);
+    window.addEventListener('pointermove', handlePointerMove, {
+      passive: true,
     });
 
-    // 2. Identify new users to add
-    activeUsers.forEach(userId => {
-      const exists = currentParticles.some(p => p.id === userId);
-      if (!exists) {
-        // Instantiate a new particle with a random Z-depth
-        const size = Math.random() * 15 + 10; // 10px to 25px radius
-        currentParticles.push({
-          id: userId,
-          x: Math.random() * window.innerWidth,
-          y: Math.random() * window.innerHeight,
-          vx: (Math.random() - 0.5) * 0.8, // Slow float speed
-          vy: (Math.random() - 0.5) * 0.8,
-          size: size,
-          depth: Math.random() * 0.75 + 0.25, // Z-depth layer (0.25 to 1.0)
-          color: colors[Math.floor(Math.random() * colors.length)],
-          alpha: 0, // Fade in start
-          targetAlpha: 0.8,
-          isDying: false
-        });
-      }
-    });
-
-    // Animation Loop
-    const draw = () => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-      // Easing mouse coordinates (lerp)
-      const mouseEase = 0.08;
-      mouseRef.current.x += (targetMouseRef.current.x - mouseRef.current.x) * mouseEase;
-      mouseRef.current.y += (targetMouseRef.current.y - mouseRef.current.y) * mouseEase;
-
-      // Filter out completely dead particles
-      particlesRef.current = particlesRef.current.filter(p => {
-        if (p.isDying) {
-          p.alpha -= 0.02; // Fade out speed
-          if (p.alpha <= 0) return false; // Remove from array
-        } else if (p.alpha < p.targetAlpha) {
-          p.alpha += 0.02; // Fade in speed
-        }
-        return true;
-      });
-
-      const particles = particlesRef.current;
-
-      // Update positions, calculate offsets, & draw particles
-      particles.forEach(p => {
-        p.x += p.vx;
-        p.y += p.vy;
-
-        // Bounce off edges
-        if (p.x < p.size || p.x > canvas.width - p.size) p.vx *= -1;
-        if (p.y < p.size || p.y > canvas.height - p.size) p.vy *= -1;
-
-        // Prevent getting stuck outside viewport
-        if (p.x < 0) p.x = p.size;
-        if (p.x > canvas.width) p.x = canvas.width - p.size;
-        if (p.y < 0) p.y = p.size;
-        if (p.y > canvas.height) p.y = canvas.height - p.size;
-
-        // Calculate 3D Parallax offset based on depth and mouse distance from center
-        const offsetX = (mouseRef.current.x - canvas.width / 2) * p.depth * 0.08;
-        const offsetY = (mouseRef.current.y - canvas.height / 2) * p.depth * 0.08;
-        const drawX = p.x + offsetX;
-        const drawY = p.y + offsetY;
-
-        // Draw particle body
-        ctx.beginPath();
-        ctx.arc(drawX, drawY, p.size, 0, Math.PI * 2);
-        ctx.fillStyle = p.color.replace(/[\d.]+\)$/, `${p.alpha * 0.25})`); // Scale color opacity by alpha
-        ctx.fill();
-
-        // Draw a glowing center dot
-        ctx.beginPath();
-        ctx.arc(drawX, drawY, 2, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(245, 245, 245, ${p.alpha * 0.6})`;
-        ctx.fill();
-
-        // Keep draw coordinates on the particle object for line rendering
-        p.lastDrawX = drawX;
-        p.lastDrawY = drawY;
-      });
-
-      // Draw subtle connecting lines (constellation network effect)
-      for (let i = 0; i < particles.length; i++) {
-        for (let j = i + 1; j < particles.length; j++) {
-          const dx = particles[i].lastDrawX - particles[j].lastDrawX;
-          const dy = particles[i].lastDrawY - particles[j].lastDrawY;
-          const distance = Math.sqrt(dx * dx + dy * dy);
-
-          if (distance < 280) { // Connection threshold
-            const alpha = (1 - distance / 280) * 0.08 * Math.min(particles[i].alpha, particles[j].alpha);
-            ctx.beginPath();
-            ctx.moveTo(particles[i].lastDrawX, particles[i].lastDrawY);
-            ctx.lineTo(particles[j].lastDrawX, particles[j].lastDrawY);
-            ctx.strokeStyle = `rgba(195, 195, 195, ${alpha})`;
-            ctx.lineWidth = 1;
-            ctx.stroke();
-          }
-        }
-      }
-
-      animationFrameId = requestAnimationFrame(draw);
-    };
-
-    draw();
+    animationFrameRef.current = requestAnimationFrame(draw);
 
     return () => {
       window.removeEventListener('resize', resizeCanvas);
-      window.removeEventListener('mousemove', handleMouseMove);
-      cancelAnimationFrame(animationFrameId);
+      window.removeEventListener('pointermove', handlePointerMove);
+
+      if (animationFrameRef.current) {
+        cancelAnimationFrame(animationFrameRef.current);
+      }
     };
+  }, []);
+
+  useEffect(() => {
+    const { width, height } = canvasSizeRef.current;
+    const currentParticles = particlesRef.current;
+    const activeUserSet = new Set(activeUsers);
+
+    currentParticles.forEach((particle) => {
+      if (!activeUserSet.has(particle.id)) {
+        particle.isDying = true;
+      }
+    });
+
+    activeUsers.forEach((userId) => {
+      const alreadyExists = currentParticles.some(
+        (particle) => particle.id === userId
+      );
+
+      if (!alreadyExists) {
+        currentParticles.push(createParticle(userId, width, height));
+      }
+    });
   }, [activeUsers]);
 
   return (
     <canvas
       ref={canvasRef}
-      style={{
-        position: 'fixed',
-        top: 0,
-        left: 0,
-        width: '100%',
-        height: '100%',
-        pointerEvents: 'none',
-        zIndex: 0,
-        opacity: 0.7
-      }}
+      className={styles['particles-background-canvas']}
+      aria-hidden="true"
     />
   );
 }

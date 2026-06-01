@@ -1,0 +1,57 @@
+/* src/App.module.css */
+
+.appWrapper {
+  --section-padding-y: 56px;
+  --section-padding-x: clamp(24px, 10vw, 190px);
+  --home-padding-top: 135px;
+
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+  background: var(--bg-primary);
+}
+
+.pageSection {
+  width: 100%;
+  position: relative;
+  z-index: 2;
+  padding: var(--section-padding-y) var(--section-padding-x);
+  background: transparent;
+}
+
+.pageSection:first-of-type {
+  padding-top: var(--home-padding-top);
+}
+
+.contactSectionWrapper {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+}
+
+@media (max-width: 1200px) {
+  .appWrapper {
+    --section-padding-y: 48px;
+    --section-padding-x: clamp(24px, 7vw, 90px);
+  }
+}
+
+@media (max-width: 768px) {
+  .appWrapper {
+    --section-padding-y: 36px;
+    --section-padding-x: 20px;
+    --home-padding-top: 80px;
+  }
+
+  .pageSection:first-of-type {
+    padding-top: var(--home-padding-top);
+  }
+}
+
+@media (max-width: 480px) {
+  .appWrapper {
+    --section-padding-y: 28px;
+    --section-padding-x: 16px;
+    --home-padding-top: 70px;
+  }
+}

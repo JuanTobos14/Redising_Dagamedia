@@ -1,0 +1,299 @@
+/* src/components/VideoCube/VideoCube.module.css */
+
+.video-cube-wrapper {
+  width: 100%;
+  min-height: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Instrucción sobre el cubo */
+.cube-instruction-text {
+  font-size: 13px;
+  color: var(--text-dark);
+  margin-top: 0;
+  margin-bottom: 22px;
+  text-transform: uppercase;
+  letter-spacing: 2.5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  user-select: none;
+  text-align: center;
+}
+
+.cube-instruction-icon {
+  animation: bounce-left-right 1.5s infinite;
+  color: var(--accent-orange);
+  font-size: 10px;
+}
+
+/* Viewport */
+.cube-viewport {
+  width: 340px;
+  height: 340px;
+  perspective: 1100px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 10;
+  user-select: none;
+  -webkit-user-drag: none;
+  touch-action: none;
+}
+
+/* Espacio 3D */
+.cube-space {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  transform-style: preserve-3d;
+  transition: transform 0.08s linear;
+  z-index: 1;
+}
+
+/* Caras */
+.cube-face {
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  left: 20px;
+  top: 20px;
+  background: var(--bg-secondary);
+  border: 1.5px solid var(--border-color);
+  border-radius: 2px;
+  overflow: hidden;
+  box-shadow:
+    0 0 0 1px var(--color-black),
+    0 12px 40px var(--color-black),
+    inset 0 1px 0 var(--border-color);
+  backface-visibility: visible;
+  transition:
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.cube-face.face-active,
+.cube-face:hover {
+  border-color: var(--accent-orange);
+  box-shadow:
+    0 0 0 1px var(--color-black),
+    0 16px 50px var(--color-black),
+    inset 0 1px 0 var(--border-color);
+}
+
+/* Posición de las caras */
+.face-front {
+  transform: rotateY(0deg) translateZ(150px);
+}
+
+.face-back {
+  transform: rotateY(180deg) translateZ(150px);
+}
+
+.face-left {
+  transform: rotateY(-90deg) translateZ(150px);
+}
+
+.face-right {
+  transform: rotateY(90deg) translateZ(150px);
+}
+
+.face-top {
+  transform: rotateX(90deg) translateZ(150px);
+}
+
+.face-bottom {
+  transform: rotateX(-90deg) translateZ(150px);
+}
+
+/* Contenido de cada cara */
+.face-card-link {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  color: var(--text-main);
+  text-decoration: none;
+  outline: none;
+  display: block;
+}
+
+.face-card-link:focus-visible {
+  outline: 2px solid var(--accent-yellow);
+  outline-offset: 4px;
+}
+
+/* Cara completa */
+.face-image-wrapper {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--color-black);
+  overflow: hidden;
+}
+
+/* Imagen de YouTube con recorte centrado */
+.face-poster-img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 260%;
+  height: 146.25%;
+  object-fit: cover;
+  object-position: center;
+  opacity: 0.78;
+  transform: translate(-50%, -50%) scale(1);
+  transition:
+    opacity 0.4s ease,
+    transform 0.5s ease;
+}
+
+.face-poster-img.preview-visible {
+  opacity: 0;
+}
+
+.face-card-link:hover .face-poster-img {
+  opacity: 0.16;
+  transform: translate(-50%, -50%) scale(1.04);
+}
+
+/* Preview de YouTube con recorte centrado */
+.face-video-preview {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 260%;
+  height: 146.25%;
+  border: none;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  animation: videoFadeIn 0.45s ease forwards;
+}
+
+/* Capa sutil de profundidad */
+.face-3d-shine {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(
+      135deg,
+      color-mix(in srgb, var(--text-main) 8%, transparent) 0%,
+      transparent 50%,
+      color-mix(in srgb, var(--color-black) 18%, transparent) 100%
+    );
+  pointer-events: none;
+  z-index: 4;
+}
+
+/* Overlay de reproducción */
+.face-play-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: color-mix(in srgb, var(--accent-orange) 10%, transparent);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 5;
+}
+
+.face-card-link:hover .face-play-overlay {
+  opacity: 1;
+}
+
+.face-play-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: var(--accent-orange);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: none;
+  transform: scale(0.75);
+  transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.4);
+}
+
+.face-card-link:hover .face-play-icon {
+  transform: scale(1);
+}
+
+.face-play-icon svg {
+  width: 20px;
+  height: 20px;
+  fill: var(--color-white);
+  margin-left: 3px;
+}
+
+/* Animaciones */
+@keyframes bounce-left-right {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+
+  50% {
+    transform: translateX(5px);
+  }
+}
+
+@keyframes videoFadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .cube-viewport {
+    width: 280px;
+    height: 280px;
+  }
+
+  .cube-face {
+    width: 260px;
+    height: 260px;
+    left: 10px;
+    top: 10px;
+  }
+
+  .face-front {
+    transform: rotateY(0deg) translateZ(130px);
+  }
+
+  .face-back {
+    transform: rotateY(180deg) translateZ(130px);
+  }
+
+  .face-left {
+    transform: rotateY(-90deg) translateZ(130px);
+  }
+
+  .face-right {
+    transform: rotateY(90deg) translateZ(130px);
+  }
+
+  .face-top {
+    transform: rotateX(90deg) translateZ(130px);
+  }
+
+  .face-bottom {
+    transform: rotateX(-90deg) translateZ(130px);
+  }
+
+  .cube-instruction-text {
+    font-size: 11px;
+    letter-spacing: 2px;
+    margin-bottom: 18px;
+  }
+}

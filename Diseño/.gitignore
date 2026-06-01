@@ -23,6 +23,9 @@ dist-ssr
 *.sln
 *.sw?
 
+# Vite cache
+.vite/
+
 # Design and temp assets
 /Wireframe Alta_Fidelidad 2.0.pdf
 /Logo-DAGAMEDIA-Encabezado.png

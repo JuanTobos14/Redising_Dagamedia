@@ -1,130 +1,330 @@
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { useLanguage } from '../../context/LanguageContext';
-import './VideoCube.css';
+import useBodyScrollLock from '../../hooks/useBodyScrollLock';
+import {
+  CUBE_FACES,
+  CUBE_INSTRUCTIONS,
+  CUBE_PROJECTS,
+  CUBE_ROTATION,
+  getYoutubePlayer,
+  getYoutubePoster,
+  getYoutubePosterFallback,
+  getYoutubePreview,
+} from '../../data/videoCubeData';
+import styles from './VideoCube.module.css';
 
-const PROJECTS = [
-  { id: '110eJJP_QVs', title: 'Tundama',             tag: 'Largometraje Animación 3D' },
-  { id: 'ohnGoV38SB4', title: 'Oso',                  tag: 'Cortometraje Animación'   },
-  { id: 'HVHsgO69FSA', title: 'Cerdos',               tag: 'Comercial Animación 3D'   },
-  { id: 'RQFsIshO7gE', title: 'Niño (Abuso Infantil)',tag: 'Narrativo Animación 2D'   },
-  { id: 'ro02De3I21c', title: 'Lotería de Boyacá',    tag: 'Comercial Animación 3D'   },
-  { id: 'NRC4f_Z29RY', title: 'Boyacá es para Vivirla',tag: 'Campaña Promocional'     },
-];
+function getPointerPosition(event) {
+  const pointer = event.touches?.[0] || event.changedTouches?.[0] || event;
 
-const FACES = ['front', 'back', 'left', 'right', 'top', 'bottom'];
+  return {
+    x: pointer.clientX,
+    y: pointer.clientY,
+  };
+}
+
+function clamp(value, min, max) {
+  return Math.max(min, Math.min(max, value));
+}
+
+function PlayIcon() {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M8 5v14l11-7z" />
+    </svg>
+  );
+}
+
+function CubeInstruction({ text }) {
+  return (
+    <div className={styles['cube-instruction-text']}>
+      <span className={styles['cube-instruction-icon']} aria-hidden="true">
+        ◄
+      </span>
+
+      {text}
+
+      <span className={styles['cube-instruction-icon']} aria-hidden="true">
+        ►
+      </span>
+    </div>
+  );
+}
+
+function CubeFace({
+  project,
+  faceName,
+  faceKey,
+  isActive,
+  isPreviewVisible,
+  onClick,
+  onMouseEnter,
+  onMouseLeave,
+  language,
+}) {
+  const playLabel =
+    language === 'es'
+      ? 'Reproducir video del cubo'
+      : 'Play cube video';
+
+  const cursorText = language === 'es' ? 'VER' : 'PLAY';
+
+  return (
+    <div
+      className={`${styles['cube-face']} ${styles[`face-${faceName}`]} ${
+        isActive ? styles['face-active'] : ''
+      }`}
+      onDragStart={(event) => event.preventDefault()}
+      onMouseEnter={() => onMouseEnter(faceKey)}
+      onMouseLeave={() => onMouseLeave(faceKey)}
+    >
+      <a
+        href={`https://youtu.be/${project.id}`}
+        onClick={(event) => onClick(event, project.id)}
+        className={styles['face-card-link']}
+        data-cursor={cursorText}
+        aria-label={playLabel}
+      >
+        <div className={styles['face-image-wrapper']}>
+          <img
+            src={getYoutubePoster(project.id)}
+            alt=""
+            className={`${styles['face-poster-img']} ${
+              isPreviewVisible ? styles['preview-visible'] : ''
+            }`}
+            loading="lazy"
+            onError={(event) => {
+              event.currentTarget.src = getYoutubePosterFallback(project.id);
+            }}
+          />
+
+          {isPreviewVisible && (
+            <iframe
+              src={getYoutubePreview(project.id)}
+              title={playLabel}
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media"
+              className={styles['face-video-preview']}
+            />
+          )}
+
+          <div className={styles['face-play-overlay']}>
+            <div className={styles['face-play-icon']}>
+              <PlayIcon />
+            </div>
+          </div>
+
+          <div className={styles['face-3d-shine']} aria-hidden="true" />
+        </div>
+      </a>
+    </div>
+  );
+}
+
+function VideoCubeLightbox({ videoId, onClose, language }) {
+  useBodyScrollLock(true);
+
+  const title =
+    language === 'es'
+      ? 'Video del cubo Dagamedia'
+      : 'Dagamedia cube video';
+
+  return createPortal(
+    <div className="lightbox-modal" onClick={onClose}>
+      <button
+        type="button"
+        className="lightbox-close"
+        onClick={onClose}
+        aria-label={language === 'es' ? 'Cerrar reproductor' : 'Close player'}
+      >
+        ✕
+      </button>
+
+      <div
+        className="lightbox-content"
+        onClick={(event) => event.stopPropagation()}
+      >
+        <div className="lightbox-video-wrapper">
+          <iframe
+            src={getYoutubePlayer(videoId)}
+            title={title}
+            frameBorder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowFullScreen
+          />
+        </div>
+      </div>
+    </div>,
+    document.body
+  );
+}
 
 export default function VideoCube() {
-  const cubeRef      = useRef(null);
-  const { t, language } = useLanguage();
+  const cubeRef = useRef(null);
+
+  const rotationRef = useRef({
+    x: CUBE_ROTATION.initialX,
+    y: CUBE_ROTATION.initialY,
+  });
+
+  const dragRef = useRef({
+    isDragging: false,
+    startX: 0,
+    startY: 0,
+    startRotX: 0,
+    startRotY: 0,
+    hasMoved: false,
+  });
+
+  const autoRotateRef = useRef({
+    active: true,
+    timer: null,
+  });
+
+  const previewTimersRef = useRef({});
+
+  const { language } = useLanguage();
+
   const [activeModalVideo, setActiveModalVideo] = useState(null);
-  const [hoveredFace,      setHoveredFace]      = useState(null);
+  const [hoveredFace, setHoveredFace] = useState(null);
+  const [previewFace, setPreviewFace] = useState(null);
 
-  const rotationRef    = useRef({ x: -15, y: 45 });
-  const dragRef        = useRef({ isDragging: false, startX: 0, startY: 0, startRotX: 0, startRotY: 0, hasMoved: false });
-  const autoRotateRef  = useRef({ active: true, timer: null });
-  const iframeTimers   = useRef({});
+  const allFaceKeys = CUBE_PROJECTS.map((project, index) => `${CUBE_FACES[index]}-${project.id}`);
 
-  /* Block body scroll when lightbox is open */
-  useEffect(() => {
-    if (activeModalVideo) {
-      document.body.style.overflow = 'hidden';
-      document.documentElement.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = '';
-      document.documentElement.style.overflow = '';
-    }
-    return () => {
-      document.body.style.overflow = '';
-      document.documentElement.style.overflow = '';
-    };
-  }, [activeModalVideo]);
-
-  /* Auto-rotate RAF loop */
   useEffect(() => {
     const cube = cubeRef.current;
-    if (!cube) return;
-    let rafId;
-    const update = () => {
+
+    if (!cube) return undefined;
+
+    let animationFrameId;
+
+    const updateRotation = () => {
       if (autoRotateRef.current.active && !dragRef.current.isDragging) {
-        rotationRef.current.y += 0.18;
-        rotationRef.current.x = -15 + Math.sin(Date.now() * 0.0005) * 8;
+        rotationRef.current.y += CUBE_ROTATION.autoRotateSpeed;
+        rotationRef.current.x =
+          CUBE_ROTATION.initialX +
+          Math.sin(Date.now() * CUBE_ROTATION.waveSpeed) *
+            CUBE_ROTATION.waveAmplitude;
+
         cube.style.transform = `rotateX(${rotationRef.current.x}deg) rotateY(${rotationRef.current.y}deg)`;
       }
-      rafId = requestAnimationFrame(update);
+
+      animationFrameId = requestAnimationFrame(updateRotation);
     };
+
     cube.style.transform = `rotateX(${rotationRef.current.x}deg) rotateY(${rotationRef.current.y}deg)`;
-    rafId = requestAnimationFrame(update);
+    animationFrameId = requestAnimationFrame(updateRotation);
+
     return () => {
-      cancelAnimationFrame(rafId);
-      if (autoRotateRef.current.timer) clearTimeout(autoRotateRef.current.timer);
+      cancelAnimationFrame(animationFrameId);
+
+      if (autoRotateRef.current.timer) {
+        clearTimeout(autoRotateRef.current.timer);
+      }
+
+      Object.values(previewTimersRef.current).forEach((timer) => {
+        clearTimeout(timer);
+      });
     };
   }, []);
 
-  /* Drag handlers */
-  const handleDragStart = (e) => {
-    const cx = e.touches ? e.touches[0].clientX : e.clientX;
-    const cy = e.touches ? e.touches[0].clientY : e.clientY;
+  const handleDragStart = (event) => {
+    const { x, y } = getPointerPosition(event);
+
     autoRotateRef.current.active = false;
-    if (autoRotateRef.current.timer) clearTimeout(autoRotateRef.current.timer);
-    dragRef.current = { isDragging: true, startX: cx, startY: cy, startRotX: rotationRef.current.x, startRotY: rotationRef.current.y, hasMoved: false };
+
+    if (autoRotateRef.current.timer) {
+      clearTimeout(autoRotateRef.current.timer);
+    }
+
+    dragRef.current = {
+      isDragging: true,
+      startX: x,
+      startY: y,
+      startRotX: rotationRef.current.x,
+      startRotY: rotationRef.current.y,
+      hasMoved: false,
+    };
   };
 
-  const handleDragMove = (e) => {
+  const handleDragMove = (event) => {
     if (!dragRef.current.isDragging) return;
-    const cx = e.touches ? e.touches[0].clientX : e.clientX;
-    const cy = e.touches ? e.touches[0].clientY : e.clientY;
-    const dx = cx - dragRef.current.startX;
-    const dy = cy - dragRef.current.startY;
-    if (Math.abs(dx) > 6 || Math.abs(dy) > 6) dragRef.current.hasMoved = true;
-    rotationRef.current.y = dragRef.current.startRotY + dx * 0.4;
-    rotationRef.current.x = Math.max(-80, Math.min(80, dragRef.current.startRotX - dy * 0.4));
-    if (cubeRef.current) cubeRef.current.style.transform = `rotateX(${rotationRef.current.x}deg) rotateY(${rotationRef.current.y}deg)`;
+
+    const { x, y } = getPointerPosition(event);
+
+    const deltaX = x - dragRef.current.startX;
+    const deltaY = y - dragRef.current.startY;
+
+    if (
+      Math.abs(deltaX) > CUBE_ROTATION.dragThreshold ||
+      Math.abs(deltaY) > CUBE_ROTATION.dragThreshold
+    ) {
+      dragRef.current.hasMoved = true;
+    }
+
+    rotationRef.current.y =
+      dragRef.current.startRotY + deltaX * CUBE_ROTATION.dragSensitivity;
+
+    rotationRef.current.x = clamp(
+      dragRef.current.startRotX - deltaY * CUBE_ROTATION.dragSensitivity,
+      -CUBE_ROTATION.maxXRotation,
+      CUBE_ROTATION.maxXRotation
+    );
+
+    if (cubeRef.current) {
+      cubeRef.current.style.transform = `rotateX(${rotationRef.current.x}deg) rotateY(${rotationRef.current.y}deg)`;
+    }
   };
 
   const handleDragEnd = () => {
     if (!dragRef.current.isDragging) return;
+
     dragRef.current.isDragging = false;
-    setTimeout(() => { dragRef.current.hasMoved = false; }, 80);
-    autoRotateRef.current.timer = setTimeout(() => { autoRotateRef.current.active = true; }, 2500);
+
+    setTimeout(() => {
+      dragRef.current.hasMoved = false;
+    }, CUBE_ROTATION.dragResetDelay);
   };
 
-  /* Open lightbox on click (not drag) */
-  const handleFaceClick = (e, videoId) => {
-    e.preventDefault();
+  const handleFaceClick = (event, videoId) => {
+    event.preventDefault();
+
     if (dragRef.current.hasMoved) return;
+
     setActiveModalVideo(videoId);
   };
 
-  /* Hover: start delayed iframe inject for smooth preview */
-  const handleFaceMouseEnter = (faceId) => {
-    setHoveredFace(faceId);
-    if (iframeTimers.current[faceId]) clearTimeout(iframeTimers.current[faceId]);
-    iframeTimers.current[faceId] = setTimeout(() => {
-      setHoveredFace(faceId + '_ready');
-    }, 600);
+  const handleFaceMouseEnter = (faceKey) => {
+    setHoveredFace(faceKey);
+
+    if (previewTimersRef.current[faceKey]) {
+      clearTimeout(previewTimersRef.current[faceKey]);
+    }
+
+    previewTimersRef.current[faceKey] = setTimeout(() => {
+      setPreviewFace(faceKey);
+    }, CUBE_ROTATION.previewDelay);
   };
 
-  const handleFaceMouseLeave = (faceId) => {
-    if (iframeTimers.current[faceId]) clearTimeout(iframeTimers.current[faceId]);
+  const handleFaceMouseLeave = (faceKey) => {
+    if (previewTimersRef.current[faceKey]) {
+      clearTimeout(previewTimersRef.current[faceKey]);
+    }
+
     setHoveredFace(null);
+    setPreviewFace(null);
   };
 
-  const cubeInstruction = language === 'es'
-    ? 'Arrastra para rotar · haz clic para reproducir'
-    : 'Drag to rotate · click to play';
+  const instruction = CUBE_INSTRUCTIONS[language] || CUBE_INSTRUCTIONS.es;
+  const dragCursorText = language === 'es' ? 'GIRAR' : 'DRAG';
 
   return (
-    <div style={{ width: '100%', position: 'relative' }}>
-      <div className="cube-instruction-text">
-        <span className="cube-instruction-icon">◄</span>
-        {cubeInstruction}
-        <span className="cube-instruction-icon">►</span>
-      </div>
+    <div className={styles['video-cube-wrapper']}>
+      <CubeInstruction text={instruction} />
 
-      {/* 3D Viewport */}
       <div
-        className="cube-viewport"
+        className={styles['cube-viewport']}
+        data-cursor={dragCursorText}
         onMouseDown={handleDragStart}
         onMouseMove={handleDragMove}
         onMouseUp={handleDragEnd}
@@ -133,93 +333,36 @@ export default function VideoCube() {
         onTouchMove={handleDragMove}
         onTouchEnd={handleDragEnd}
       >
-        {/* Ambient glow ring behind cube */}
-        <div className="cube-glow-ring" />
-
-        <div className="cube-space" ref={cubeRef}>
-          {PROJECTS.map((project, idx) => {
-            const faceName  = FACES[idx];
-            const faceKey   = `${faceName}-${project.id}`;
-            const isHovered = hoveredFace === faceKey || hoveredFace === faceKey + '_ready';
-            const showIframe = hoveredFace === faceKey + '_ready';
+        <div className={styles['cube-space']} ref={cubeRef}>
+          {CUBE_PROJECTS.map((project, index) => {
+            const faceName = CUBE_FACES[index];
+            const faceKey = allFaceKeys[index];
+            const isActive = hoveredFace === faceKey || previewFace === faceKey;
 
             return (
-              <div
-                key={faceName}
-                className={`cube-face face-${faceName} ${isHovered ? 'face-active' : ''}`}
-                onDragStart={(e) => e.preventDefault()}
-                onMouseEnter={() => handleFaceMouseEnter(faceKey)}
-                onMouseLeave={() => handleFaceMouseLeave(faceKey)}
-              >
-                <a
-                  href={`https://youtu.be/${project.id}`}
-                  onClick={(e) => handleFaceClick(e, project.id)}
-                  className="face-card-link"
-                >
-                  <div className="face-image-wrapper">
-                    {/* Thumbnail always visible as base layer */}
-                    <img
-                      src={`https://img.youtube.com/vi/${project.id}/hqdefault.jpg`}
-                      alt={project.title}
-                      className="face-poster-img"
-                      loading="lazy"
-                    />
-
-                    {/* Iframe injected only on hover (after delay) — saves bandwidth */}
-                    {showIframe && (
-                      <iframe
-                        src={`https://www.youtube.com/embed/${project.id}?autoplay=1&mute=1&controls=0&loop=1&playlist=${project.id}&modestbranding=1&rel=0`}
-                        title={project.title}
-                        frameBorder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media"
-                        className="face-video-preview face-video-lazy"
-                        style={{ pointerEvents: 'none' }}
-                      />
-                    )}
-
-                    {/* Play overlay */}
-                    <div className="face-play-overlay">
-                      <div className="face-play-icon">
-                        <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z" /></svg>
-                      </div>
-                    </div>
-
-                    {/* 3D shine reflection effect on face */}
-                    <div className="face-3d-shine" />
-                  </div>
-
-                  <div className="face-info-bar">
-                    <span className="face-project-tag">{project.tag}</span>
-                    <h3 className="face-project-title">{project.title}</h3>
-                  </div>
-                </a>
-              </div>
+              <CubeFace
+                key={faceKey}
+                project={project}
+                faceName={faceName}
+                faceKey={faceKey}
+                isActive={isActive}
+                isPreviewVisible={true}
+                onClick={handleFaceClick}
+                onMouseEnter={handleFaceMouseEnter}
+                onMouseLeave={handleFaceMouseLeave}
+                language={language}
+              />
             );
           })}
         </div>
       </div>
 
-      {/* Fullscreen Lightbox */}
-      {activeModalVideo && createPortal(
-        <div className="cube-lightbox-modal" onClick={() => setActiveModalVideo(null)}>
-          <button
-            className="cube-lightbox-close"
-            onClick={() => setActiveModalVideo(null)}
-            aria-label="Cerrar reproductor"
-          >✕</button>
-          <div className="cube-lightbox-content" onClick={(e) => e.stopPropagation()}>
-            <div className="cube-lightbox-video-wrapper">
-              <iframe
-                src={`https://www.youtube.com/embed/${activeModalVideo}?autoplay=1`}
-                title="Dagamedia Project Video"
-                frameBorder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                allowFullScreen
-              />
-            </div>
-          </div>
-        </div>,
-        document.body
+      {activeModalVideo && (
+        <VideoCubeLightbox
+          videoId={activeModalVideo}
+          language={language}
+          onClose={() => setActiveModalVideo(null)}
+        />
       )}
     </div>
   );

@@ -1,87 +1,238 @@
+import { useState } from 'react';
 import { useLanguage } from '../../context/LanguageContext';
 import StandardForm from './StandardForm';
 import WorkWithUsForm from './WorkWithUsForm';
-import './Contact.css';
+import styles from './Contact.module.css';
 
-export default function ContactLayout({ activeForm = 'standard', onChangeActiveForm }) {
+const FORMS = [
+  {
+    id: 'standard',
+    labelKey: 'contact_tab_contact',
+    subtitleKey: 'contact_sub_contact',
+    Component: StandardForm,
+  },
+  {
+    id: 'work',
+    labelKey: 'contact_tab_work',
+    subtitleKey: 'contact_sub_work',
+    Component: WorkWithUsForm,
+  },
+];
+
+const MAP_TITLE = 'Dagamedia Office Map';
+
+const MAP_SRC =
+  'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3971.2847522502677!2d-73.3419956!3d5.5732819!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e6a7c762797ec35%3A0x4dd06b9858acbe6c!2sDagamedia!5e0!3m2!1ses-419!2sco!4v1716300000000!5m2!1ses-419!2sco';
+
+function getFormIndex(formId) {
+  const index = FORMS.findIndex((form) => form.id === formId);
+  return index >= 0 ? index : 0;
+}
+
+function getPreviousFormId(formId) {
+  const currentIndex = getFormIndex(formId);
+  const previousIndex = currentIndex === 0 ? FORMS.length - 1 : currentIndex - 1;
+
+  return FORMS[previousIndex].id;
+}
+
+function getNextFormId(formId) {
+  const currentIndex = getFormIndex(formId);
+  const nextIndex = currentIndex === FORMS.length - 1 ? 0 : currentIndex + 1;
+
+  return FORMS[nextIndex].id;
+}
+
+function getDirection(currentFormId, targetFormId) {
+  const currentIndex = getFormIndex(currentFormId);
+  const targetIndex = getFormIndex(targetFormId);
+
+  if (targetIndex > currentIndex) return 'next';
+  if (targetIndex < currentIndex) return 'previous';
+
+  return 'idle';
+}
+
+function ContactTextSwitcher({
+  activeFormId,
+  transitionDirection,
+  onPreviousForm,
+  onNextForm,
+}) {
   const { t } = useLanguage();
-  const currentForm = activeForm;
 
-  const setCurrentForm = (formType) => {
-    if (onChangeActiveForm) {
-      onChangeActiveForm(formType);
-    }
+  const activeForm = FORMS[getFormIndex(activeFormId)];
+  const previousForm = FORMS[getFormIndex(getPreviousFormId(activeFormId))];
+  const nextForm = FORMS[getFormIndex(getNextFormId(activeFormId))];
+
+  const transitionClass =
+    transitionDirection === 'previous'
+      ? styles['switch-previous']
+      : transitionDirection === 'next'
+        ? styles['switch-next']
+        : '';
+
+  return (
+    <div
+      key={`${activeFormId}-${transitionDirection}`}
+      className={`${styles['contact-switcher-row']} ${transitionClass}`}
+      aria-label="Selector de formulario"
+    >
+      <button
+        type="button"
+        className={`${styles['switcher-arrow']} ${styles['switcher-arrow-left']}`}
+        onClick={onPreviousForm}
+        aria-label={`Cambiar a ${t(previousForm.labelKey)}`}
+        data-cursor="Cambiar"
+      >
+        ‹
+      </button>
+
+      <div className={styles['contact-text-switcher']}>
+        <button
+          type="button"
+          className={`${styles['switcher-item']} ${styles['switcher-side']} ${styles['switcher-left']}`}
+          onClick={onPreviousForm}
+          aria-label={`Cambiar a ${t(previousForm.labelKey)}`}
+          data-cursor="Cambiar"
+        >
+          {t(previousForm.labelKey)}
+        </button>
+
+        <button
+          type="button"
+          className={`${styles['switcher-item']} ${styles['switcher-active']}`}
+          onClick={onNextForm}
+          aria-label={`Formulario actual: ${t(activeForm.labelKey)}. Cambiar al siguiente.`}
+          data-cursor="Cambiar"
+        >
+          {t(activeForm.labelKey)}
+        </button>
+
+        <button
+          type="button"
+          className={`${styles['switcher-item']} ${styles['switcher-side']} ${styles['switcher-right']}`}
+          onClick={onNextForm}
+          aria-label={`Cambiar a ${t(nextForm.labelKey)}`}
+          data-cursor="Cambiar"
+        >
+          {t(nextForm.labelKey)}
+        </button>
+      </div>
+
+      <button
+        type="button"
+        className={`${styles['switcher-arrow']} ${styles['switcher-arrow-right']}`}
+        onClick={onNextForm}
+        aria-label={`Cambiar a ${t(nextForm.labelKey)}`}
+        data-cursor="Cambiar"
+      >
+        ›
+      </button>
+    </div>
+  );
+}
+
+function ContactDots({ activeFormId, onSelectForm }) {
+  const { t } = useLanguage();
+
+  return (
+    <div className={styles['contact-pagination']} aria-label="Selector de formulario">
+      {FORMS.map((form) => {
+        const selected = form.id === activeFormId;
+
+        return (
+          <button
+            key={form.id}
+            type="button"
+            className={`${styles['pagination-dot']} ${selected ? styles.activeDot : ''}`}
+            onClick={() => onSelectForm(form.id)}
+            aria-label={`Cambiar a ${t(form.labelKey)}`}
+            aria-pressed={selected}
+            data-cursor="Cambiar"
+          />
+        );
+      })}
+    </div>
+  );
+}
+
+function ContactMap() {
+  return (
+    <div className={styles['contact-map-container']}>
+      <iframe
+        src={MAP_SRC}
+        width="100%"
+        height="100%"
+        className={styles['contact-map-frame']}
+        allowFullScreen=""
+        loading="lazy"
+        referrerPolicy="no-referrer-when-downgrade"
+        title={MAP_TITLE}
+      />
+    </div>
+  );
+}
+
+export default function ContactLayout({ activeForm, onChangeActiveForm }) {
+  const { t } = useLanguage();
+  const [transitionDirection, setTransitionDirection] = useState('idle');
+
+  const activeIndex = getFormIndex(activeForm);
+  const activeFormConfig = FORMS[activeIndex];
+  const ActiveFormComponent = activeFormConfig.Component;
+
+  const handleSelectForm = (targetFormId) => {
+    if (targetFormId === activeFormConfig.id) return;
+
+    setTransitionDirection(getDirection(activeFormConfig.id, targetFormId));
+    onChangeActiveForm(targetFormId);
+  };
+
+  const handlePreviousForm = () => {
+    const previousFormId = getPreviousFormId(activeFormConfig.id);
+
+    setTransitionDirection('previous');
+    onChangeActiveForm(previousFormId);
+  };
+
+  const handleNextForm = () => {
+    const nextFormId = getNextFormId(activeFormConfig.id);
+
+    setTransitionDirection('next');
+    onChangeActiveForm(nextFormId);
   };
 
   return (
-    <div className="contact-container">
-      <header className="contact-tabs">
-        <div className="contact-tab-dot" />
+    <div className={styles['contact-container']}>
+      <h2 className="section-label">{t('contact_title')}</h2>
 
-        <button
-          type="button"
-          className={`contact-tab subtitle-main ${currentForm === 'standard' ? 'active' : ''}`}
-          onClick={() => setCurrentForm('standard')}
-        >
-          {t('contact_tab_contact')}
-        </button>
+      <ContactTextSwitcher
+        activeFormId={activeFormConfig.id}
+        transitionDirection={transitionDirection}
+        onPreviousForm={handlePreviousForm}
+        onNextForm={handleNextForm}
+      />
 
-        <button
-          type="button"
-          className={`contact-tab subtitle-main ${currentForm === 'work' ? 'active' : ''}`}
-          onClick={() => setCurrentForm('work')}
-        >
-          {t('contact_tab_work')}
-        </button>
-
-        <button
-          type="button"
-          className="contact-tab-arrow"
-          onClick={() => setCurrentForm(currentForm === 'standard' ? 'work' : 'standard')}
-          aria-label="Cambiar formulario"
-        >
-          <svg viewBox="0 0 24 24" width="28" height="28">
-            <polygon points="8,4 20,12 8,20" fill="currentColor" />
-          </svg>
-        </button>
-      </header>
-
-      <p className="contact-subtitle text-normal">
-        {currentForm === 'work'
-          ? t('contact_sub_work')
-          : t('contact_sub_contact')}
+      <p
+        key={`${activeFormConfig.id}-subtitle`}
+        className={`${styles['contact-subtitle']} text-normal`}
+      >
+        {t(activeFormConfig.subtitleKey)}
       </p>
 
-      <main className="contact-content">
-        {currentForm === 'work' ? <WorkWithUsForm /> : <StandardForm />}
-      </main>
+      <div className={styles['contact-grid']}>
+        <ContactMap />
 
-      <div className="contact-pagination">
-        <span
-          className={`pagination-dot ${currentForm === 'standard' ? 'active' : ''}`}
-          onClick={() => setCurrentForm('standard')}
-          title="Contact Form"
-        />
-
-        <span
-          className={`pagination-dot ${currentForm === 'work' ? 'active' : ''}`}
-          onClick={() => setCurrentForm('work')}
-          title="Work with us Form"
-        />
+        <main key={activeFormConfig.id} className={styles['contact-content']}>
+          <ActiveFormComponent />
+        </main>
       </div>
 
-      <div className="contact-map-container">
-        <iframe
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3971.2847522502677!2d-73.3419956!3d5.5732819!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e6a7c762797ec35%3A0x4dd06b9858acbe6c!2sDagamedia!5e0!3m2!1ses-419!2sco!4v1716300000000!5m2!1ses-419!2sco"
-          width="100%"
-          height="100%"
-          style={{ border: 0 }}
-          allowFullScreen=""
-          loading="lazy"
-          referrerPolicy="no-referrer-when-downgrade"
-          title="Dagamedia Office Map"
-        ></iframe>
-      </div>
+      <ContactDots
+        activeFormId={activeFormConfig.id}
+        onSelectForm={handleSelectForm}
+      />
     </div>
   );
 }

@@ -36,6 +36,7 @@ const io = new Server(httpServer, {
 // ──────────────────────────────────────────────────────
 const VALID_SECTIONS = ['inicio', 'nosotros', 'servicios', 'peliculas', 'contacto'];
 const VALID_EMOJIS   = ['🔥', '🚀', '❤️', '🎉', '😮', '👏'];
+const VALID_PHRASES  = ['¡Increíble!', '¡Espectacular!', '¡Buenísimo!', '¡Me encanta!', 'Awesome!', 'Amazing!', 'Spectacular!', 'Love it!'];
 
 const activeUsers    = new Set();       // socket IDs online
 const userSections   = new Map();       // socketId → sectionId
@@ -76,7 +77,7 @@ io.on('connection', (socket) => {
 
   // ── Reactions with throttle (max 1 per 600 ms per user) ─
   socket.on('send_reaction', (emoji) => {
-    if (!VALID_EMOJIS.includes(emoji)) return;
+    if (!VALID_EMOJIS.includes(emoji) && !VALID_PHRASES.includes(emoji)) return;
 
     const now  = Date.now();
     const last = reactionThrottle.get(socket.id) || 0;

@@ -1,24 +1,16 @@
-/* src/components/AboutUs/AboutUs.css */
-
 .about-section {
-  padding: 80px 100px;
-  background-color: var(--bg-primary);
+  /* usa .section-padded de shared.css */
 }
 
-/* Team title: tipografía tomada desde index.css */
-.about-team-title {
-  text-align: center;
-  margin: 40px 0 30px;
-}
+.about-team-title { text-align: center; margin: 40px 0 30px; }
 
-/* Team description: tipografía tomada desde index.css */
 .about-team-desc {
   text-align: center;
   max-width: 1720px;
   margin: 0 auto 70px;
 }
 
-/* Directors row */
+/* Fila de directores */
 .about-directors-row {
   display: flex;
   gap: 60px;
@@ -26,21 +18,10 @@
   margin-bottom: 70px;
 }
 
-.about-directors-text {
-  flex: 1;
-}
+.about-directors-text { flex: 1; }
 
-/* Subsection titles: tipografía tomada desde index.css */
-.about-subsection-title {
-  text-align: center;
-  margin: 0 0 20px;
-}
-
-/* Paragraphs: tipografía tomada desde index.css */
-.about-subsection-text {
-  text-align: center;
-  margin: 0;
-}
+.about-subsection-title { text-align: center; margin: 0 0 20px; }
+.about-subsection-text  { text-align: center; margin: 0; }
 
 .about-directors-photos {
   display: flex;
@@ -48,36 +29,13 @@
   flex-shrink: 0;
 }
 
+/* Foto de director — extiende .img-card */
 .director-photo {
   width: 396px;
   height: 560px;
-
-  border-radius: 20px;
-  overflow: hidden;
-
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
-  transition: transform 0.4s ease, box-shadow 0.4s ease;
 }
 
-.director-photo:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 25px 60px rgba(255, 102, 0, 0.1);
-}
-
-.director-photo img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-
-  transition: transform 0.4s ease;
-}
-
-.director-photo:hover img {
-  transform: scale(1.03);
-}
-
-/* Bottom row */
+/* Fila inferior */
 .about-bottom-row {
   display: flex;
   gap: 60px;
@@ -91,33 +49,10 @@
   flex-shrink: 0;
 }
 
+/* Foto de equipo — extiende .img-card */
 .team-photo {
   width: 380px;
   height: 351px;
-
-  border-radius: 20px;
-  overflow: hidden;
-
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-  transition: transform 0.4s ease, box-shadow 0.4s ease;
-}
-
-.team-photo:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 20px 50px rgba(255, 102, 0, 0.08);
-}
-
-.team-photo img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-
-  transition: transform 0.4s ease;
-}
-
-.team-photo:hover img {
-  transform: scale(1.04);
 }
 
 .about-company-info {
@@ -125,56 +60,19 @@
   padding-top: 80px;
 }
 
+/* ── Responsive ── */
 @media (max-width: 1200px) {
-  .about-directors-row {
-    flex-direction: column;
-  }
-
-  .about-directors-photos {
-    justify-content: center;
-  }
-
-  .about-bottom-row {
-    flex-direction: column;
-  }
-
-  .about-photos-grid {
-    justify-self: center;
-  }
-
-  .director-photo {
-    width: 300px;
-    height: 420px;
-  }
-
-  .team-photo {
-    width: 100%;
-    height: 280px;
-  }
+  .about-directors-row    { flex-direction: column; }
+  .about-directors-photos { justify-content: center; }
+  .about-bottom-row       { flex-direction: column; }
+  .about-photos-grid      { justify-self: center; }
+  .director-photo         { width: 300px; height: 420px; }
+  .team-photo             { width: 100%; height: 280px; }
 }
 
 @media (max-width: 768px) {
-  .about-section {
-    padding: 60px 20px;
-  }
-
-  .about-directors-photos {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .director-photo {
-    width: 100%;
-    max-width: 380px;
-    height: 400px;
-  }
-
-  .about-photos-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .team-photo {
-    width: 100%;
-    height: 250px;
-  }
+  .about-directors-photos { flex-direction: column; align-items: center; }
+  .director-photo         { width: 100%; max-width: 380px; height: 400px; }
+  .about-photos-grid      { grid-template-columns: 1fr; }
+  .team-photo             { width: 100%; height: 250px; }
 }

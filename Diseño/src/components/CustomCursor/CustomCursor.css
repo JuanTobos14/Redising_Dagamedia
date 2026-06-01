@@ -1,15 +1,11 @@
-/* src/components/CustomCursor/CustomCursor.css */
 .custom-cursor-wrapper {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  inset: 0;
   pointer-events: none;
-  z-index: 99999;
+  z-index: 3000;
 }
 
-/* Hide default cursor on desktop device width */
+/* Desktop only */
 @media (min-width: 1025px) {
   body.custom-cursor-active,
   body.custom-cursor-active a,
@@ -22,81 +18,71 @@
   }
 }
 
-/* Fallback: hide custom cursor on tablets/mobiles where touch is used */
+/* Hide on mobile/tablet */
 @media (max-width: 1024px) {
   .custom-cursor-wrapper {
     display: none !important;
   }
 }
 
+/* DOT */
 .cursor-dot {
   position: absolute;
   width: 6px;
   height: 6px;
   background-color: var(--accent-orange);
   border-radius: 50%;
-  margin-top: -3px;
-  margin-left: -3px;
-  transition: background-color 0.3s ease;
+  transform: translate(-50%, -50%);
   will-change: transform;
+  transition: background-color 0.25s ease;
 }
 
+/* RING */
 .cursor-ring {
   position: absolute;
   width: 32px;
   height: 32px;
   border: 1.5px solid rgba(255, 255, 255, 0.45);
   border-radius: 50%;
-  margin-top: -16px;
-  margin-left: -16px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  transition: width 0.3s cubic-bezier(0.25, 0.8, 0.25, 1.25),
-              height 0.3s cubic-bezier(0.25, 0.8, 0.25, 1.25),
-              margin-top 0.3s cubic-bezier(0.25, 0.8, 0.25, 1.25),
-              margin-left 0.3s cubic-bezier(0.25, 0.8, 0.25, 1.25),
-              border-color 0.3s ease,
-              background-color 0.3s ease;
-  will-change: transform, width, height;
+  transform: translate(-50%, -50%);
+  will-change: transform;
+  transition:
+    transform 0.25s cubic-bezier(0.25, 0.8, 0.25, 1),
+    border-color 0.3s ease,
+    background-color 0.3s ease;
 }
 
-/* Clicking State */
+/* CLICK */
 .custom-cursor-wrapper.clicking .cursor-dot {
-  transform: scale(0.6) !important;
+  transform: translate(-50%, -50%) scale(0.6);
 }
 
 .custom-cursor-wrapper.clicking .cursor-ring {
-  border-color: var(--accent-orange) !important;
-  transform: scale(0.9) !important;
+  transform: translate(-50%, -50%) scale(0.9);
+  border-color: var(--accent-orange);
 }
 
-/* Hovering interactive links/buttons */
+/* HOVER */
 .custom-cursor-wrapper.hovered .cursor-dot {
   background-color: var(--accent-yellow);
 }
 
 .custom-cursor-wrapper.hovered .cursor-ring {
-  width: 50px;
-  height: 50px;
-  margin-top: -25px;
-  margin-left: -25px;
+  transform: translate(-50%, -50%) scale(1.6);
   border-color: var(--accent-orange);
   background-color: rgba(255, 107, 0, 0.05);
   box-shadow: 0 0 15px rgba(255, 107, 0, 0.2);
 }
 
-/* Hovering elements with active TEXT inside cursor */
+/* TEXT MODE */
 .custom-cursor-wrapper.has-text .cursor-ring {
-  width: 70px;
-  height: 70px;
-  margin-top: -35px;
-  margin-left: -35px;
+  transform: translate(-50%, -50%) scale(2.2);
   border-color: var(--accent-orange);
   background-color: rgba(255, 107, 0, 0.12);
   box-shadow: 0 0 25px rgba(255, 107, 0, 0.3);
 }
 
+/* CURSOR TEXT */
 .cursor-text {
   font-size: 10px;
   font-weight: 800;
@@ -104,11 +90,10 @@
   color: var(--text-main);
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
   animation: cursorTextFade 0.25s ease-out forwards;
-  pointer-events: none;
   user-select: none;
 }
 
 @keyframes cursorTextFade {
   from { opacity: 0; transform: scale(0.85); }
-  to { opacity: 1; transform: scale(1); }
+  to   { opacity: 1; transform: scale(1); }
 }

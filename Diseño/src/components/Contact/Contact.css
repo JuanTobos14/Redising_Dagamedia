@@ -1,5 +1,3 @@
-/* src/components/Contact/Contact.css */
-
 .contact-container {
   max-width: 1000px;
   margin: 0 auto;
@@ -44,39 +42,15 @@
   text-shadow: 0 0 30px rgba(255, 205, 0, 0.2);
 }
 
-.contact-tab:hover:not(.active) {
-  color: #777;
-}
+.contact-tab:hover:not(.active) { color: #777; }
 
-.contact-tab-arrow {
-  background: none;
-  border: none;
-  cursor: pointer;
-  color: var(--text-section-label);
-  padding: 8px;
-  transition: color 0.3s ease, transform 0.3s ease;
-  flex-shrink: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.contact-tab-arrow:hover {
-  color: var(--accent-yellow);
-  transform: translateX(5px);
-}
-
-.contact-tab-arrow svg {
-  fill: currentColor;
-}
-
-/* Subtitle */
+/* Subtítulo */
 .contact-subtitle {
   text-align: center;
   margin-bottom: 50px;
 }
 
-/* Form */
+/* Formulario */
 .contact-form {
   background-color: var(--bg-secondary);
   border: 1px solid var(--border-color);
@@ -84,7 +58,7 @@
   padding: 50px;
   box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
   max-width: 800px;
-  margin: 0 auto 40px auto;
+  margin: 0 auto 40px;
   transition: var(--transition-smooth);
 }
 
@@ -106,7 +80,7 @@
   align-items: center;
 }
 
-/* Inputs, textareas and selects */
+/* Inputs, textareas y selects */
 .contact-form input[type="text"],
 .contact-form input[type="email"],
 .contact-form input[type="tel"],
@@ -140,22 +114,20 @@
   line-height: 1.6;
 }
 
-/* Select custom arrow */
+/* Select con flecha personalizada */
 .contact-form select {
   appearance: none;
   -webkit-appearance: none;
   -moz-appearance: none;
-
   background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23ffcd00' width='24px' height='24px'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
   background-position: right 24px center;
   background-repeat: no-repeat;
   background-size: 20px;
-
   padding-right: 50px;
   cursor: pointer;
 }
 
-/* Dual column row */
+/* Fila de dos columnas */
 .form-row {
   display: flex;
   gap: 20px;
@@ -168,11 +140,8 @@
   margin-bottom: 0;
 }
 
-/* Custom file upload */
-.file-upload-container {
-  display: flex;
-  flex-direction: column;
-}
+/* Upload de archivo */
+.file-upload-container { display: flex; flex-direction: column; }
 
 .file-upload-wrapper {
   display: flex;
@@ -212,7 +181,7 @@
   white-space: nowrap;
 }
 
-/* Submit button */
+/* Botón enviar */
 .submit-btn {
   background-color: var(--accent-yellow);
   color: var(--color-black);
@@ -236,11 +205,9 @@
   transform: translateY(-2px);
 }
 
-.submit-btn:active {
-  transform: translateY(0);
-}
+.submit-btn:active { transform: translateY(0); }
 
-/* Pagination */
+/* Paginación */
 .contact-pagination {
   display: flex;
   justify-content: center;
@@ -263,11 +230,9 @@
   box-shadow: 0 0 10px rgba(255, 102, 0, 0.5);
 }
 
-.pagination-dot:hover:not(.active) {
-  background-color: #555555;
-}
+.pagination-dot:hover:not(.active) { background-color: #555555; }
 
-/* Google Map */
+/* Mapa */
 .contact-map-container {
   height: 350px;
   width: 100%;
@@ -289,24 +254,12 @@
   filter: invert(90%) hue-rotate(180deg) grayscale(0%) contrast(95%);
 }
 
-/* Responsive */
+/* ── Responsive ── */
 @media (max-width: 768px) {
-  .contact-container {
-    padding: 60px 15px;
-  }
-
-  .contact-tabs {
-    gap: 20px;
-  }
-
-  .contact-form {
-    padding: 30px 20px;
-  }
-
-  .form-row {
-    flex-direction: column;
-    gap: 20px;
-  }
+  .contact-container { padding: 60px 15px; }
+  .contact-tabs      { gap: 20px; }
+  .contact-form      { padding: 30px 20px; }
+  .form-row          { flex-direction: column; gap: 20px; }
 
   .file-upload-wrapper {
     flex-direction: column;

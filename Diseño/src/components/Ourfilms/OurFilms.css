@@ -1,11 +1,8 @@
-/* src/components/Ourfilms/OurFilms.css */
-
 .films-section {
-  padding: 80px 100px;
-  background-color: var(--bg-primary);
+  /* usa .section-padded */
 }
 
-/* Subtitle row */
+/* Fila de subtítulos */
 .films-subtitle-row {
   display: flex;
   justify-content: space-between;
@@ -14,16 +11,10 @@
   margin-bottom: 50px;
 }
 
-.films-subtitle-left {
-  flex: 1;
-}
+.films-subtitle-left { flex: 1; }
+.films-subtitle-right { flex: 1; text-align: right; }
 
-.films-subtitle-right {
-  flex: 1;
-  text-align: right;
-}
-
-/* Short Films Carousel */
+/* Carrusel de cortometrajes */
 .shortfilms-carousel-wrapper {
   width: 100%;
   overflow: hidden;
@@ -41,12 +32,10 @@
   animation: shortfilmsScroll 25s linear infinite;
 }
 
-.shortfilms-carousel-track:hover {
-  animation-play-state: paused;
-}
+.shortfilms-carousel-track:hover { animation-play-state: paused; }
 
 @keyframes shortfilmsScroll {
-  0% { transform: translateX(0); }
+  0%   { transform: translateX(0); }
   100% { transform: translateX(calc(-50% - 20px)); }
 }
 
@@ -75,9 +64,7 @@
   transition: transform 0.4s ease;
 }
 
-.shortfilm-card-block:hover .shortfilm-img {
-  transform: scale(1.03);
-}
+.shortfilm-card-block:hover .shortfilm-img { transform: scale(1.03); }
 
 .shortfilm-label {
   position: absolute;
@@ -85,7 +72,7 @@
   left: 0;
   right: 0;
   padding: 40px 22px 18px;
-  background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 100%);
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.85) 0%, transparent 100%);
   font-family: var(--font-display);
   font-size: 15px;
   font-weight: 700;
@@ -102,7 +89,7 @@
   transform: translateY(0);
 }
 
-/* ── Tundama Banner Ajustes de Encajado (No se corta) ───────────────── */
+/* Banner Tundama */
 .tundama-banner {
   display: flex;
   gap: 40px;
@@ -112,32 +99,17 @@
   width: 100%;
 }
 
+/* Imágenes laterales de Tundama — extiende .img-card */
 .tundama-side-img {
-  width: 28%; /* Escalado porcentual respecto al contenedor padre */
+  width: 28%;
   max-width: 450px;
-  aspect-ratio: 4 / 5; /* Asegura proporciones perfectas */
-  border-radius: 20px;
-  overflow: hidden;
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+  aspect-ratio: 4 / 5;
   flex-shrink: 0;
-}
-
-.tundama-side-img img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover; /* Evita recortes bruscos y mantiene la relación de aspecto */
-  display: block;
-  transition: transform 0.4s ease;
-}
-
-.tundama-side-img:hover img {
-  transform: scale(1.03);
 }
 
 .tundama-center {
   flex: 1;
   text-align: center;
-
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -145,13 +117,10 @@
   padding: 0 10px;
 }
 
-.tundama-logo {
-  max-width: 380px;
-  width: 100%;
-  height: auto;
-}
+.tundama-logo { max-width: 380px; width: 100%; height: auto; }
 
-.tundama-premiere {
+.tundama-premiere,
+.tundama-desc {
   font-family: var(--font-display);
   font-size: 16px;
   line-height: 1.6;
@@ -161,7 +130,8 @@
   margin: 0;
 }
 
-/* Contenedor e Imagen de los Laureles Reales */
+.tundama-desc { line-height: 1.7; }
+
 .tundama-laurels-container {
   width: 100%;
   max-width: 420px;
@@ -174,20 +144,10 @@
   width: 100%;
   height: auto;
   object-fit: contain;
-  filter: drop-shadow(0 4px 15px rgba(0,0,0,0.5));
+  filter: drop-shadow(0 4px 15px rgba(0, 0, 0, 0.5));
 }
 
-.tundama-desc {
-  font-family: var(--font-display);
-  font-size: 16px;
-  line-height: 1.7;
-  letter-spacing: 1.5px;
-  color: var(--text-muted);
-  text-align: center;
-  margin: 0;
-}
-
-/* Trailer Section */
+/* Sección del tráiler */
 .trailer-section {
   display: flex;
   flex-direction: column;
@@ -196,9 +156,7 @@
   margin-bottom: 80px;
 }
 
-.trailer-title {
-  text-align: center;
-}
+.trailer-title { text-align: center; }
 
 .trailer-video-box {
   position: relative;
@@ -226,46 +184,16 @@
   transition: opacity 0.4s ease;
 }
 
-.trailer-video-box:hover .trailer-poster {
-  opacity: 0.85;
-}
+.trailer-video-box:hover .trailer-poster { opacity: 0.85; }
 
-.trailer-play-btn {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-
-  transform: translate(-50%, -50%);
-
-  width: 120px;
-  height: 120px;
-
-  background: rgba(255, 102, 0, 0.85);
-  border-radius: 50%;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  box-shadow: 0 0 40px rgba(255, 102, 0, 0.5);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.trailer-video-box:hover .trailer-play-btn {
-  transform: translate(-50%, -50%) scale(1.1);
-  box-shadow: 0 0 60px rgba(255, 102, 0, 0.7);
-}
-
-.trailer-play-btn svg {
-  margin-left: 6px;
-}
+/* El play button usa .play-btn-circle de shared.css */
 
 .trailer-synopsis {
   text-align: center;
   max-width: 1720px;
 }
 
-/* CTA Buttons */
+/* CTAs */
 .films-actions {
   display: flex;
   gap: 20px;
@@ -311,46 +239,14 @@
   transform: translateY(-3px);
 }
 
-/* Video Cube */
-.films-cube-section {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 40px 0;
-}
-
-/* Responsividad */
+/* ── Responsive ── */
 @media (max-width: 1200px) {
-  .tundama-banner {
-    flex-direction: column;
-    gap: 40px;
-  }
-
-  .tundama-side-img {
-    width: 70%;
-    max-width: 400px;
-  }
+  .tundama-banner   { flex-direction: column; gap: 40px; }
+  .tundama-side-img { width: 70%; max-width: 400px; }
 }
 
 @media (max-width: 768px) {
-  .films-section {
-    padding: 60px 20px;
-  }
-
-  .films-subtitle-row {
-    flex-direction: column;
-    gap: 20px;
-  }
-
-  .films-subtitle-right {
-    text-align: left;
-  }
-  .tundama-side-img {
-    width: 100%;
-  }
-
-  .trailer-play-btn {
-    width: 70px;
-    height: 70px;
-  }
+  .films-subtitle-row  { flex-direction: column; gap: 20px; }
+  .films-subtitle-right { text-align: left; }
+  .tundama-side-img    { width: 100%; }
 }

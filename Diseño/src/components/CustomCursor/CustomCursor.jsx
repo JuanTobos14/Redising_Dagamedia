@@ -1,113 +1,233 @@
-import React, { useEffect, useState, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useLanguage } from '../../context/LanguageContext';
-import './CustomCursor.css';
+import styles from './CustomCursor.module.css';
+
+const DESKTOP_CURSOR_QUERY = '(hover: hover) and (pointer: fine)';
+
+const INTERACTIVE_SELECTOR = [
+  '[data-cursor]',
+  'a',
+  'button',
+  'input',
+  'select',
+  'textarea',
+  'label[for]',
+  '[role="button"]',
+].join(', ');
+
+function isDesktopCursorAvailable() {
+  return window.matchMedia(DESKTOP_CURSOR_QUERY).matches;
+}
+
+function getPointerPosition(event) {
+  return {
+    x: event.clientX,
+    y: event.clientY,
+  };
+}
+
+function getCursorText(target, language) {
+  const customText = target.getAttribute('data-cursor');
+
+  if (customText) {
+    return customText;
+  }
+
+  return language === 'es' ? '' : '';
+}
 
 export default function CustomCursor() {
   const { language } = useLanguage();
+
   const dotRef = useRef(null);
   const ringRef = useRef(null);
 
-  const [cursorText, setCursorText] = useState('');
+  const mouseRef = useRef({ x: 0, y: 0 });
+  const ringPositionRef = useRef({ x: 0, y: 0 });
+  const animationFrameRef = useRef(null);
+
+  const [isEnabled, setIsEnabled] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
   const [isClicking, setIsClicking] = useState(false);
-  const [isVisible, setIsVisible] = useState(false);
-
-  // Position coordinates
-  const mouseRef = useRef({ x: 0, y: 0 });
-  const ringPosRef = useRef({ x: 0, y: 0 });
+  const [cursorText, setCursorText] = useState('');
 
   useEffect(() => {
-    // Hide default cursor on desktop
-    document.body.classList.add('custom-cursor-active');
-    
-    const handleMouseMove = (e) => {
-      mouseRef.current.x = e.clientX;
-      mouseRef.current.y = e.clientY;
-      if (!isVisible) setIsVisible(true);
+    const mediaQuery = window.matchMedia(DESKTOP_CURSOR_QUERY);
+
+    const updateCursorAvailability = () => {
+      const shouldEnable = mediaQuery.matches;
+
+      setIsEnabled(shouldEnable);
+
+      if (!shouldEnable) {
+        setIsVisible(false);
+        document.body.classList.remove('custom-cursor-active');
+      }
     };
 
-    const handleMouseDown = () => setIsClicking(true);
-    const handleMouseUp = () => setIsClicking(false);
-    const handleMouseLeaveWindow = () => setIsVisible(false);
-    const handleMouseEnterWindow = () => setIsVisible(true);
+    updateCursorAvailability();
 
-    window.addEventListener('mousemove', handleMouseMove);
-    window.addEventListener('mousedown', handleMouseDown);
-    window.addEventListener('mouseup', handleMouseUp);
-    document.addEventListener('mouseleave', handleMouseLeaveWindow);
-    document.addEventListener('mouseenter', handleMouseEnterWindow);
+    mediaQuery.addEventListener('change', updateCursorAvailability);
 
-    // Loop for smooth ring interpolation (lerp)
-    let animId;
-    const updatePosition = () => {
-      // Direct DOM update of dot for 60fps responsiveness
+    return () => {
+      mediaQuery.removeEventListener('change', updateCursorAvailability);
+      document.body.classList.remove('custom-cursor-active');
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!isEnabled || !isDesktopCursorAvailable()) {
+      return undefined;
+    }
+
+    document.body.classList.add('custom-cursor-active');
+
+    const handlePointerMove = (event) => {
+      const { x, y } = getPointerPosition(event);
+
+      mouseRef.current.x = x;
+      mouseRef.current.y = y;
+
+      setIsVisible(true);
+    };
+
+    const handlePointerDown = () => {
+      setIsClicking(true);
+    };
+
+    const handlePointerUp = () => {
+      setIsClicking(false);
+    };
+
+    const handlePointerLeaveWindow = () => {
+      setIsVisible(false);
+      setIsClicking(false);
+    };
+
+    const handlePointerEnterWindow = () => {
+      setIsVisible(true);
+    };
+
+    const handlePointerOver = (event) => {
+      if (!(event.target instanceof Element)) {
+        return;
+      }
+
+      if (event.target.tagName === 'IFRAME' || event.target.closest('iframe') || event.target.closest('.lightbox-modal')) {
+        setIsHovered(false);
+        setCursorText('');
+        document.body.classList.remove('custom-cursor-active');
+        return;
+      }
+
+      document.body.classList.add('custom-cursor-active');
+
+      const interactiveTarget = event.target.closest(INTERACTIVE_SELECTOR);
+
+      if (!interactiveTarget) {
+        setIsHovered(false);
+        setCursorText('');
+        return;
+      }
+
+      setIsHovered(true);
+      setCursorText(getCursorText(interactiveTarget, language));
+    };
+
+    const handlePointerOut = (event) => {
+      if (!(event.target instanceof Element)) {
+        return;
+      }
+
+      if (event.target.tagName === 'IFRAME' || event.target.closest('iframe') || event.target.closest('.lightbox-modal')) {
+        document.body.classList.add('custom-cursor-active');
+        return;
+      }
+
+      const nextTarget = event.relatedTarget;
+
+      if (
+        nextTarget instanceof Element &&
+        nextTarget.closest(INTERACTIVE_SELECTOR)
+      ) {
+        return;
+      }
+
+      setIsHovered(false);
+      setCursorText('');
+    };
+
+    const updateCursorPosition = () => {
       if (dotRef.current) {
         dotRef.current.style.transform = `translate3d(${mouseRef.current.x}px, ${mouseRef.current.y}px, 0)`;
       }
 
-      // Smooth interpolation for ring
-      const ease = 0.12; // Easing factor
-      ringPosRef.current.x += (mouseRef.current.x - ringPosRef.current.x) * ease;
-      ringPosRef.current.y += (mouseRef.current.y - ringPosRef.current.y) * ease;
+      const ease = 0.12;
+
+      ringPositionRef.current.x +=
+        (mouseRef.current.x - ringPositionRef.current.x) * ease;
+
+      ringPositionRef.current.y +=
+        (mouseRef.current.y - ringPositionRef.current.y) * ease;
 
       if (ringRef.current) {
-        ringRef.current.style.transform = `translate3d(${ringPosRef.current.x}px, ${ringPosRef.current.y}px, 0)`;
+        ringRef.current.style.transform = `translate3d(${ringPositionRef.current.x}px, ${ringPositionRef.current.y}px, 0)`;
       }
 
-      animId = requestAnimationFrame(updatePosition);
-    };
-    animId = requestAnimationFrame(updatePosition);
-
-    // Dynamic Hover Listeners (checking target attributes)
-    const handleMouseOver = (e) => {
-      const target = e.target.closest('[data-cursor], a, button, .video-poster-wrapper, .cube-viewport');
-      if (target) {
-        setIsHovered(true);
-        
-        // Custom interactive text based on target
-        if (target.closest('.cube-viewport')) {
-          setCursorText(language === 'es' ? 'GIRAR' : 'DRAG');
-        } else if (target.closest('.video-poster-wrapper')) {
-          setCursorText(language === 'es' ? 'VER' : 'PLAY');
-        } else if (target.getAttribute('data-cursor')) {
-          const customText = target.getAttribute('data-cursor');
-          setCursorText(customText);
-        } else {
-          setCursorText(''); // Normal links/buttons just scale the ring without text
-        }
-      } else {
-        setIsHovered(false);
-        setCursorText('');
-      }
+      animationFrameRef.current = requestAnimationFrame(updateCursorPosition);
     };
 
-    window.addEventListener('mouseover', handleMouseOver);
+    window.addEventListener('pointermove', handlePointerMove);
+    window.addEventListener('pointerdown', handlePointerDown);
+    window.addEventListener('pointerup', handlePointerUp);
+    window.addEventListener('pointerover', handlePointerOver);
+    window.addEventListener('pointerout', handlePointerOut);
+    document.addEventListener('mouseleave', handlePointerLeaveWindow);
+    document.addEventListener('mouseenter', handlePointerEnterWindow);
+
+    animationFrameRef.current = requestAnimationFrame(updateCursorPosition);
 
     return () => {
       document.body.classList.remove('custom-cursor-active');
-      window.removeEventListener('mousemove', handleMouseMove);
-      window.removeEventListener('mousedown', handleMouseDown);
-      window.removeEventListener('mouseup', handleMouseUp);
-      document.removeEventListener('mouseleave', handleMouseLeaveWindow);
-      document.removeEventListener('mouseenter', handleMouseEnterWindow);
-      window.removeEventListener('mouseover', handleMouseOver);
-      cancelAnimationFrame(animId);
-    };
-  }, [language, isVisible]);
 
-  if (!isVisible) return null;
+      window.removeEventListener('pointermove', handlePointerMove);
+      window.removeEventListener('pointerdown', handlePointerDown);
+      window.removeEventListener('pointerup', handlePointerUp);
+      window.removeEventListener('pointerover', handlePointerOver);
+      window.removeEventListener('pointerout', handlePointerOut);
+      document.removeEventListener('mouseleave', handlePointerLeaveWindow);
+      document.removeEventListener('mouseenter', handlePointerEnterWindow);
+
+      if (animationFrameRef.current) {
+        cancelAnimationFrame(animationFrameRef.current);
+      }
+    };
+  }, [isEnabled, language]);
+
+  if (!isEnabled || !isVisible) {
+    return null;
+  }
 
   return (
-    <div className={`custom-cursor-wrapper ${isHovered ? 'hovered' : ''} ${isClicking ? 'clicking' : ''} ${cursorText ? 'has-text' : ''}`}>
-      {/* Small center dot */}
-      <div className="cursor-dot" ref={dotRef} />
-      {/* Outer ring */}
-      <div className="cursor-ring" ref={ringRef}>
-        {cursorText && (
-          <span className="cursor-text">
-            {cursorText}
-          </span>
-        )}
+    <div
+      className={`${styles['custom-cursor-wrapper']} ${isHovered ? styles.hovered : ''} ${
+        isClicking ? styles.clicking : ''
+      } ${cursorText ? styles['has-text'] : ''}`}
+      aria-hidden="true"
+    >
+      <div className={styles['cursor-dot-position']} ref={dotRef}>
+        <span className={styles['cursor-dot']} />
+      </div>
+
+      <div className={styles['cursor-ring-position']} ref={ringRef}>
+        <span className={styles['cursor-ring']}>
+          {cursorText && (
+            <span className={styles['cursor-text']}>
+              {cursorText}
+            </span>
+          )}
+        </span>
       </div>
     </div>
   );

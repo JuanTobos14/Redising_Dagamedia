@@ -1,6 +1,9 @@
 /* src/components/Footer/Footer.css */
 
-.contact-footer {
+/* Nota: el footer usaba .contact-footer; se renombra a .site-footer para
+   evitar confusión con el componente Contact. El JSX se actualiza en consecuencia. */
+
+.site-footer {
   border-top: 1px solid var(--border-color);
   padding: 60px 40px;
   background-color: var(--bg-primary);
@@ -31,28 +34,21 @@
 .social-icon {
   width: 40px;
   height: 40px;
-
   border-radius: 50%;
   border: none;
-
   display: flex;
   justify-content: center;
   align-items: center;
-
   color: #040404;
   transition: var(--transition-smooth);
   cursor: pointer;
 }
 
 .social-icon.facebook,
-.social-icon.youtube {
-  background-color: var(--accent-orange);
-}
+.social-icon.youtube   { background-color: var(--accent-orange); }
 
 .social-icon.instagram,
-.social-icon.x {
-  background-color: var(--accent-yellow);
-}
+.social-icon.x         { background-color: var(--accent-yellow); }
 
 .social-icon:hover {
   transform: translateY(-3px) scale(1.08);
@@ -60,20 +56,12 @@
 }
 
 .social-icon.facebook:hover,
-.social-icon.youtube:hover {
-  box-shadow: 0 6px 18px rgba(255, 102, 0, 0.45);
-}
+.social-icon.youtube:hover  { box-shadow: 0 6px 18px rgba(255, 102, 0, 0.45); }
 
 .social-icon.instagram:hover,
-.social-icon.x:hover {
-  box-shadow: 0 6px 18px rgba(255, 205, 0, 0.45);
-}
+.social-icon.x:hover        { box-shadow: 0 6px 18px rgba(255, 205, 0, 0.45); }
 
-.social-icon svg {
-  width: 20px;
-  height: 20px;
-  fill: currentColor;
-}
+.social-icon svg { width: 20px; height: 20px; fill: currentColor; }
 
 .phone-info {
   display: flex;
@@ -81,15 +69,8 @@
   gap: 4px;
 }
 
-/* Tipografía tomada desde index.css */
-.phone-label {
-  text-transform: uppercase;
-  color: var(--text-dark);
-}
-
-.phone-numbers {
-  color: var(--text-muted);
-}
+.phone-label   { text-transform: uppercase; color: var(--text-dark); }
+.phone-numbers { color: var(--text-muted); }
 
 .footer-center {
   color: var(--text-dark);
@@ -100,7 +81,6 @@
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-
   gap: 12px;
   text-align: right;
 }
@@ -115,7 +95,6 @@
   height: 45px;
   width: auto;
   object-fit: contain;
-
   filter: brightness(0.95);
   transition: var(--transition-smooth);
 }
@@ -130,9 +109,8 @@
   max-width: 250px;
 }
 
-/* Responsiveness */
 @media (max-width: 768px) {
-  .contact-footer {
+  .site-footer {
     flex-direction: column;
     text-align: center;
     align-items: center;

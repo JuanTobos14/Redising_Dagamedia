@@ -1,41 +1,61 @@
+/* src/index.css — Sistema global optimizado, limpio y centralizado */
+
+@import './styles/shared.css';
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@300;400;500;600;700;800&family=Karla:wght@400;700;800&display=swap');
 
 :root {
-  /* Colores oficiales */
+  /* Paleta de colores */
   --color-white: #ffffff;
-  --color-gray-text: #c3c3c3;
-  --color-yellow: #ffcd00;
-  --color-cell: #1a1a1a;
-  --color-orange: #ff6600;
-  --color-gray-section: #4d4d4d;
   --color-black: #000000;
+  --color-yellow: #ffcd00;
+  --color-orange: #ff6600;
+  --color-gray-text: #c3c3c3;
+  --color-gray-section: #4d4d4d;
+  --color-cell: #1a1a1a;
 
-  /* Alias usados por el proyecto */
-  --bg-primary: #000000;
+  /* Tokens semánticos */
+  --bg-primary: var(--color-black);
   --bg-secondary: #0a0a0a;
-  --bg-card: #1a1a1a;
+  --bg-card: var(--color-cell);
 
   --border-color: #2f2f2f;
 
-  --accent-orange: #ff6600;
-  --accent-yellow: #ffcd00;
+  --accent-orange: var(--color-orange);
+  --accent-yellow: var(--color-yellow);
 
-  --text-main: #ffffff;
-  --text-muted: #c3c3c3;
-  --text-dark: #4d4d4d;
-  --text-section-label: #4d4d4d;
+  --text-main: var(--color-white);
+  --text-muted: var(--color-gray-text);
+  --text-dark: var(--color-gray-section);
 
-  /* Tipografías */
-  --font-main: 'Inter', 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  --font-display: 'Inter', sans-serif;
+  /* Tipografía global */
+  --font-base: 'Inter', 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-display: var(--font-base);
+  --font-main: var(--font-base);
+
+  /* Alias semánticos usados por componentes */
+  --text-section-label: var(--text-dark);
 
   /* Espaciado tipográfico */
   --letter-title: 0.05em;
   --letter-text: 0.10em;
 
+  /* Tamaños globales */
+  --section-title-size: clamp(34px, 4vw, 64px);
+
+  /* Tokens visuales reutilizables */
+  --overlay-dark-strong: rgba(6, 6, 6, 0.96);
+  --glass-border-soft: rgba(255, 255, 255, 0.08);
+  --glass-border-medium: rgba(255, 255, 255, 0.14);
+  --shadow-dark-soft: rgba(0, 0, 0, 0.5);
+  --shadow-dark-strong: rgba(0, 0, 0, 0.85);
+  --glow-orange-soft: rgba(255, 107, 0, 0.08);
+  --glow-orange-medium: rgba(255, 107, 0, 0.45);
+
+  /* Transición estándar */
   --transition-smooth: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
+/* Reset y base */
 * {
   box-sizing: border-box;
   scroll-behavior: smooth;
@@ -45,21 +65,18 @@ html,
 body {
   margin: 0;
   padding: 0;
+  font-family: var(--font-base);
   background-color: var(--bg-primary);
   color: var(--text-main);
-  font-family: var(--font-main);
   overflow-x: hidden;
 }
 
-/* ============================= */
-/* SISTEMA TIPOGRÁFICO GLOBAL */
-/* ============================= */
+/* ============================================================
+   Sistema tipográfico global
+   ============================================================ */
 
-/* Títulos principales: 100px, Bold, 5% */
-.title-main,
-.section-title-huge {
-  font-family: var(--font-display);
-  font-size: clamp(3rem, 8vw, 100px);
+.title-main {
+  font-size: clamp(48px, 4vw, 96px);
   line-height: 1.1;
   font-weight: 700;
   letter-spacing: var(--letter-title);
@@ -67,33 +84,25 @@ body {
   margin: 0;
 }
 
-/* Subtítulos: 50px–60px, Bold, 5% */
 .subtitle-main {
-  font-family: var(--font-display);
-  font-size: clamp(2.5rem, 5vw, 56px);
-  line-height: 1.2;
+  font-size: clamp(24px, 2.5vw, 40px);
+  line-height: 1.25;
   font-weight: 700;
   letter-spacing: var(--letter-title);
   color: var(--color-white);
   margin: 0;
 }
 
-/* Títulos de sección: 50px, Regular, gris */
-.section-title,
 .section-label {
-  font-family: var(--font-display);
-  font-size: clamp(2rem, 4vw, 50px);
+  font-size: clamp(20px, 2vw, 32px);
   font-weight: 400;
   letter-spacing: var(--letter-title);
   color: var(--color-gray-section);
   margin: 0 0 40px 0;
 }
 
-/* Texto normal: 25px, Regular, gris, 10% */
-.text-normal,
-.body-text {
-  font-family: var(--font-display);
-  font-size: clamp(1rem, 2vw, 25px);
+.text-normal {
+  font-size: clamp(14px, 1.2vw, 18px);
   font-weight: 400;
   line-height: 1.6;
   letter-spacing: var(--letter-text);
@@ -101,29 +110,24 @@ body {
   margin: 0;
 }
 
-/* Texto pequeño */
 .text-small {
-  font-family: var(--font-display);
-  font-size: 18px;
-  font-weight: 400;
-  line-height: 1.6;
+  font-size: 14px;
+  line-height: 1.5;
   letter-spacing: var(--letter-text);
   color: var(--color-gray-text);
   margin: 0;
 }
 
-/* Título de formulario */
 .form-title {
-  font-family: var(--font-display);
-  font-size: 25px;
+  font-size: clamp(14px, 1.2vw, 18px);
   font-weight: 400;
-  letter-spacing: var(--letter-text);
+  letter-spacing: 0.08em;
   color: var(--color-white);
   background-color: var(--color-cell);
   margin: 0;
 }
 
-/* Colores auxiliares */
+/* Helpers de color */
 .text-yellow {
   color: var(--color-yellow);
 }
@@ -140,19 +144,57 @@ body {
   color: var(--color-gray-text);
 }
 
-/* ============================= */
-/* ANIMACIONES GLOBALES */
-/* ============================= */
+/* ============================================================
+   Transiciones reutilizables
+   ============================================================ */
+
+.section-title-transition {
+  animation: sectionTitleFade 0.35s ease both;
+}
+
+.section-content-transition {
+  animation: sectionContentFade 0.45s ease both;
+}
+
+@keyframes sectionTitleFade {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes sectionContentFade {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ============================================================
+   Animaciones globales de scroll
+   ============================================================ */
 
 .reveal-on-scroll {
   opacity: 0;
-  transform: scale(0.9, 0.9) translateY(40px);
-  transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transform: scale(0.95) translateY(40px);
+  transition:
+    opacity 0.6s ease,
+    transform 0.6s ease;
 }
 
 .reveal-on-scroll.visible {
   opacity: 1;
-  transform: scale(1, 1) translateY(0);
+  transform: scale(1) translateY(0);
 }
 
 .reveal-on-scroll.visible.animating {
@@ -161,27 +203,49 @@ body {
 
 @keyframes squashStretch {
   0% {
-    transform: scale(1, 1) translateY(0);
+    transform: scale(1) translateY(0);
   }
 
   30% {
-    transform: scale(1.05, 0.92) translateY(15px);
+    transform: scale(1.03, 0.97) translateY(10px);
   }
 
   65% {
-    transform: scale(0.97, 1.03) translateY(-8px);
-  }
-
-  85% {
-    transform: scale(1.01, 0.99) translateY(3px);
+    transform: scale(0.98, 1.02) translateY(-6px);
   }
 
   100% {
-    transform: scale(1, 1) translateY(0);
+    transform: scale(1) translateY(0);
   }
 }
 
-/* Scrollbar */
+@keyframes buttonSquash {
+  0% {
+    transform: scale(1);
+  }
+
+  30% {
+    transform: scale(1.08, 0.9);
+  }
+
+  60% {
+    transform: scale(0.95, 1.05);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+.films-cta-btn:active,
+.contact-tab:active,
+.submit-btn:active,
+.btn-primary:active,
+.btn-secondary:active {
+  animation: buttonSquash 0.4s ease-out;
+}
+
+/* Scrollbar personalizada */
 ::-webkit-scrollbar {
   width: 10px;
 }
@@ -197,4 +261,10 @@ body {
 
 ::-webkit-scrollbar-thumb:hover {
   background: var(--accent-orange);
+}
+
+@media (max-width: 576px) {
+  :root {
+    --section-title-size: clamp(30px, 9vw, 44px);
+  }
 }
