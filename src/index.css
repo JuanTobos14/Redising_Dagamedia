@@ -1,0 +1,200 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@300;400;500;600;700;800&family=Karla:wght@400;700;800&display=swap');
+
+:root {
+  /* Colores oficiales */
+  --color-white: #ffffff;
+  --color-gray-text: #c3c3c3;
+  --color-yellow: #ffcd00;
+  --color-cell: #1a1a1a;
+  --color-orange: #ff6600;
+  --color-gray-section: #4d4d4d;
+  --color-black: #000000;
+
+  /* Alias usados por el proyecto */
+  --bg-primary: #000000;
+  --bg-secondary: #0a0a0a;
+  --bg-card: #1a1a1a;
+
+  --border-color: #2f2f2f;
+
+  --accent-orange: #ff6600;
+  --accent-yellow: #ffcd00;
+
+  --text-main: #ffffff;
+  --text-muted: #c3c3c3;
+  --text-dark: #4d4d4d;
+  --text-section-label: #4d4d4d;
+
+  /* Tipografías */
+  --font-main: 'Inter', 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-display: 'Inter', sans-serif;
+
+  /* Espaciado tipográfico */
+  --letter-title: 0.05em;
+  --letter-text: 0.10em;
+
+  --transition-smooth: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+* {
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--bg-primary);
+  color: var(--text-main);
+  font-family: var(--font-main);
+  overflow-x: hidden;
+}
+
+/* ============================= */
+/* SISTEMA TIPOGRÁFICO GLOBAL */
+/* ============================= */
+
+/* Títulos principales: 100px, Bold, 5% */
+.title-main,
+.section-title-huge {
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 8vw, 100px);
+  line-height: 1.1;
+  font-weight: 700;
+  letter-spacing: var(--letter-title);
+  color: var(--color-white);
+  margin: 0;
+}
+
+/* Subtítulos: 50px–60px, Bold, 5% */
+.subtitle-main {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 5vw, 56px);
+  line-height: 1.2;
+  font-weight: 700;
+  letter-spacing: var(--letter-title);
+  color: var(--color-white);
+  margin: 0;
+}
+
+/* Títulos de sección: 50px, Regular, gris */
+.section-title,
+.section-label {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4vw, 50px);
+  font-weight: 400;
+  letter-spacing: var(--letter-title);
+  color: var(--color-gray-section);
+  margin: 0 0 40px 0;
+}
+
+/* Texto normal: 25px, Regular, gris, 10% */
+.text-normal,
+.body-text {
+  font-family: var(--font-display);
+  font-size: clamp(1rem, 2vw, 25px);
+  font-weight: 400;
+  line-height: 1.6;
+  letter-spacing: var(--letter-text);
+  color: var(--color-gray-text);
+  margin: 0;
+}
+
+/* Texto pequeño */
+.text-small {
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.6;
+  letter-spacing: var(--letter-text);
+  color: var(--color-gray-text);
+  margin: 0;
+}
+
+/* Título de formulario */
+.form-title {
+  font-family: var(--font-display);
+  font-size: 25px;
+  font-weight: 400;
+  letter-spacing: var(--letter-text);
+  color: var(--color-white);
+  background-color: var(--color-cell);
+  margin: 0;
+}
+
+/* Colores auxiliares */
+.text-yellow {
+  color: var(--color-yellow);
+}
+
+.text-orange {
+  color: var(--color-orange);
+}
+
+.text-white {
+  color: var(--color-white);
+}
+
+.text-gray {
+  color: var(--color-gray-text);
+}
+
+/* ============================= */
+/* ANIMACIONES GLOBALES */
+/* ============================= */
+
+.reveal-on-scroll {
+  opacity: 0;
+  transform: scale(0.9, 0.9) translateY(40px);
+  transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.reveal-on-scroll.visible {
+  opacity: 1;
+  transform: scale(1, 1) translateY(0);
+}
+
+.reveal-on-scroll.visible.animating {
+  animation: squashStretch 0.8s cubic-bezier(0.25, 0.8, 0.25, 1.1) forwards;
+}
+
+@keyframes squashStretch {
+  0% {
+    transform: scale(1, 1) translateY(0);
+  }
+
+  30% {
+    transform: scale(1.05, 0.92) translateY(15px);
+  }
+
+  65% {
+    transform: scale(0.97, 1.03) translateY(-8px);
+  }
+
+  85% {
+    transform: scale(1.01, 0.99) translateY(3px);
+  }
+
+  100% {
+    transform: scale(1, 1) translateY(0);
+  }
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-orange);
+}
