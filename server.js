@@ -105,10 +105,13 @@ io.on('connection', (socket) => {
 // ──────────────────────────────────────────────────────
 //  Fallback — serve React SPA
 // ──────────────────────────────────────────────────────
-app.get('/{*splat}', (req, res) => {
-  res.sendFile(path.join(__dirname, 'dist', 'index.html'), (err) => {
-    if (err) res.status(200).send('WebSocket server active. Build the frontend to see the client.');
-  });
+app.get(/.*/, (req, res) => {
+   res.sendFile(path.join(__dirname, 'dist', 'index.html'), (err) => {
+     if (err) {
+       console.error('Error sending index.html:', err);
+       res.status(500).send('Internal Server Error');
+     }
+   });
 });
 
 const PORT = process.env.PORT || 4000;

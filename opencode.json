@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "figma": {
+      "command": "npx",
+      "args": ["@anthropic/mcp-figma", "--figma-token", "$FIGMA_TOKEN"]
+    }
+  }
+}
